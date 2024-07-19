@@ -25,7 +25,7 @@ import argparse
 from permanens.logger import get_logger
 from permanens import __version__
 from permanens.config import configure
-from permanens.manage import action_new, action_kill, action_list, action_info
+from permanens.manage import action_consult, action_kill, action_list, action_info
 
 
 LOG = get_logger(__name__)
@@ -55,16 +55,16 @@ def main():
                         help='action',
                         required=False)
     
-    parser.add_argument('-f', '--form',
+    parser.add_argument('-f', '--formfile',
                         help='consultation input',
                         required=False)
 
 
     args = parser.parse_args()
 
-    if args.form is not None:
-        if not os.path.isfile(args.form):
-            LOG.error(f'Input file {args.form} not found')
+    if args.formfile is not None:
+        if not os.path.isfile(args.formfile):
+            LOG.error(f'Input file {args.formfile} not found')
             return 
 
     if args.command == 'config':
@@ -73,7 +73,7 @@ def main():
             LOG.error(f'{results}, configuration unchanged')
 
     elif args.command == 'consult':
-        success, results = action_consult(args.form)  
+        success, results = action_consult(args.formfile)  
 
     elif args.command == 'list':
         success, results = action_list()   

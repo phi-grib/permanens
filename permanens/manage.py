@@ -22,12 +22,28 @@
 
 import os
 import shutil
+import yaml
 
 from permanens.logger import get_logger
 from permanens.consult import Consult
 from permanens.utils import consult_repository_path, consult_path, id_generator
 
 LOG = get_logger(__name__)
+
+def action_consult (formfile):
+
+    form = None
+    with open(formfile, 'r') as f:
+        form = yaml.safe_load(f)
+
+    if form == None:
+        return False, 'formfile not loaded'
+    
+    c = Consult()
+
+    success, result = c.run (form)
+
+    return success, result
 
 def action_new(raname):
     '''

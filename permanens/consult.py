@@ -35,11 +35,16 @@ class Consult:
         ''' constructor '''
 
         # generate unique ID
-        cname = id_generator()
+        self.cname = id_generator()
 
         # assign path
-        self.cpath = consult_path(cname)
+        self.cpath = consult_path(self.cname)
         
+    def run (self, form):
+
+        print (self.cname, form)
+
+        return True, 'OK'
 
     def load(self):       
         ''' load the Consult object from a YAML file
@@ -76,40 +81,6 @@ class Consult:
         with open(rafile,'w') as f:
             f.write(yaml.dump(dict_temp))
 
-        # rename other yaml file in the historic describing the same step as bk_
-        step = self.ra['step']
-        
-        files_to_rename = []
-
-        rahistpath = os.path.join (self.cpath,'hist')
-
-        for ra_hist_file in os.listdir(rahistpath):
-            if not ra_hist_file.startswith('ra_'):
-                continue
-            ra_hist_item = os.path.join(rahistpath, ra_hist_file)
-            if os.path.isfile(ra_hist_item):
-                idict = {}
-                with open(ra_hist_item, 'r') as pfile:
-                    idict = yaml.safe_load(pfile)
-                    if 'ra' in idict:
-                        if 'step' in idict['ra']:
-                            if step == idict['ra']['step']:
-                                files_to_rename.append(ra_hist_file)
-
-            for ifile in files_to_rename:
-                ipath = os.path.join(rahistpath,ifile)
-                if os.path.isfile(ipath):
-                    bk_name = os.path.join(rahistpath, 'bk_'+ ifile[3:])
-                    i=1
-                    while os.path.isfile(bk_name):
-                        bk_name = os.path.join(rahistpath, f'bk_{ifile[3:-5]}_{str(i)}.yaml')
-                        i=i+1
-                    os.rename(ipath, bk_name)
-
-        # save in the historic file
-        time_label = time.strftime("_%d%b%Y_%H%M%S", time.localtime()) 
-        rahist = os.path.join (rahistpath,f'ra{time_label}.yaml')
-        shutil.copyfile(rafile, rahist)
 
     def getStatus(self):
         ''' return a dictionary with RA status
