@@ -34,26 +34,26 @@ import random
 #     else:
 #         return os.path.join(path, 'ver%0.6d' % (version))
 
-def ra_repository_path():
+def consult_repository_path():
     '''
-    Returns the path to the root of the raname repository,
-    containing all ranames and versions
+    Returns the path to the root of the cname repository,
+    containing all cnames and versions
     '''
     success, config = read_config()
     if success: 
-        return config['ras']
+        return config['consults']
 
-def ra_path(raname):
+def consult_path(cname):
     '''
-    Returns the path to the raname given as argumen, containg all versions
+    Returns the path to the cname given as argumen, containg all versions
     '''
-    return os.path.join(ra_repository_path(), raname)
+    return os.path.join(consult_repository_path(), cname)
 
 
 def read_config():
     '''
     Reads configuration file "config.yaml" and checks
-    sanity of raname repository path.
+    sanity of cname repository path.
 
     Returns:
     --------
@@ -76,13 +76,13 @@ def read_config():
 
     # legacy configuration files contain individual items in the yaml
     if not 'root_repository' in conf:
-        if 'ra_repository_path' in conf:
-            base_dir, head_dir = os.path.split(conf['ra_repository_path'])
+        if 'consult_repository_path' in conf:
+            base_dir, head_dir = os.path.split(conf['consult_repository_path'])
             conf['root_repository'] = base_dir
         else:
             return False, f'Configuration file incorrect. Run "namastox -c config -d ROOT_DIR" with a suitable ROOT_DIR setting'
 
-    items = ['ras']
+    items = ['consults']
     for i in items:
         conf[i] = os.path.join(conf['root_repository'],i)
 
@@ -99,8 +99,8 @@ def read_config():
 
 def set_repositories(root_path):
     """
-    Set the raname repository path.
-    This is the dir where flame is going to create and load ranames.
+    Set the cname repository path.
+    This is the dir where flame is going to create and load cnames.
     Returns:
     --------
     None
@@ -112,7 +112,7 @@ def set_repositories(root_path):
 
     configuration['root_repository'] = root_path
 
-    items = ['ras']
+    items = ['consults']
     for i in items:
         ipath = os.path.join(root_path, i)
         try:

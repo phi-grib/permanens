@@ -25,18 +25,18 @@ import shutil
 
 from permanens.logger import get_logger
 from permanens.consult import Consult
-from permanens.utils import ra_repository_path, ra_path, id_generator
+from permanens.utils import consult_repository_path, consult_path, id_generator
 
 LOG = get_logger(__name__)
 
-def action_new(raname, outfile=None):
+def action_new(raname):
     '''
-    Create a new risk assessment tree, using the given name.
+    Create a new consult, using the given name.
     This creates the development version "dev",
     copying inside default child classes
     '''
     if not raname:
-        return False, 'empty risk assessment name'
+        return False, 'empty consult'
 
     # importlib does not allow using 'test' and issues a misterious error when we
     # try to use this name. This is a simple workaround to prevent creating ranames 
@@ -45,7 +45,7 @@ def action_new(raname, outfile=None):
         return False, 'the name "test" is disallowed, please use any other name'
 
     # raname directory with /dev (default) level
-    ndir = ra_path(raname)
+    ndir = consult_path(raname)
     if os.path.isdir(ndir):
         return False, f'Risk assessment {raname} already exists'
     try:
@@ -81,62 +81,21 @@ def action_new(raname, outfile=None):
     # Save
     ra.save()
 
-    # Show template
-    yaml = ra.getTemplate()
+    # # Show template
+    # yaml = ra.getTemplate()
     
-    if outfile is not None:
-        with open(outfile,'w') as f:
-            f.write(yaml)
+    # if outfile is not None:
+    #     with open(outfile,'w') as f:
+    #         f.write(yaml)
 
     return True, f'New risk assessment {raname} created'
 
-def action_kill(raname, step=None):
+def action_kill(cname):
     '''
     removes the last step from the ra tree or the whole tree if no step is specified
     '''
-    if not raname:
+    if not cname:
         return False, 'Empty risk assessment name'
-
-    ndir = ra_path(raname)
-
-    if not os.path.isdir(ndir):
-        return False, f'Risk assessment {raname} not found'
-
-    # Remove the whole tree
-    if step is None:
-        try:
-            shutil.rmtree(ndir, ignore_errors=True)
-        except:
-            return False, f'Failed to remove risk assessment {raname}'
-
-        return True, f'Risk assessment {raname} removed'
-
-    # Remove last step
-    if step == 1:
-        return False, 'the first step cannot be removed'
-
-    # New value of step
-    new_step = step-1
-
-    # load RA
-    ra = Consult(raname)
-    success, results = ra.load()
-    if not success:
-        return False, results
-
-    last_step = ra.getVal('step')
-    if step!=last_step:
-        return False, 'only the last step can be removed'
-
-
-    shutil.copy(ra_new, os.path.join(ndir,'ra.yaml'))
-    
-    # remove the ra to delete 
-    success, ra_delete = getConsultHistoric(raname, step)
-    if not success:
-        return False, f'unable to remove file {ra_delete}'
-
-    os.remove(ra_delete)
 
     return True, 'OK'
 
@@ -145,14 +104,14 @@ def action_list(out='text'):
     if no argument is provided lists all ranames present at the repository 
     otherwyse lists all versions for the raname provided as argument
     '''
-    rdir = ra_repository_path()
+    rdir = consult_repository_path()
     if os.path.isdir(rdir) is False:
         return False, 'The risk assessment name repository path does not exist. Please run "permanens -c config".'
 
     output = []
     num_ranames = 0
     if out != 'json':
-        LOG.info('Risk assessment(s) found in repository:')
+        LOG.info('Consults found in repository:')
         
     for x in os.listdir(rdir):
         xpath = os.path.join(rdir,x) 
@@ -175,35 +134,32 @@ def action_list(out='text'):
 
     return True, f'{num_ranames} risk assessment(s) found'
 
-def action_info(raname, out='text'):
+def action_info(cname, out='text'):
     '''
     provides a list with all steps for ranames present at the repository 
     '''
     # instantiate a ra object
-    ra = Consult(raname)
+    ra = Consult(cname)
 
     succes, results = ra.load()
     if not succes:
         return False, results
 
-    # get a dictionary with the ra.yaml contents that can
-    # be passed to the GUI or shown in screen
-    info = ra.getGeneralInfo()
 
-    LOG.debug(f'Retrieved general info for {raname}')
+    LOG.debug(f'Retrieved general info for {cname}')
 
-    for ikey in info:
-        ielement = info[ikey]
-        for jkey in ielement:
-            jelement = ielement[jkey]
-            if out != 'json':
-                LOG.info(f'{ikey} : {jkey} : {jelement}')
+    # for ikey in info:
+    #     ielement = info[ikey]
+    #     for jkey in ielement:
+    #         jelement = ielement[jkey]
+    #         if out != 'json':
+    #             LOG.info(f'{ikey} : {jkey} : {jelement}')
 
-    # web-service
-    if out=='json':
-        return True, info
+    # # web-service
+    # if out=='json':
+    #     return True, info
 
-    return True, f'completed info for {raname}'
+    return True, f'completed info for {cname}'
 
 def getPath(raname):
     '''
@@ -216,7 +172,7 @@ def getPath(raname):
     if not succes:
         return False, results
     
-    return True, ra.rapath
+    return True, ra.cpath
 
 def getRepositoryPath(raname):
     '''
@@ -229,5 +185,5 @@ def getRepositoryPath(raname):
     if not succes:
         return False, results
     
-    repo_path = os.path.join(ra.rapath, 'repo')
+    repo_path = os.path.join(ra.cpath, 'repo')
     return True, repo_path
