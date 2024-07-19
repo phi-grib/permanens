@@ -1,0 +1,9 @@
+config.yaml
+src/__pycache__/
+ras/
+*.pyc
+*.log
+*.zip
+*.tgz
+dist/*
+permanens.egg-info/*
