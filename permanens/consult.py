@@ -58,12 +58,29 @@ class Consult:
     def save_form (self, form, cname):
         ''' saves the Consult object to a YAML file
         '''
-        rafile = os.path.join (self.cpath, cname)
+        consultfile = os.path.join (self.cpath, cname)
 
-        with open(rafile,'w') as f:
+        with open(consultfile,'w') as f:
             f.write(yaml.dump(form))
 
         return True
+    
+    def load_form (self, cname):
+        ''' load form from YAML file
+        '''
+        consultfile = os.path.join (self.cpath, cname)
+
+        if not os.path.isfile(consultfile):
+            return False, 'not found'
+
+        form = None
+        with open(consultfile,'r') as f:
+            form = yaml.safe_load(f)
+
+        if form == None:
+            return False, 'unable to load form'
+        
+        return True, form
 
     def predict (self, form, cname):
 
@@ -74,3 +91,6 @@ class Consult:
         result = 'OK'
 
         return True, result
+
+    def list (self, format):
+        return os.listdir(self.cpath)

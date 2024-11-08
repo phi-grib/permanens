@@ -25,7 +25,7 @@ import argparse
 from permanens.logger import get_logger
 from permanens import __version__
 from permanens.config import configure
-from permanens.manage import action_consult, action_kill, action_list, action_info
+from permanens.manage import action_consult, action_kill, action_list, action_rerun
 
 
 LOG = get_logger(__name__)
@@ -39,8 +39,8 @@ def main():
 
     parser.add_argument('-c', '--command',
                         action='store',
-                        choices=['config', 'consult', 'kill', 'list', 'info' ],
-                        help='Action type: \'config\' or \'kill\' or \'list\' or \'info\' ',
+                        choices=['config', 'consult', 'kill', 'list' ],
+                        help='Action type: \'config\' or \'kill\' or \'list\' ',
                         required=True)
 
     parser.add_argument('-i', '--id',
@@ -59,7 +59,6 @@ def main():
                         help='consultation input',
                         required=False)
 
-
     args = parser.parse_args()
 
     if args.formfile is not None:
@@ -73,21 +72,16 @@ def main():
             LOG.error(f'{results}, configuration unchanged')
 
     elif args.command == 'consult':
-        success, results = action_consult(args.formfile)  
+        if args.id != None:
+            success, results = action_rerun(args.formfile) 
+
+        if args.formfile != None:
+            success, results = action_consult(formfile=args.formfile)  
 
     elif args.command == 'list':
         success, results = action_list()   
 
-    elif args.command == 'info':
-        if (args.id is None ):
-            LOG.error('permanens info : raname argument is compulsory')
-            return
-        success, results = action_info(args.id)   
-
     elif args.command == 'kill':
-        if (args.id is None):
-            LOG.error('permanens kill : raname argument is compulsory')
-            return
         success, results = action_kill(args.id)   
     
     if results is not None and type(results) != dict:
