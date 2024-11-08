@@ -35,7 +35,7 @@ class Consult:
         # assign path
         self.cpath = consult_repository_path()
 
-        # load estimator
+        # load estimators + rules as a list of pipelines
         # TODO
         
     def run (self, form):
@@ -90,8 +90,12 @@ class Consult:
 
         LOG.info (f'predicting {cname} form')
 
+        # submit to prediction pipelines (statistical and rule-based)
+        # TODO
         print (form)
 
+        # results should include the ID (cname)
+        # TODO
         result = 'OK'
 
         return True, result
