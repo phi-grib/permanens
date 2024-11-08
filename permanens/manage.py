@@ -30,18 +30,21 @@ from permanens.consult import Consult
 LOG = get_logger(__name__)
 
 def action_consult (form=None, formfile=None):
-
-    if form == None:
-
-        if formfile == None:
-            return False, 'formfile not loaded'
+    ''' uses the input data provided in the arguments to run the consult  
+    '''
+     
+    # input is a file (typically from command line)
+    if formfile != None:
+        if not os.path.isfile(formfile):
+            return False, 'input file not found'
 
         with open(formfile, 'r') as f:
             form = yaml.safe_load(f)
 
+    # input is a form (passed as argument or loaded from input file)
     if form == None:
-        return False, 'formfile not loaded'
-
+        return False, 'failed to load input data'
+        
     c = Consult()
 
     success, result = c.run (form)
@@ -49,6 +52,9 @@ def action_consult (form=None, formfile=None):
     return success, result
 
 def action_rerun (id):
+    ''' tries to load a form with the ID given as argument, saved in the repository 
+        and run the consult 
+    '''
 
     c = Consult()
 
@@ -60,17 +66,17 @@ def action_rerun (id):
 
     return success, result
 
-
 def action_kill(cname=None):
     '''
     removes the consult with the ID given as argument
     '''
     if cname == None:
-        return False, 'Empty risk assessment name'
+        return False, 'no consult ID provided'
     
-    # TODO
+    c = Consult()
+    succes, result = c.kill(cname)
 
-    return True, 'OK'
+    return succes, result
 
 def action_list(out='text'):
     '''

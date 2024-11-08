@@ -73,7 +73,7 @@ def main():
 
     elif args.command == 'consult':
         if args.id != None:
-            success, results = action_rerun(args.formfile) 
+            success, results = action_rerun(args.id) 
 
         if args.formfile != None:
             success, results = action_consult(formfile=args.formfile)  

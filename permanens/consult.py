@@ -20,10 +20,8 @@
 # You should have received a copy of the GNU General Public License
 # along with permanens. If not, see <http://www.gnu.org/licenses/>.
 
-import shutil
 import yaml
 import os
-import time
 from permanens.utils import consult_repository_path, id_generator
 from permanens.logger import get_logger
 
@@ -38,6 +36,7 @@ class Consult:
         self.cpath = consult_repository_path()
 
         # load estimator
+        # TODO
         
     def run (self, form):
         ''' function called when receiving an input form 
@@ -83,14 +82,31 @@ class Consult:
         return True, form
 
     def predict (self, form, cname):
+        ''' uses the form to run the prediction pipeline
+        '''
 
         # conditions form to adapt to the estimator requirements
+        # TODO
 
         LOG.info (f'predicting {cname} form')
+
+        print (form)
 
         result = 'OK'
 
         return True, result
 
     def list (self, format):
+        ''' lists all the forms stored in the repository
+        '''
         return os.listdir(self.cpath)
+    
+    def kill (self, cname):
+        ''' deletes the consult with the ID provided as argumen from the repository
+        '''
+        formfile = os.path.join (self.cpath, cname)
+        if os.path.isfile(formfile):
+            os.remove(formfile)
+            return True, 'OK'
+        else:
+            return False, 'file not found'
