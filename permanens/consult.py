@@ -26,6 +26,7 @@ import os
 import time
 from permanens.utils import consult_repository_path, id_generator
 from permanens.logger import get_logger
+
 LOG = get_logger(__name__)
 
 class Consult:
@@ -44,15 +45,13 @@ class Consult:
         # generate unique ID
         cname = id_generator()
 
-        LOG.info = (cname, form)
-
         # save form
         success = self.save_form(form, cname)
         if not success:
             return False, 'unable to save input'
         
         # send to prediction 
-        success, result = self.predict(form)
+        success, result = self.predict(form, cname)
 
         return success, result
 
@@ -66,11 +65,11 @@ class Consult:
 
         return True
 
-    def predict (self, form):
+    def predict (self, form, cname):
 
         # conditions form to adapt to the estimator requirements
 
-        print ('predicting')
+        LOG.info (f'predicting {cname} form')
 
         result = 'OK'
 
