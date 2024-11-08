@@ -4,7 +4,7 @@
 #
 # Authors:       Manuel Pastor (manuel.pastor@upf.edu)
 #
-# Copyright 2022 Manuel Pastor
+# Copyright 2024 Manuel Pastor
 #
 # This file is part of permanens
 #

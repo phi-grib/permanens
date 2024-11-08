@@ -21,7 +21,6 @@
 # along with permanens. If not, see <http://www.gnu.org/licenses/>.
 
 import os
-import shutil
 import yaml
 
 from permanens.logger import get_logger
