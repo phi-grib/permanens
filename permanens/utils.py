@@ -4,7 +4,7 @@
 #
 # Authors:       Manuel Pastor (manuel.pastor@upf.edu)
 #
-# Copyright 2022 Manuel Pastor
+# Copyright 2024 Manuel Pastor
 #
 # This file is part of permanens
 #
@@ -24,15 +24,6 @@ import os
 import yaml
 import string
 import random 
-
-# def path_expand (path, version):
-#     ''' 
-#     Expands the path as required for the version provided as argument 
-#     '''
-#     if version == 0:
-#         return os.path.join(path, 'dev')
-#     else:
-#         return os.path.join(path, 'ver%0.6d' % (version))
 
 def consult_repository_path():
     '''
@@ -92,13 +83,13 @@ def read_config():
     return True, conf
 
 def set_repositories(root_path):
-    """
+    '''
     Set the cname repository path.
     This is the dir where flame is going to create and load cnames.
     Returns:
     --------
     None
-    """
+    '''
     success, configuration = read_config()
     
     if not success:
@@ -125,7 +116,8 @@ def set_repositories(root_path):
     return True
 
 def write_config(config: dict) -> None:
-    """Writes the configuration to disk"""
+    ''' writes the configuration to disk
+    '''
     config['config_status'] = True
     
     globals()['flame_configuration'] = config
@@ -136,7 +128,6 @@ def write_config(config: dict) -> None:
 
 
 def id_generator(size=10, chars=string.ascii_uppercase + string.digits):
-    '''
-    Return a random ID (used for temp files) with uppercase letters and numbers
+    ''' returns a random ID (used for temp files) with uppercase letters and numbers
     '''
     return ''.join(random.choice(chars) for _ in range(size))
