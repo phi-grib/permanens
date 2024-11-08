@@ -43,12 +43,6 @@ def consult_repository_path():
     if success: 
         return config['consults']
 
-def consult_path(cname):
-    '''
-    Returns the path to the cname given as argumen, containg all versions
-    '''
-    return os.path.join(consult_repository_path(), cname)
-
 
 def read_config():
     '''

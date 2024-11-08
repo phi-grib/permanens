@@ -1,4 +1,4 @@
-name: permanens
+name: permanens_app
 channels:
   - default
   - conda-forge 
@@ -12,6 +12,7 @@ dependencies:
   - requests
   - flask
   - flask_cors
+  
   - pyyaml
   - pytest
   - psycopg2

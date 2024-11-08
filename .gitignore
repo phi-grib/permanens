@@ -6,4 +6,5 @@ ras/
 *.zip
 *.tgz
 dist/*
+consults/*
 permanens.egg-info/*
