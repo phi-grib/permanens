@@ -6,4 +6,5 @@ ras/
 *.tgz
 dist/*
 consults/*
+models/*
 permanens.egg-info/*
