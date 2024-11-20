@@ -34,6 +34,14 @@ def consult_repository_path():
     if success: 
         return config['consults']
 
+def model_repository_path():
+    '''
+    Returns the path to the root of the cname repository,
+    containing all cnames and versions
+    '''
+    success, config = read_config()
+    if success: 
+        return config['models']
 
 def read_config():
     '''

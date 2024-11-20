@@ -62,7 +62,7 @@ def configure(path: None, silent: False):
 
         # If permanens has been already configured, just show values in screen and return values
         if config['config_status'] == True:
-            for i in ['consults']:
+            for i in ['consults', 'models']:
                 print (f'{i}: {config[i]}')
             return True, config
 

@@ -22,7 +22,10 @@
 
 import yaml
 import os
-from permanens.utils import consult_repository_path, id_generator
+import pickle
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from permanens.utils import consult_repository_path, model_repository_path, id_generator
 from permanens.logger import get_logger
 
 LOG = get_logger(__name__)
@@ -34,6 +37,9 @@ class Consult:
         ''' constructor '''
         # assign path
         self.cpath = consult_repository_path()
+
+        # assign estimator
+        self.model = os.path.join(model_repository_path(),'rf.pkl')
 
         # load estimators + rules as a list of pipelines
         # TODO
@@ -81,22 +87,47 @@ class Consult:
         
         return True, form
 
+    def condition (self, form, names):
+        nvarx = len(names)
+
+        xtest = np.zeros(names)
+        for ikey in form:
+            if isinstance (form[ikey], dict):
+                iform = form[ikey]
+                for iikey in iform:
+                    if iikey in names:
+                        xtest[names.index(iikey)] = iform[iikey]
+                        print ('iassign ', iikey, iform[iikey])
+
+            if ikey in names:
+                xtest[names.index(ikey)] = form[ikey]
+                print ('assign ', ikey, form[ikey])
+
+        return True, xtest
+
     def predict (self, form, cname):
         ''' uses the form to run the prediction pipeline
         '''
 
-        # conditions form to adapt to the estimator requirements
-        # TODO
-
         LOG.info (f'predicting {cname} form')
+        result = {'cname' : cname} 
 
-        # submit to prediction pipelines (statistical and rule-based)
-        # TODO
-        print (form)
+        # open estimator
+        with open(self.model, 'rb') as handle:
+            model = pickle.load(handle)
+            names = pickle.load(handle)
 
-        # results should include the ID (cname)
-        # TODO
-        result = 'OK'
+
+        # conditions form to adapt to the estimator requirements
+        success, xtest = self.condition (form, names)
+        if not success:
+            return False, 'unable to condition input form'
+
+        # submit to rule-based pipeline
+        #TODO
+
+        # submit to model
+        result['outcome'] = model.predict(xtest)
 
         return True, result
 
