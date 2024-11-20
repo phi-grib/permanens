@@ -25,7 +25,6 @@ import os
 import pickle
 import json
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
 from permanens.utils import consult_repository_path, model_repository_path, id_generator
 from permanens.logger import get_logger
 
@@ -59,6 +58,8 @@ class Consult:
         # send to prediction 
         success, result = self.predict(form, cname)
 
+        print (result)
+        
         return success, result
 
     def save_form (self, form, cname):
@@ -114,9 +115,6 @@ class Consult:
     def predict (self, form, cname):
         ''' uses the form to run the prediction pipeline
         '''
-
-        print (form)
-
         LOG.info (f'predicting {cname} form')
         result = {'cname' : cname} 
 
