@@ -127,7 +127,9 @@ class Consult:
 
         # submit to model
         r = model.predict(xtest)
+        r_proba = model.predict_proba(xtest)
         result['outcome'] = r.tolist()[0]
+        result['probability'] = r_proba.tolist()[0]
 
         return True, result
 
