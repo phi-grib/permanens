@@ -23,6 +23,7 @@
 import yaml
 import os
 import pickle
+import json
 import numpy as np
 from sklearn.ensemble import RandomForestClassifier
 from permanens.utils import consult_repository_path, model_repository_path, id_generator
@@ -89,25 +90,32 @@ class Consult:
 
     def condition (self, form, names):
         nvarx = len(names)
-
+        listitems = ['drugs', 'conditions']
+        
         xtest = np.zeros((1,nvarx))
         for ikey in form:
-            if isinstance (form[ikey], dict):
-                iform = form[ikey]
-                for iikey in iform:
-                    if iikey in names:
-                        xtest[0,names.index(iikey)] = iform[iikey]
-                        print ('iassign ', iikey, iform[iikey])
 
+            # for drugs and conditions, convert to list and set to 1 the corresponding items
+            if ikey in listitems:
+                iform = form[ikey]
+                ijson = json.loads(iform)
+                for ival in ijson:
+                    if ival in names:
+                        xtest[0,names.index(ival)] = 1
+                        print ('assigned from list: ', ival)
+
+            # for sex and age
             if ikey in names:
                 xtest[0,names.index(ikey)] = form[ikey]
-                print ('assign ', ikey, form[ikey])
+                print('assigned from key: ', ikey, form[ikey])
 
         return True, xtest
 
     def predict (self, form, cname):
         ''' uses the form to run the prediction pipeline
         '''
+
+        print (form)
 
         LOG.info (f'predicting {cname} form')
         result = {'cname' : cname} 
