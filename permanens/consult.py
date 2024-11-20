@@ -90,17 +90,17 @@ class Consult:
     def condition (self, form, names):
         nvarx = len(names)
 
-        xtest = np.zeros(names)
+        xtest = np.zeros((1,nvarx))
         for ikey in form:
             if isinstance (form[ikey], dict):
                 iform = form[ikey]
                 for iikey in iform:
                     if iikey in names:
-                        xtest[names.index(iikey)] = iform[iikey]
+                        xtest[0,names.index(iikey)] = iform[iikey]
                         print ('iassign ', iikey, iform[iikey])
 
             if ikey in names:
-                xtest[names.index(ikey)] = form[ikey]
+                xtest[0,names.index(ikey)] = form[ikey]
                 print ('assign ', ikey, form[ikey])
 
         return True, xtest
@@ -117,7 +117,6 @@ class Consult:
             model = pickle.load(handle)
             names = pickle.load(handle)
 
-
         # conditions form to adapt to the estimator requirements
         success, xtest = self.condition (form, names)
         if not success:
@@ -127,7 +126,8 @@ class Consult:
         #TODO
 
         # submit to model
-        result['outcome'] = model.predict(xtest)
+        r = model.predict(xtest)
+        result['outcome'] = r.tolist()[0]
 
         return True, result
 

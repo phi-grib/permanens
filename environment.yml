@@ -4,19 +4,19 @@ channels:
   - conda-forge 
 dependencies:
   - python=3.10
-  - numpy=1.26.*
-  - scikit-learn=1.4.*
-  - imbalanced-learn=0.12.*
   - pip
   - setuptools
   - requests
   - flask
   - flask_cors
-  
   - pyyaml
   - pytest
   - psycopg2
   - python-docx
   - XlsxWriter
   - appdirs
+  - pip:
+    - numpy
+    - scikit-learn
+    - statsmodels
      
