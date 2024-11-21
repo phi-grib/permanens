@@ -44,22 +44,21 @@ class Consult:
         # load estimators + rules as a list of pipelines
         # TODO
         
-    def run (self, form):
+    def run (self, form, cname=None):
         ''' function called when receiving an input form 
         '''
-        # generate unique ID
-        cname = id_generator()
+        if cname == None:
+            # generate unique ID
+            cname = id_generator()
 
-        # save form
-        success = self.save_form(form, cname)
-        if not success:
-            return False, 'unable to save input'
+            # save form
+            success = self.save_form(form, cname)
+            if not success:
+                return False, 'unable to save input'
         
         # send to prediction 
         success, result = self.predict(form, cname)
 
-        print (result)
-        
         return success, result
 
     def save_form (self, form, cname):

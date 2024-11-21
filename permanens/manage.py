@@ -61,7 +61,7 @@ def action_rerun (id):
     if not success:
         return form
 
-    success, result = c.run (form)
+    success, result = c.run (form, id)
 
     return success, result
 
