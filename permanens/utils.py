@@ -135,7 +135,7 @@ def write_config(config: dict) -> None:
         yaml.dump(config, f, default_flow_style=False)
 
 
-def id_generator(size=10, chars=string.ascii_uppercase + string.digits):
+def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     ''' returns a random ID (used for temp files) with uppercase letters and numbers
     '''
     return ''.join(random.choice(chars) for _ in range(size))
