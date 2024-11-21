@@ -65,6 +65,16 @@ def action_rerun (id):
 
     return success, result
 
+def action_retrieve (id):
+    ''' tries to load a form with the ID given as argument, saved in the repository 
+    '''
+
+    c = Consult()
+
+    success, form = c.load_form(id)
+    return success, form
+
+
 def action_kill(cname=None):
     '''
     removes the consult with the ID given as argument
