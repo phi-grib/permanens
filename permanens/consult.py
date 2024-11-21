@@ -91,24 +91,22 @@ class Consult:
 
     def condition (self, form, names):
         nvarx = len(names)
-        listitems = ['drugs', 'conditions']
         
         xtest = np.zeros((1,nvarx))
         for ikey in form:
+            ival = form[ikey]
 
-            # for drugs and conditions, convert to list and set to 1 the corresponding items
-            if ikey in listitems:
-                iform = form[ikey]
-                ijson = json.loads(iform)
-                for ival in ijson:
-                    if ival in names:
-                        xtest[0,names.index(ival)] = 1
-                        print ('assigned from list: ', ival)
+            # for lists
+            if isinstance(form[ikey], list):
+                for item in ival:
+                    if item in names:
+                        xtest[0,names.index(item)] = 1
+                        print ('assigned from list: ', item)
 
             # for sex and age
             if ikey in names:
-                xtest[0,names.index(ikey)] = form[ikey]
-                print('assigned from key: ', ikey, form[ikey])
+                xtest[0,names.index(ikey)] = ival
+                print('assigned from key: ', ikey, ival)
 
         return True, xtest
 
