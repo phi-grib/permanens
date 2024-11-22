@@ -28,7 +28,7 @@ from permanens.consult import Consult
 
 LOG = get_logger(__name__)
 
-def action_consult (form=None, formfile=None):
+def action_consult (form=None, formfile=None, id=None):
     ''' uses the input data provided in the arguments to run the consult  
     '''
      
@@ -46,7 +46,7 @@ def action_consult (form=None, formfile=None):
         
     c = Consult()
 
-    success, result = c.run (form)
+    success, result = c.run (form, id)
 
     return success, result
 
