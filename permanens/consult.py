@@ -23,7 +23,6 @@
 import yaml
 import os
 import pickle
-import json
 import numpy as np
 from permanens.utils import consult_repository_path, model_repository_path, id_generator
 from permanens.logger import get_logger
@@ -58,6 +57,7 @@ class Consult:
         
         # send to prediction 
         success, result = self.predict(form, cname)
+
 
         return success, result
 
@@ -133,6 +133,7 @@ class Consult:
         r_proba = model.predict_proba(xtest)
         result['outcome'] = r.tolist()[0]
         result['probability'] = r_proba.tolist()[0]
+        result['input'] = form
 
         return True, result
 
