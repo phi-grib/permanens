@@ -38,11 +38,9 @@ class Consult:
         self.cpath = consult_repository_path()
 
         # assign estimator
-        self.model = os.path.join(model_repository_path(),'rf.pkl')
+        self.model_name = os.path.join(model_repository_path(),'rf.pkl')
+        self.model_dict = None
 
-        # load estimators + rules as a list of pipelines
-        # TODO
-        
     def run (self, form, cname=None):
         ''' function called when receiving an input form 
         '''
@@ -116,9 +114,12 @@ class Consult:
         result = {'cname' : cname} 
 
         # open estimator
-        with open(self.model, 'rb') as handle:
-            model = pickle.load(handle)
-            names = pickle.load(handle)
+        if self.model_dict == None:
+            with open(self.model_name, 'rb') as handle:
+                self.model_dict = pickle.load(handle)
+            
+        model = self.model_dict['model']
+        names = model.feature_names_in_.tolist()
 
         # conditions form to adapt to the estimator requirements
         success, xtest = self.condition (form, names)
@@ -131,9 +132,30 @@ class Consult:
         # submit to model
         r = model.predict(xtest)
         r_proba = model.predict_proba(xtest)
+
+        p = r_proba.tolist()[0]
         result['outcome'] = r.tolist()[0]
-        result['probability'] = r_proba.tolist()[0]
+        result['probability'] = p
         result['input'] = form
+        result['decil_info'] = self.model_dict['decil_info']
+        result['model_description'] = self.model_dict['description'] 
+        result['model_metrics_training'] = self.model_dict['metrics_fitting']
+        result['model_metrics_test'] = self.model_dict['metrics_prediction']
+        model_percentils = self.model_dict['percentils']
+
+        pred_percentil = 100
+        for i, pi in enumerate(model_percentils):
+            if pi > p[1] :
+                pred_percentil = i
+                break
+        result['percentil'] = pred_percentil
+        
+        pred_decil = 10
+        for i, d in enumerate(result['decil_info']):
+            if d['pmax'] > p[1]:
+                pred_decil = i+1
+                break
+        result['decil'] = pred_decil
 
         return True, result
 
