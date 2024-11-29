@@ -124,8 +124,6 @@ class Consult:
         LOG.info (f'predicting {cname} form')
         result = {'cname' : cname} 
 
-
-            
         model = self.model_dict['model']
         names = model.feature_names_in_.tolist()
 
