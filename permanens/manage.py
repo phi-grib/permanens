@@ -27,6 +27,7 @@ from permanens.logger import get_logger
 from permanens.consult import Consult
 
 LOG = get_logger(__name__)
+c = Consult()
 
 def action_consult (form=None, formfile=None, id=None):
     ''' uses the input data provided in the arguments to run the consult  
@@ -44,7 +45,7 @@ def action_consult (form=None, formfile=None, id=None):
     if form == None:
         return False, 'failed to load input data'
         
-    c = Consult()
+    # c = Consult()
 
     success, result = c.run (form, id)
 
@@ -55,7 +56,7 @@ def action_rerun (id):
         and run the consult 
     '''
 
-    c = Consult()
+    # c = Consult()
 
     success, form = c.load_form(id)
     if not success:
@@ -69,7 +70,7 @@ def action_retrieve (id):
     ''' tries to load a form with the ID given as argument, saved in the repository 
     '''
 
-    c = Consult()
+    # c = Consult()
 
     success, form = c.load_form(id)
     return success, form
@@ -82,7 +83,8 @@ def action_kill(cname=None):
     if cname == None:
         return False, 'no consult ID provided'
     
-    c = Consult()
+    # c = Consult()
+
     succes, result = c.kill(cname)
 
     return succes, result
@@ -91,7 +93,9 @@ def action_list(out='text'):
     '''
     lists all consults in the repository  
     '''
-    c = Consult()
+
+    # c = Consult()
+
     consult_list = c.list(out)
 
     if out == 'text':

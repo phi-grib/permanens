@@ -23,6 +23,7 @@
 import yaml
 import os
 import pickle
+import pandas as pd
 import numpy as np
 from permanens.utils import consult_repository_path, model_repository_path, id_generator
 from permanens.logger import get_logger
@@ -39,7 +40,13 @@ class Consult:
 
         # assign estimator
         self.model_name = os.path.join(model_repository_path(),'rf.pkl')
-        self.model_dict = None
+
+        # open estimator
+        with open(self.model_name, 'rb') as handle:
+            self.model_dict = pickle.load(handle)
+        
+        print ('*** INITIALIZATION COMPLETE *****')
+        
 
     def run (self, form, cname=None):
         ''' function called when receiving an input form 
@@ -105,7 +112,11 @@ class Consult:
                 xtest[0,names.index(ikey)] = ival
                 print('assigned from key: ', ikey, ival)
 
-        return True, xtest
+        # convert to pandas dataframe 
+        xdf = pd.DataFrame(xtest)
+        xdf.columns = names
+
+        return True, xdf
 
     def predict (self, form, cname):
         ''' uses the form to run the prediction pipeline
@@ -113,10 +124,7 @@ class Consult:
         LOG.info (f'predicting {cname} form')
         result = {'cname' : cname} 
 
-        # open estimator
-        if self.model_dict == None:
-            with open(self.model_name, 'rb') as handle:
-                self.model_dict = pickle.load(handle)
+
             
         model = self.model_dict['model']
         names = model.feature_names_in_.tolist()
