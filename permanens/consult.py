@@ -25,6 +25,7 @@ import os
 import pickle
 import pandas as pd
 import numpy as np
+
 from permanens.utils import consult_repository_path, model_repository_path, id_generator
 from permanens.logger import get_logger
 
@@ -138,8 +139,13 @@ class Consult:
         # submit to model
         r = model.predict(xtest)
         r_proba = model.predict_proba(xtest)
-
         p = r_proba.tolist()[0]
+
+        # # xtest = np.reshape(test[i],shape=(1, 91))
+        # if r[0]==1:
+        #     exp = result['explainer'].explain_instance(xtest, model.predict_proba, labels=(1), num_features=20, top_labels=1)
+        #     result['explanation']= exp.as_list(label=1)
+
         result['outcome'] = r.tolist()[0]
         result['probability'] = p
         result['input'] = form
