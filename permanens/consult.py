@@ -143,10 +143,16 @@ class Consult:
         r = model.predict(xtest_pd).tolist()[0]
         p = model.predict_proba(xtest_pd).tolist()[0]
 
+
+        importance_sel = [] # in case of negatives, pass an empty list
         if r==1:
             exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=20, top_labels=1)
-            result['explanation']= exp.as_list(label=1)
-
+            importance_all = exp.as_list(label=1)
+            for i in importance_all:
+                ilabel = i[0]
+                if ' > 0.0' in ilabel:
+                    importance_sel.append( (ilabel[:-7], i[1]))
+                
         result['outcome'] = r
         result['probability'] = p
         result['input'] = form
@@ -154,6 +160,7 @@ class Consult:
         result['model_description'] = self.model_dict['description'] 
         result['model_metrics_training'] = self.model_dict['metrics_fitting']
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
+        result['explanation']= importance_sel
         model_percentils = self.model_dict['percentils']
 
         pred_percentil = 100
