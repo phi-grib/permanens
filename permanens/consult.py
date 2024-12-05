@@ -143,10 +143,9 @@ class Consult:
         r = model.predict(xtest_pd).tolist()[0]
         p = model.predict_proba(xtest_pd).tolist()[0]
 
-
         importance_sel = [] # in case of negatives, pass an empty list
         if r==1:
-            exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=20, top_labels=1)
+            exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=40, top_labels=1)
             importance_all = exp.as_list(label=1)
             for i in importance_all:
                 ilabel = i[0]
