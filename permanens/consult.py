@@ -22,7 +22,8 @@
 
 import yaml
 import os
-import pickle
+# import pickle
+import dill
 import pandas as pd
 import numpy as np
 
@@ -40,11 +41,12 @@ class Consult:
         self.cpath = consult_repository_path()
 
         # assign estimator
-        self.model_name = os.path.join(model_repository_path(),'rf.pkl')
+        # self.model_name = os.path.join(model_repository_path(),'rf.pkl')
+        self.model_name = os.path.join(model_repository_path(),'rf.dill')
 
         # open estimator
         with open(self.model_name, 'rb') as handle:
-            self.model_dict = pickle.load(handle)
+            self.model_dict = dill.load(handle)
         
         print ('*** INITIALIZATION COMPLETE *****')
         
@@ -97,7 +99,7 @@ class Consult:
     def condition (self, form, names):
         nvarx = len(names)
         
-        xtest = np.zeros((1,nvarx))
+        xtest_np = np.zeros((1,nvarx))
         for ikey in form:
             ival = form[ikey]
 
@@ -105,19 +107,19 @@ class Consult:
             if isinstance(form[ikey], list):
                 for item in ival:
                     if item in names:
-                        xtest[0,names.index(item)] = 1
-                        print ('assigned from list: ', item)
+                        xtest_np[0,names.index(item)] = 1
+                        # print ('assigned from list: ', item)
 
             # for sex and age
             if ikey in names:
-                xtest[0,names.index(ikey)] = ival
-                print('assigned from key: ', ikey, ival)
+                xtest_np[0,names.index(ikey)] = ival
+                # print('assigned from key: ', ikey, ival)
 
         # convert to pandas dataframe 
-        xdf = pd.DataFrame(xtest)
-        xdf.columns = names
+        xtest_pd = pd.DataFrame(xtest_np)
+        xtest_pd.columns = names
 
-        return True, xdf
+        return True, xtest_pd, xtest_np
 
     def predict (self, form, cname):
         ''' uses the form to run the prediction pipeline
@@ -126,10 +128,11 @@ class Consult:
         result = {'cname' : cname} 
 
         model = self.model_dict['model']
+        explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
 
         # conditions form to adapt to the estimator requirements
-        success, xtest = self.condition (form, names)
+        success, xtest_pd, xtest_np = self.condition (form, names)
         if not success:
             return False, 'unable to condition input form'
 
@@ -137,16 +140,14 @@ class Consult:
         #TODO
 
         # submit to model
-        r = model.predict(xtest)
-        r_proba = model.predict_proba(xtest)
-        p = r_proba.tolist()[0]
+        r = model.predict(xtest_pd).tolist()[0]
+        p = model.predict_proba(xtest_pd).tolist()[0]
 
-        # # xtest = np.reshape(test[i],shape=(1, 91))
-        # if r[0]==1:
-        #     exp = result['explainer'].explain_instance(xtest, model.predict_proba, labels=(1), num_features=20, top_labels=1)
-        #     result['explanation']= exp.as_list(label=1)
+        if r==1:
+            exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=20, top_labels=1)
+            result['explanation']= exp.as_list(label=1)
 
-        result['outcome'] = r.tolist()[0]
+        result['outcome'] = r
         result['probability'] = p
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']

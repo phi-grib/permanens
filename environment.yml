@@ -17,6 +17,8 @@ dependencies:
   - appdirs
   - pip:
     - numpy
+    - dill
+    - lime
     - scikit-learn
     - statsmodels
      
