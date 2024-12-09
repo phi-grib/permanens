@@ -31,6 +31,7 @@ from permanens.utils import consult_repository_path, model_repository_path, id_g
 from permanens.logger import get_logger
 
 LOG = get_logger(__name__)
+VAR_MAX = 10
 
 class Consult:
     ''' Class storing all the risk assessment information
@@ -44,12 +45,39 @@ class Consult:
         # self.model_name = os.path.join(model_repository_path(),'rf.pkl')
         self.model_name = os.path.join(model_repository_path(),'rf.dill')
 
+        # open predictors class yaml
+        predictors_file = os.path.join(model_repository_path(),'predictors.yaml')
+        self.predictors=None
+        with open(predictors_file, 'r') as handle:
+            self.predictors = yaml.safe_load(handle)
+
         # open estimator
         with open(self.model_name, 'rb') as handle:
             self.model_dict = dill.load(handle)
+
+        self.predictors_ord={}
+        self.predictors_ord['drugs'] = []
+        self.predictors_ord['conditions'] = []
         
-        print ('*** INITIALIZATION COMPLETE *****')
+        # extract top-10 predictor for drugs and conditions
+        var_importance = self.model_dict['var_importance']
+        for ivar in var_importance:
+            if ivar in self.predictors['drugs']:
+                if len (self.predictors_ord['drugs']) < VAR_MAX:
+                    self.predictors_ord['drugs'].append(ivar)
+            elif ivar in self.predictors['conditions']:
+                if len (self.predictors_ord['conditions']) < VAR_MAX:
+                    self.predictors_ord['conditions'].append(ivar)
+
+        LOG.info ('INITIALIZATION COMPLETE')
         
+
+    def get_predictors (self):
+
+        if self.predictors_ord['drugs'] != [] and self.predictors_ord['conditions'] != []:
+            return True, self.predictors_ord
+
+        return False, 'predictors undefined'
 
     def run (self, form, cname=None):
         ''' function called when receiving an input form 
@@ -65,8 +93,6 @@ class Consult:
         
         # send to prediction 
         success, result = self.predict(form, cname)
-
-
         return success, result
 
     def save_form (self, form, cname):

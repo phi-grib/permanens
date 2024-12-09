@@ -105,5 +105,11 @@ def action_list(out='text'):
 
     return True, consult_list
 
+def action_predictors():
+
+    success, predictors = c.get_predictors()
+
+    return success, predictors 
+
 
 
