@@ -106,7 +106,12 @@ def action_list(out='text'):
     return True, consult_list
 
 def action_predictors():
+    '''
+    returns predictors by category, to be used by the front-end as selectable predictors
+    '''
 
+    # c = Consult()
+    
     success, predictors = c.get_predictors()
 
     return success, predictors 

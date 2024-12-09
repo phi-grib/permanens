@@ -69,10 +69,11 @@ class Consult:
         
 
     def get_predictors (self):
-
+        ''' provides a list of VAR_MAX predictors for drugs and conditions categories, which can
+            be used as selectable predictor variables in the front-end
+        '''
         if self.predictors_ord['drugs'] != [] and self.predictors_ord['conditions'] != []:
             return True, self.predictors_ord
-
         return False, 'predictors undefined'
 
     def run (self, form, cname=None):
