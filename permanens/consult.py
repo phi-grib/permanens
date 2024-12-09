@@ -45,15 +45,11 @@ class Consult:
         # self.model_name = os.path.join(model_repository_path(),'rf.pkl')
         self.model_name = os.path.join(model_repository_path(),'rf.dill')
 
-        # open predictors class yaml
-        predictors_file = os.path.join(model_repository_path(),'predictors.yaml')
-        self.predictors=None
-        with open(predictors_file, 'r') as handle:
-            self.predictors = yaml.safe_load(handle)
-
         # open estimator
         with open(self.model_name, 'rb') as handle:
             self.model_dict = dill.load(handle)
+
+        predictors_dict = self.model_dict['predictors_dict']
 
         self.predictors_ord={}
         self.predictors_ord['drugs'] = []
@@ -61,13 +57,13 @@ class Consult:
         
         # extract top-10 predictor for drugs and conditions
         var_importance = self.model_dict['var_importance']
-        for ivar in var_importance:
-            if ivar in self.predictors['drugs']:
-                if len (self.predictors_ord['drugs']) < VAR_MAX:
-                    self.predictors_ord['drugs'].append(ivar)
-            elif ivar in self.predictors['conditions']:
-                if len (self.predictors_ord['conditions']) < VAR_MAX:
-                    self.predictors_ord['conditions'].append(ivar)
+        for item in ['drugs', 'conditions']:
+            for ivar in var_importance:
+                if ivar in predictors_dict[item]:
+                    if len (self.predictors_ord[item]) < VAR_MAX:
+                        self.predictors_ord[item].append(ivar)
+                    else:
+                        break
 
         LOG.info ('INITIALIZATION COMPLETE')
         
