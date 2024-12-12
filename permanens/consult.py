@@ -120,6 +120,9 @@ class Consult:
         return True, form
 
     def condition (self, form, names):
+        ''' compares the form values with the names to setup an appropriate
+            input string for the model
+        '''
         nvarx = len(names)
         
         xtest_np = np.zeros((1,nvarx))

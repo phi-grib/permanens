@@ -27,7 +27,20 @@ from permanens.logger import get_logger
 from permanens.consult import Consult
 
 LOG = get_logger(__name__)
+
+# consult is instantiated when the server starts. This allows to load only one model
+# and should be reviewed to allow reload other models on the fly or load a set of models
+# for ensemble predictions
+
 c = Consult()
+
+def valid_token (token):
+    ''' check if the token used to identify "doctor mode" is correct
+        for now, we use a simple hardcode token
+    '''
+    if token == '67257293892':
+        return True
+    return False
 
 def action_consult (form=None, formfile=None, id=None):
     ''' uses the input data provided in the arguments to run the consult  
@@ -51,14 +64,10 @@ def action_consult (form=None, formfile=None, id=None):
 
     return success, result
 
-def valid_token (token):
-    if token == '67257293892':
-        return True
-    return False
-
 def action_rerun (id, token):
-    ''' tries to load a form with the ID given as argument, saved in the repository 
-        and run the consult 
+    ''' loads a form with the ID given as argument, saved in the repository 
+        and run the consult. The token informs if the GUI is in "doctor mode".
+        Protected consults (view=False) can only be run in doctor mode  
     '''
 
     # c = Consult()
