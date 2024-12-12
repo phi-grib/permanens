@@ -67,7 +67,7 @@ def action_rerun (id, token):
     if not success:
         return form
     
-    # if form "Patient visible" is not true, check token
+    # if form "visible" is not true, check token
     if form['view'] == False:
         if not valid_token (token):
             return False, 'invalid token'
