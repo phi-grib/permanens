@@ -43,7 +43,7 @@ class Consult:
 
         # assign estimator
         # self.model_name = os.path.join(model_repository_path(),'rf.pkl')
-        self.model_name = os.path.join(model_repository_path(),'rf.dill')
+        self.model_name = os.path.join(model_repository_path(),'model-rf.dill')
 
         # open estimator
         with open(self.model_name, 'rb') as handle:
