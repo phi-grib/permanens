@@ -51,7 +51,12 @@ def action_consult (form=None, formfile=None, id=None):
 
     return success, result
 
-def action_rerun (id):
+def valid_token (token):
+    if token == '67257293892':
+        return True
+    return False
+
+def action_rerun (id, token):
     ''' tries to load a form with the ID given as argument, saved in the repository 
         and run the consult 
     '''
@@ -61,6 +66,11 @@ def action_rerun (id):
     success, form = c.load_form(id)
     if not success:
         return form
+    
+    # if form "Patient visible" is not true, check token
+    if form['view'] == False:
+        if not valid_token (token):
+            return False, 'invalid token'
 
     success, result = c.run (form, id)
 
