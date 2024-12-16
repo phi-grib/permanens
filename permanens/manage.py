@@ -74,7 +74,7 @@ def action_rerun (id, token):
 
     success, form = c.load_form(id)
     if not success:
-        return form
+        return False, form
     
     # if form "visible" is not true, check token
     if form['view'] == False:
