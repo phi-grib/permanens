@@ -12,7 +12,7 @@
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation version 3.
 #
-# Flame is distributed in the hope that it will be useful,
+# Permanens is distributed in the hope that it will be useful,
 # but WITHOUT ANY WARRANTY; without even the implied warranty of
 # MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 # GNU General Public License for more details.
@@ -53,8 +53,8 @@ def read_config():
     Boolean, dict
     '''
 
-    if 'namastox_configuration' in globals():
-        return True, globals()['namastox_configuration']
+    if 'permanens_configuration' in globals():
+        return True, globals()['permanens_configuration']
 
     try:
         source_dir = os.path.dirname(os.path.dirname(__file__)) 
@@ -73,7 +73,7 @@ def read_config():
             base_dir, head_dir = os.path.split(conf['consult_repository_path'])
             conf['root_repository'] = base_dir
         else:
-            return False, f'Configuration file incorrect. Run "namastox -c config -d ROOT_DIR" with a suitable ROOT_DIR setting'
+            return False, f'Configuration file incorrect. Run "permanens -c config -d ROOT_DIR" with a suitable ROOT_DIR setting'
 
     items = ['consults']
     for i in items:
@@ -86,14 +86,14 @@ def read_config():
             except:
                 return False, f'Configuration file incorrect. Unable to convert "{conf[i]}" to a valid path.'
         
-    globals()['namastox_configuration'] = conf
+    globals()['permanens_configuration'] = conf
 
     return True, conf
 
 def set_repositories(root_path):
     '''
     Set the cname repository path.
-    This is the dir where flame is going to create and load cnames.
+    This is the dir where permanens is going to create and load cnames.
     Returns:
     --------
     None
@@ -105,7 +105,7 @@ def set_repositories(root_path):
 
     configuration['root_repository'] = root_path
 
-    items = ['consults']
+    items = ['consults', 'models']
     for i in items:
         ipath = os.path.join(root_path, i)
         try:
@@ -128,7 +128,7 @@ def write_config(config: dict) -> None:
     '''
     config['config_status'] = True
     
-    globals()['flame_configuration'] = config
+    globals()['permanens_configuration'] = config
 
     source_dir = os.path.dirname(os.path.dirname(__file__)) 
     with open(os.path.join(source_dir,'config.yaml'), 'w') as f:

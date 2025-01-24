@@ -23,10 +23,7 @@
 import os
 import argparse
 from permanens.logger import get_logger
-from permanens import __version__
-from permanens.config import configure
-from permanens.manage import action_consult, action_kill, action_list, action_rerun
-
+# from permanens import __version__
 
 LOG = get_logger(__name__)
 
@@ -67,11 +64,17 @@ def main():
             return 
 
     if args.command == 'config':
+        
+        from permanens.config import configure
+        
         success, results = configure(args.directory, (args.action == 'silent'))
         if not success:
             LOG.error(f'{results}, configuration unchanged')
+        return
 
-    elif args.command == 'consult':
+    from permanens.manage import action_consult, action_kill, action_list, action_rerun
+    
+    if args.command == 'consult':
         if args.id != None:
             success, results = action_rerun(args.id) 
 
