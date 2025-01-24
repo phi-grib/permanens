@@ -125,17 +125,26 @@ def action_list(out='text'):
     return True, consult_list
 
 def action_models(out='text'):
-
+    '''
+    list all models in the model repository
+    '''
+    model_labels = c.get_model_labels()
+    if out == 'text':
+        print (model_labels)
+        return True, 'OK'
+    
     return True, c.get_model_labels()
 
 def action_setmodel(model_id):
-
-    print ('***************', model_id)
-    c.set_model(model_id)
-
-    return True, 'OK'
-
-
+    '''
+    changes the current model to the one identified by the model_id
+    '''
+    model_labels = c.get_model_labels()
+    if model_id<len(model_labels):
+        c.set_model(model_id)
+        return True, 'OK'
+    else:
+        return False, 'model_id not defined'
 
 def action_predictors():
     '''
