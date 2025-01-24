@@ -40,49 +40,23 @@ class Consult:
         ''' constructor '''
         # assign path
         self.cpath = consult_repository_path()
-        
-        # obtain a list with all estimators and all model information
-        model_repo = model_repository_path()
-        self.model_names = []
-        self.model_dicts = []
-        self.model_labels = []
-        for iname in os.listdir (model_repo):
-            ipath = os.path.join(model_repo,iname)
-            self.model_names.append(ipath)
-        
-            try:
-                with open(ipath, 'rb') as handle:
-                    idict = dill.load(handle)
-            except:
-                LOG.error ('unable to load model info')
-                continue
-            
-            self.model_dicts.append(idict)
-        
-            if 'description' in idict:
-                self.model_labels.append(idict['description'])
-            else:
-                self.model_labels.append('unk model')
-                
-        # use first model as default
-        self.set_model(0)
-        
-        LOG.info ('INITIALIZATION COMPLETE')
-        
-    def set_model (self, modelID):
-        self.model_name = self.model_names[modelID]
-        self.model_dict = self.model_dicts[modelID]
 
-        # extract top-10 predictor for drugs and conditions
-        var_importance = self.model_dict['var_importance']
+        # assign estimator
+        # self.model_name = os.path.join(model_repository_path(),'rf.pkl')
+        self.model_name = os.path.join(model_repository_path(),'model-rf.dill')
 
-        # initialize predictors
+        # open estimator
+        with open(self.model_name, 'rb') as handle:
+            self.model_dict = dill.load(handle)
+
+        predictors_dict = self.model_dict['predictors_dict']
+
         self.predictors_ord={}
         self.predictors_ord['drugs'] = []
         self.predictors_ord['conditions'] = []
-
-        # assign more important variables to the predictors
-        predictors_dict = self.model_dict['predictors_dict']
+        
+        # extract top-10 predictor for drugs and conditions
+        var_importance = self.model_dict['var_importance']
         for item in ['drugs', 'conditions']:
             for ivar in var_importance:
                 if ivar in predictors_dict[item]:
@@ -91,8 +65,8 @@ class Consult:
                     else:
                         break
 
-    def get_model_labels (self):
-        return self.model_labels
+        LOG.info ('INITIALIZATION COMPLETE')
+        
 
     def get_predictors (self):
         ''' provides a list of VAR_MAX predictors for drugs and conditions categories, which can

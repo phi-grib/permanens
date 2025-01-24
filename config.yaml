@@ -1,8 +1,8 @@
 admin_email: admin@domain.org
 admin_name: Admin Name
 config_status: true
-consults: c:\users\mpastor\documents\soft\permanens\consults
+consults: x:\soft\permanens\consults
 homepage: homepage@domain.org
-models: c:\users\mpastor\documents\soft\permanens\models
+models: x:\soft\permanens\models
 provider: My Organization
-root_repository: c:\users\mpastor\documents\soft\permanens
+root_repository: x:\soft\permanens
