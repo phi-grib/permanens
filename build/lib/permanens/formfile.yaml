@@ -1,0 +1,7 @@
+age: 56
+sex: 0
+drugs: 
+  - clozapine
+  - loratadine
+conditions:
+  - depression

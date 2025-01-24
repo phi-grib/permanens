@@ -124,19 +124,6 @@ def action_list(out='text'):
 
     return True, consult_list
 
-def action_models(out='text'):
-
-    return True, c.get_model_labels()
-
-def action_setmodel(model_id):
-
-    print ('***************', model_id)
-    c.set_model(model_id)
-
-    return True, 'OK'
-
-
-
 def action_predictors():
     '''
     returns predictors by category, to be used by the front-end as selectable predictors
