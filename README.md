@@ -1,6 +1,6 @@
 # permanens
 
-Clinical Decisions Support Tool of PERMANENS projecy
+Clinical Decisions Support System (CDSS) of PERMANENS project
 
 
 ## Install
