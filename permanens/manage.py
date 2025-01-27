@@ -139,12 +139,7 @@ def action_setmodel(model_id):
     '''
     changes the current model to the one identified by the model_id
     '''
-    model_labels = c.get_model_labels()
-    if model_id<len(model_labels):
-        c.set_model(model_id)
-        return True, 'OK'
-    else:
-        return False, 'model_id not defined'
+    return c.set_model(model_id)
 
 def action_predictors():
     '''

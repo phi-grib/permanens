@@ -70,6 +70,9 @@ class Consult:
         LOG.info ('INITIALIZATION COMPLETE')
         
     def set_model (self, modelID):
+        if modelID >= len (self.model_dicts):
+            return False, 'modeID out of range'
+        
         self.model_name = self.model_names[modelID]
         self.model_dict = self.model_dicts[modelID]
 
@@ -90,6 +93,12 @@ class Consult:
                         self.predictors_ord[item].append(ivar)
                     else:
                         break
+        
+        result = {}
+        result['model_description'] = self.model_dict['description']
+        result['model_metrics_training'] = self.model_dict['metrics_fitting']
+        result['model_metrics_test'] = self.model_dict['metrics_prediction']
+        return True, result
 
     def get_model_labels (self):
         return self.model_labels
@@ -208,9 +217,9 @@ class Consult:
         result['probability'] = p
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']
-        result['model_description'] = self.model_dict['description'] 
-        result['model_metrics_training'] = self.model_dict['metrics_fitting']
-        result['model_metrics_test'] = self.model_dict['metrics_prediction']
+        # result['model_description'] = self.model_dict['description'] 
+        # result['model_metrics_training'] = self.model_dict['metrics_fitting']
+        # result['model_metrics_test'] = self.model_dict['metrics_prediction']
         result['explanation']= importance_sel
         model_percentils = self.model_dict['percentils']
 
