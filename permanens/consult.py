@@ -27,7 +27,7 @@ import dill
 import pandas as pd
 import numpy as np
 
-from permanens.utils import consult_repository_path, model_repository_path, id_generator
+from permanens.utils import consult_repository_path, model_repository_path, id_generator, hashfile
 from permanens.logger import get_logger
 
 LOG = get_logger(__name__)
@@ -49,6 +49,8 @@ class Consult:
         for iname in os.listdir (model_repo):
             ipath = os.path.join(model_repo,iname)
             self.model_names.append(ipath)
+            
+            hfile = hashfile(ipath)
         
             try:
                 with open(ipath, 'rb') as handle:
@@ -57,18 +59,23 @@ class Consult:
                 LOG.error ('unable to load model info')
                 continue
             
+            idict['model_hash'] = hfile
             self.model_dicts.append(idict)
         
+            # models are identified by the descrition and a hashed unique ID
             if 'description' in idict:
-                self.model_labels.append(idict['description'])
+                dfile = idict['description']
             else:
-                self.model_labels.append('unk model')
+                dfile = 'unknown'
+            
+            self.model_labels.append((dfile, hfile))
                 
         # use first model as default
         self.set_model(0)
         
         LOG.info ('INITIALIZATION COMPLETE')
         
+
     def set_model (self, modelID):
         if modelID >= len (self.model_dicts):
             return False, 'modeID out of range'
@@ -134,6 +141,8 @@ class Consult:
         '''
         consultfile = os.path.join (self.cpath, cname)
 
+        form['model_hash'] = self.model_dict['model_hash']
+        
         with open(consultfile,'w') as f:
             f.write(yaml.dump(form))
 

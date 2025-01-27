@@ -24,6 +24,7 @@ import os
 import yaml
 import string
 import random 
+import hashlib
 
 def consult_repository_path():
     '''
@@ -139,3 +140,22 @@ def id_generator(size=6, chars=string.ascii_uppercase + string.digits):
     ''' returns a random ID (used for temp files) with uppercase letters and numbers
     '''
     return ''.join(random.choice(chars) for _ in range(size))
+
+def hashfile(filename, blocksize=65536, hash_len=10):
+    '''
+    Returns the SHAKE256 sum of the file given as argument
+    '''
+
+    if filename is None:
+        return 0
+
+    if not os.path.isfile(filename):
+        return 0
+        
+    hash = hashlib.shake_256()
+
+    with open(filename, "rb") as f:
+        for block in iter(lambda: f.read(blocksize), b""):
+            hash.update(block)
+
+    return hash.hexdigest(hash_len)
