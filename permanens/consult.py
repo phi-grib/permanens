@@ -98,6 +98,8 @@ class Consult:
         result['model_description'] = self.model_dict['description']
         result['model_metrics_training'] = self.model_dict['metrics_fitting']
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
+        result['drugs'] = self.predictors_ord['drugs'] 
+        result['conditions'] = self.predictors_ord['conditions'] 
         return True, result
 
     def get_model_labels (self):
