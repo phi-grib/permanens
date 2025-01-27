@@ -142,7 +142,7 @@ class Consult:
         consultfile = os.path.join (self.cpath, cname)
 
         form['model_hash'] = self.model_dict['model_hash']
-        
+
         with open(consultfile,'w') as f:
             f.write(yaml.dump(form))
 
@@ -162,6 +162,16 @@ class Consult:
 
         if form == None:
             return False, 'unable to load form'
+        
+        # if 'model_hash' in form:
+        #     input_hash = form['model_hash']
+        #     found = False
+        #     for i,imodel in enumerate(self.model_labels):
+        #         if imodel[1] == input_hash:
+        #             self.set_model(i)
+        #             found = True
+        #     if not found:
+        #         return False, 'No model matching'
         
         return True, form
 
