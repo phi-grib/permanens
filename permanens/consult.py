@@ -105,6 +105,7 @@ class Consult:
         result['model_description'] = self.model_dict['description']
         result['model_metrics_training'] = self.model_dict['metrics_fitting']
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
+        result['model_hash'] = self.model_dict['model_hash']
         result['drugs'] = self.predictors_ord['drugs'] 
         result['conditions'] = self.predictors_ord['conditions'] 
         return True, result
