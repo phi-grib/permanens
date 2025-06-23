@@ -6,5 +6,5 @@ ras/
 *.tgz
 dist/*
 consults/*
-models/*
+model-rf*.dill
 permanens.egg-info/*
