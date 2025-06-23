@@ -64,6 +64,28 @@ def action_consult (form=None, formfile=None, id=None):
 
     return success, result
 
+def action_rules (form=None, formfile=None, id=None):
+    ''' uses the input data provided in the arguments to run the consult  
+    '''
+     
+    # input is a file (typically from command line)
+    if formfile != None:
+        if not os.path.isfile(formfile):
+            return False, 'input file not found'
+
+        with open(formfile, 'r') as f:
+            form = yaml.safe_load(f)
+
+    # input is a form (passed as argument or loaded from input file)
+    if form == None:
+        return False, 'failed to load input data'
+        
+    # c = Consult()
+
+    success, result = c.apply_rules (form)
+
+    return success, result
+
 def action_rerun (id, token):
     ''' loads a form with the ID given as argument, saved in the repository 
         and run the consult. The token informs if the GUI is in "doctor mode".

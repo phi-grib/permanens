@@ -46,6 +46,7 @@ class Consult:
         self.model_names = []
         self.model_dicts = []
         self.model_labels = []
+        self.rules_dict = {}
         for iname in os.listdir (model_repo):
             ipath = os.path.join(model_repo,iname)
             self.model_names.append(ipath)
@@ -73,9 +74,21 @@ class Consult:
         # use first model as default
         self.set_model(0)
         
+        # reading a pre-build yaml file containing a ruleset
+        rpath = os.path.join(model_repo,'rules.yaml')
+        with open(rpath,'r') as f:
+            self.rules_dict['rules'] = yaml.safe_load(f)
+    
+        # get a list of relevant predictors (used by any rule) 
+        self.rules_dict['rules_pred'] = []
+        for item in self.rules_dict['rules']:
+            for iitem in item['rules']:
+                ipredictor = iitem[0]
+                if ipredictor not in self.rules_dict['rules_pred']:
+                    self.rules_dict['rules_pred'].append(ipredictor)
+        
         LOG.info ('INITIALIZATION COMPLETE')
         
-
     def set_model (self, modelID):
         if modelID >= len (self.model_dicts):
             return False, 'modeID out of range'
@@ -176,7 +189,7 @@ class Consult:
         
         return True, form
 
-    def condition (self, form, names):
+    def condition_model (self, form, names):
         ''' compares the form values with the names to setup an appropriate
             input string for the model
         '''
@@ -203,6 +216,36 @@ class Consult:
         xtest_pd.columns = names
 
         return True, xtest_pd, xtest_np
+    
+    def condition_rules (self, form, rules_pred):
+        nvarx = len(rules_pred)
+
+        #TODO process form to return only relevant pred in correct format to the x_rules present
+        x_rules = {}  # dictionary key:value containing only predictors used by the rule
+
+        for ikey in form:
+            ival = form[ikey]
+
+            # for lists
+            if isinstance(form[ikey], list):
+                for item in ival:
+                    if item in rules_pred:
+                        if not item in x_rules:
+                           x_rules [item] = True
+                        # print ('assigned from list: ', item)
+
+            # for sex and age
+            if ikey in rules_pred:
+                if not ikey in x_rules:
+                    x_rules[ikey] = ival
+                # print('assigned from key: ', ikey, ival)
+        
+        print (x_rules)        
+
+        # x_rules = {'bipolar disorder' : True,
+        #            'substance use disorder': True}
+        
+        return True, x_rules
 
     def predict (self, form, cname):
         ''' uses the form to run the prediction pipeline
@@ -215,12 +258,9 @@ class Consult:
         names = model.feature_names_in_.tolist()
 
         # conditions form to adapt to the estimator requirements
-        success, xtest_pd, xtest_np = self.condition (form, names)
+        success, xtest_pd, xtest_np = self.condition_model (form, names)
         if not success:
             return False, 'unable to condition input form'
-
-        # submit to rule-based pipeline
-        #TODO
 
         # submit to model
         r = model.predict(xtest_pd).tolist()[0]
@@ -260,6 +300,44 @@ class Consult:
         result['decil'] = pred_decil
 
         return True, result
+
+    def apply_rules (self, form):
+
+        results = []
+
+        # submit to rule-based pipeline
+        success, x_rules = self.condition_rules (form, self.rules_dict['rules_pred'])
+        if not success:
+            return False, 'unable to process form'
+
+        print (x_rules)
+        # process rules
+        for irule in self.rules_dict['rules']:
+            print ('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',irule)
+            conn = irule['connect']
+            ruleset = irule['rules']
+            nrule_true = 0
+            for iirule in ruleset:
+                if iirule[0] in x_rules:
+                    if iirule[1] == 'is_true':
+                        nrule_true += 1
+                    elif iirule[2] != '':
+                        if x_rules[iirule[0]] > iirule[2]:
+                            nrule_true +=1
+                    elif iirule[3] != '':
+                        if x_rules[iirule[0]] < iirule[3]:
+                            nrule_true +=1
+            
+            print (nrule_true)
+
+            if conn == 'or':
+                if nrule_true > 0:
+                    results.append (irule['result'])
+            else:
+                if nrule_true == len (ruleset):
+                    results.append (irule['result'])
+
+        return True, results
 
     def list (self, format):
         ''' lists all the forms stored in the repository
