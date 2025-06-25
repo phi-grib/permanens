@@ -86,7 +86,7 @@ class Consult:
             # get a list of relevant predictors (used by any rule) 
             for item in self.rules_dict['rules']:
                 for iitem in item['rules']:
-                    ipredictor = iitem[0]
+                    ipredictor = iitem['predictor']
                     if ipredictor not in self.rules_dict['rules_pred']:
                         self.rules_dict['rules_pred'].append(ipredictor)
         
@@ -318,20 +318,30 @@ class Consult:
             ruleset = irule['rules']
             nrule_true = 0
             for iirule in ruleset:
-                # rules are formed by a list of 4 items
-                # #0 name of the predictor
-                # #1 [is_true|''], true if the predictor is present in the form (for binary predictors)
-                # #2 [min value|''], true if the predictor is > rule value (for sex, age or #visits)
-                # #3 [max value|''], true if the predictor is < rule value (for sex, age or #visits)
-                if iirule[0] in x_rules:
-                    if iirule[1] == 'is_true':
-                        nrule_true += 1
-                    elif iirule[2] != '':
-                        if x_rules[iirule[0]] > iirule[2]:
+                # rules are formed by a dictionary with 4 keys
+                # predictor: name of the predictor variable
+                # presence: [True|False], true if the value is True and the predictor is present in the form (for binary predictors)
+                #                         true if the value is False and predictor is absent in the form (for binary predictors)
+                # min: true if the predictor is > rule value (for sex, age or #visits)
+                # max: true if the predictor is < rule value (for sex, age or #visits)
+                predictor_name = iirule['predictor']
+
+                if predictor_name in x_rules:
+                    if 'presence' in iirule:
+                        if iirule['presence'] == True:
                             nrule_true +=1
-                    elif iirule[3] != '':
-                        if x_rules[iirule[0]] < iirule[3]:
+
+                    elif 'min' in iirule:
+                        if x_rules[predictor_name] > iirule['min']:
                             nrule_true +=1
+
+                    elif 'max' in iirule:
+                        if x_rules[iirule[0]] < iirule['max']:
+                            nrule_true +=1
+                else:
+                    if 'presence' in iirule and iirule['presence'] == False:
+                        nrule_true +=1
+
 
             if conn == 'or':
                 if nrule_true > 0:

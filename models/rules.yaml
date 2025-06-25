@@ -1,10 +1,8 @@
 - name: Substance use disorder
   connect: and
   rules:
-  - - substance use disorder
-    - is_true
-    - ''
-    - '' 
+  - predictor: substance use disorder
+    presence: False
   result: 
      Assessment
      For all people who misuse alcohol, carry out a motivational intervention as part of the initial assessment. The intervention should contain the key elements of motivational interviewing including
@@ -23,14 +21,10 @@
 - name: Bipolar disorder
   connect: and
   rules: 
-  - - bipolar disorder
-    - is_true
-    - ''
-    - '' 
-  - - sex
-    - ''
-    - 0
-    - ''  
+  - predictor: bipolar disorder
+    presence: True
+  - predictor: age
+    min: 20
   result: 
      Assessment
      When assessing suspected bipolar disorder
