@@ -151,6 +151,17 @@ class Consult:
         
         # send to prediction 
         success, result = self.predict(form, cname)
+        if not success:
+            return False, result
+           
+        # send to rules
+        success, result_rules = self.apply_rules(form)
+        if not success:
+            return True, result
+
+        # merge results of prediction and rules
+        result['treatment']= result_rules
+         
         return success, result
 
     def save_form (self, form, cname):
