@@ -90,6 +90,10 @@ class Consult:
                     if ipredictor not in self.rules_dict['rules_pred']:
                         self.rules_dict['rules_pred'].append(ipredictor)
         
+        #TODO: read the static adice formatted for the GUI
+        self.static_doctor = 'static doctor'
+        self.static_patient = 'static patient'
+
         LOG.info ('INITIALIZATION COMPLETE')
         
     def set_model (self, modelID):

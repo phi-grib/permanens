@@ -86,6 +86,14 @@ def action_rules (form=None, formfile=None, id=None):
 
     return success, result
 
+def action_advice(token):
+    ''' returns static advice formated to fit in the GUI'''
+
+    if valid_token (token):
+       return True, c.static_doctor
+
+    return True, c.static_patient
+
 def action_rerun (id, token):
     ''' loads a form with the ID given as argument, saved in the repository 
         and run the consult. The token informs if the GUI is in "doctor mode".
