@@ -1,4 +1,10 @@
 patient:
 - be a good patient
 doctor:
-- tell him to be good patient
+- title: Biopsycosocial assessment
+  definition: Definition of Biopsycosocia assessment
+  practical implemnetation: how to implement Biopsycosocia
+
+- title: Safety plan
+  definition: Definition of safety plan
+  practical implemnetation: how to implement safety plan
