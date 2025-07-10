@@ -54,6 +54,8 @@ def read_config():
     Boolean, dict
     '''
 
+    conf = {}
+
     if 'permanens_configuration' in globals():
         return True, globals()['permanens_configuration']
 
@@ -63,10 +65,13 @@ def read_config():
         with open(config_nam,'r') as f:
             conf = yaml.safe_load(f)
     except Exception as e:
-        return False, e
+        conf['error'] = e
+        return False, conf
+    
 
     if conf is None:
-        return False, 'unable to obtain configuration file'
+        conf['error'] = 'unable to obtain configuration file'
+        return False, conf
 
     # legacy configuration files contain individual items in the yaml
     if not 'root_repository' in conf:
@@ -74,7 +79,9 @@ def read_config():
             base_dir, head_dir = os.path.split(conf['consult_repository_path'])
             conf['root_repository'] = base_dir
         else:
-            return False, f'Configuration file incorrect. Run "permanens -c config -d ROOT_DIR" with a suitable ROOT_DIR setting'
+            conf['error'] = f'Configuration file incorrect. Run "permanens -c config -d ROOT_DIR" with a suitable ROOT_DIR setting'
+            return False, conf
+
 
     items = ['consults']
     for i in items:
@@ -85,7 +92,8 @@ def read_config():
             try:
                 conf[i] = os.path.abspath(conf[i])
             except:
-                return False, f'Configuration file incorrect. Unable to convert "{conf[i]}" to a valid path.'
+                conf['error'] = 'Configuration file incorrect. Unable to convert "{conf[i]}" to a valid path.'
+                return False, conf
         
     globals()['permanens_configuration'] = conf
 

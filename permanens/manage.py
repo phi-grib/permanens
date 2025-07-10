@@ -90,9 +90,9 @@ def action_advice(token):
     ''' returns static advice formated to fit in the GUI'''
 
     if valid_token (token):
-       return True, c.static_doctor
+       return True, c.advice['doctor']
 
-    return True, c.static_patient
+    return True, c.advice['patient']
 
 def action_rerun (id, token):
     ''' loads a form with the ID given as argument, saved in the repository 

@@ -25,14 +25,14 @@ import appdirs
 import os
 from permanens.utils import read_config, set_repositories
 
-def configure(path: None, silent: False):
+def configure(path = None, silent = False):
     """Configures model repository.
 
     Loads config.yaml and writes a correct model repository path
     with the path provided by the user or a default from appdirs
     if the path is not provided.
     """
-    
+
     success, config = read_config()
     source_dir = ''
     if not success:
@@ -61,7 +61,7 @@ def configure(path: None, silent: False):
     if path is None:  # set default
 
         # If permanens has been already configured, just show values in screen and return values
-        if config['config_status'] == True:
+        if (config['config_status']) == True:
             for i in ['consults', 'models']:
                 print (f'{i}: {config[i]}')
             return True, config

@@ -91,8 +91,12 @@ class Consult:
                         self.rules_dict['rules_pred'].append(ipredictor)
         
         #TODO: read the static adice formatted for the GUI
-        self.static_doctor = 'static doctor'
-        self.static_patient = 'static patient'
+        self.advice = {'patient':['be good'], 'doctor':['tell him to be good']}
+        
+        apath = os.path.join(model_repo,'advice.yaml')
+        if os.path.isfile(apath):
+            with open(apath,'r') as f:
+                self.advice = yaml.safe_load(f)
 
         LOG.info ('INITIALIZATION COMPLETE')
         
