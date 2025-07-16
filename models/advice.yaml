@@ -1,215 +1,225 @@
 patient:
-- be a good patient
+- title: general advice
+  content: 
+    - title: what to do
+      content: seek professional advice
+- title: resources
+  content:
+    - title: directory
+      content: list of links 
 doctor:
-- title: Biopsycosocial assessment
-  definition: 
-    '
-    <h4>Structured Guide for Biopsychosocial Assessment</h4>
-    <p>The Biopsychosocial Assessment (BPSA) is a vital component of a broader care planning and joint decision-making process for 
-    individuals with self-harm. It provides a structured and comprehensive framework to understand the individuals needs by 
-    integrating biological, psychological, and social perspectives. This multidimensional approach supports tailored interventions 
-    and ensures that care is person-centred, context-sensitive, and evidence-informed. The below guide for BPSA is based on the 
-    Irish BPSA, where it is a cornerstone of the national approach to managing self-harm presentations in emergency departments.</p>
-    <p>The BPSA is a cornerstone of effective and person-centred care. When conducted with professionalism and sensitivity, it 
-    provides valuable insights into an individuals life and circumstances. By integrating biological, psychological, and social 
-    dimensions, practitioners can develop responsive and meaningful interventions that align with the individual needs and strengths.</p>
-    '
-  practical implementation: 
-    '
-    <h4>Practical Guidance on Conducting a BPSA</h4>
-    <p><strong>a) Engagement and Preparation</strong></p>
-    <ul>
-      <li>Establish rapport</li>
-      <li>Clarify the purpose and scope of the assessment</li>
-    </ul>
-    <p><strong>b) Information Gathering</strong></p>
-    <ul>
-      <li>Use a semi-structured format to guide conversations</li>
-      <li>Include multiple sources of information (e.g., client self-report, family/carer input, previous records)</li>
-      <li>Observe non-verbal cues and contextual factors</li>
-      <li>Depending on the mental/physical health status of the patient, the BPSA can be completed over more than one session</li>
-    </ul>
-    <p><strong>c) Analysis and Formulation</strong></p>
-    <ul>
-      <li>Integrate findings across all domains to identify patterns, risks and needs</li>
-      <li>Consider protective and risk factors for self-harm</li>
-      <li>Ensure clarity and clinical relevance in the formulation</li>
-    </ul>
-    <p><strong>d) Documentation</strong></p>
-    <ul>
-      <li>Record findings in a structured and concise manner</li>
-      <li>Use professional language and objective descriptions</li>
-      <li>Highlight priority areas for intervention or further assessment</li>
-    </ul>
-    <br>
-    <h4>Biopsychosocial Assessment - Key Information to Assess</strong></h4>
-    <p><strong>1. Referral Context</strong></p>
-    <ul>
-      <li>Referral reasons</li>
-      <li>Management plan agreed with the referrer between referral and assessment</li>
-    </ul>
-    <p><strong>2. History of Self-Harm</strong></p>
-    <ul>
-      <li>5 or more self-harm presentations (lifetime) Yes / No</li>
-    </ul>
-    <p><strong>3. Current Social Circumstances</strong></p>
-    <ul>
-      <li>Relationship status</li>
-      <li>Employment status</li>
-      <li>Accommodation status</li>
-      <li>Legal difficulties</li>
-    </ul>
-    <p><strong>4. Presenting Complaint</strong></p>
-    <ul>
-      <li>Presenting symptoms or issues</li>
-      <li>Circumstances of presentation (if unable to give history)</li>
-    </ul>
-    <p><strong>5. History of Presentation</strong></p>
-    <ul>
-      <li>Recent stressors and life events</li>
-      <li>Recent drug and alcohol use</li>
-      <li>Legal difficulties</li>
-      <li>Use of collateral history (if individual is unable to provide a clear account)</li>
-    </ul>
-    <p><strong>6. Psychiatric History</strong></p>
-    <ul>
-      <li>Details of service attendance and nature of treatment (if known)</li>
-      <li>History of self-harm</li>
-      <li>Number of previous attempts (if possible)</li>
-    </ul>
-    <p><strong>7. Other Agencies Involved</strong></p>
-    <ul>
-      <li>Name any agencies currently involved</li>
-    </ul>
-    <p><strong>8. Forensic History</strong></p>
-    <ul>
-      <li>Any known outstanding criminal charges or convictions</li>
-    </ul>
-    <p><strong>9. Alcohol & Drug History</strong></p>
-    <ul>
-      <li>Units of alcohol (C₂H₅OH) per week</li>
-      <li>Use of other substances</li>
-      <li>Outline of any previous treatment related to substance use</li>
-    </ul>
-    <p><strong>10. Medical History</strong></p>
-    <ul>
-      <li>Relevant history of significant medical illnesses</li>
-      <li>Relevant treatments received</li>
-    </ul>
-    <p><strong>11. Current Medication</strong></p>
-    <ul>
-      <li>Include all medications (preferably use generic names)</li>
-    </ul>
-    <p><strong>12. Family, Personal, and Social History</strong></p>
-    <ul>
-      <li>Developmental background</li>
-      <li>Childhood experiences</li>
-      <li>Abuse (sexual, physical, or emotional)</li>
-      <li>Neglect and household dysfunction</li>
-      <li>Employment history</li>
-      <li>Relationship history</li>
-      <li>Psychosexual history</li>
-      <li>Children and caregiving responsibilities</li>
-      <li>Forensic involvement</li>
-      <li>Financial circumstances</li>
-      <li>Place of residence</li>
-    </ul>
-    <p><strong>13. Mental State Examination</strong></p>
-    <p>(To be completed even if the person is not cooperative or unable to complete the interview)</p>
-    <ul>
-      <li>Appearance and behaviour</li>
-      <li>Thoughts</li>
-      <li>Perception</li>
-      <li>Insight</li>
-      <li>Cognition</li>
-      <li>Speech</li>
-      <li>Mood</li>
-    </ul>
-    <p><strong>14. Collateral History</strong></p>
-    <ul>
-      <li>Sources of collateral information (e.g. carer, partner, nursing staff, others)</li>
-      <li>Include contact details when available</li>
-    </ul>
-    <p><strong>15. Additional Information</strong></p>
-    <ul>
-      <li>Any other relevant information not covered above</li>
-    </ul>
-    <p><strong>16. Summary / Diagnostic Formulation</strong></p>
-    <ul>
-      <li>Biopsychosocial formulation</li>
-      <li>Predisposing, precipitating, and perpetuating factors</li>
-    </ul>
-    <p><strong>17. Risks Identified</strong></p>
-    <ul>
-      <li>Risk vulnerabilities</li>
-      <li>Environmental triggers</li>
-    </ul>
-    <p><strong>18. Protective Factors Identified</strong></p>
-    <ul>
-      <li>Sources of support</li>
-      <li>Personal strengths and stabilizing factors</li>
-    </ul>
-    <p><strong>19. Management Plan</strong></p>
-    <ul>
-      <li>Plan to address identified needs and risks</li>
-      <li>Involvement of family or carers where possible</li>
-    </ul>
-    <br>
-    <h4>Resources</h4>
-    <p>Link to BPSA fillable PDF</p>
-    '
+- title: Structured Guide for Biopsychosocial Assessment
+  content: 
+  - title: Structured Guide for Biopsychosocial Assessment
+    content: 
+      '
+      <p>The Biopsychosocial Assessment (BPSA) is a vital component of a broader care planning and joint decision-making process for 
+      individuals with self-harm. It provides a structured and comprehensive framework to understand the individuals needs by 
+      integrating biological, psychological, and social perspectives. This multidimensional approach supports tailored interventions 
+      and ensures that care is person-centred, context-sensitive, and evidence-informed. The below guide for BPSA is based on the 
+      Irish BPSA, where it is a cornerstone of the national approach to managing self-harm presentations in emergency departments.</p>
+      <p>The BPSA is a cornerstone of effective and person-centred care. When conducted with professionalism and sensitivity, it 
+      provides valuable insights into an individuals life and circumstances. By integrating biological, psychological, and social 
+      dimensions, practitioners can develop responsive and meaningful interventions that align with the individual needs and strengths.</p>
+      '
+  - title: Practical Guidance on Conducting a BPSA
+    content:
+      '
+      <p><strong>a) Engagement and Preparation</strong></p>
+      <ul>
+        <li>Establish rapport</li>
+        <li>Clarify the purpose and scope of the assessment</li>
+      </ul>
+      <p><strong>b) Information Gathering</strong></p>
+      <ul>
+        <li>Use a semi-structured format to guide conversations</li>
+        <li>Include multiple sources of information (e.g., client self-report, family/carer input, previous records)</li>
+        <li>Observe non-verbal cues and contextual factors</li>
+        <li>Depending on the mental/physical health status of the patient, the BPSA can be completed over more than one session</li>
+      </ul>
+      <p><strong>c) Analysis and Formulation</strong></p>
+      <ul>
+        <li>Integrate findings across all domains to identify patterns, risks and needs</li>
+        <li>Consider protective and risk factors for self-harm</li>
+        <li>Ensure clarity and clinical relevance in the formulation</li>
+      </ul>
+      <p><strong>d) Documentation</strong></p>
+      <ul>
+        <li>Record findings in a structured and concise manner</li>
+        <li>Use professional language and objective descriptions</li>
+        <li>Highlight priority areas for intervention or further assessment</li>
+      </ul>
+      <br>
+      <h4>Biopsychosocial Assessment - Key Information to Assess</strong></h4>
+      <p><strong>1. Referral Context</strong></p>
+      <ul>
+        <li>Referral reasons</li>
+        <li>Management plan agreed with the referrer between referral and assessment</li>
+      </ul>
+      <p><strong>2. History of Self-Harm</strong></p>
+      <ul>
+        <li>5 or more self-harm presentations (lifetime) Yes / No</li>
+      </ul>
+      <p><strong>3. Current Social Circumstances</strong></p>
+      <ul>
+        <li>Relationship status</li>
+        <li>Employment status</li>
+        <li>Accommodation status</li>
+        <li>Legal difficulties</li>
+      </ul>
+      <p><strong>4. Presenting Complaint</strong></p>
+      <ul>
+        <li>Presenting symptoms or issues</li>
+        <li>Circumstances of presentation (if unable to give history)</li>
+      </ul>
+      <p><strong>5. History of Presentation</strong></p>
+      <ul>
+        <li>Recent stressors and life events</li>
+        <li>Recent drug and alcohol use</li>
+        <li>Legal difficulties</li>
+        <li>Use of collateral history (if individual is unable to provide a clear account)</li>
+      </ul>
+      <p><strong>6. Psychiatric History</strong></p>
+      <ul>
+        <li>Details of service attendance and nature of treatment (if known)</li>
+        <li>History of self-harm</li>
+        <li>Number of previous attempts (if possible)</li>
+      </ul>
+      <p><strong>7. Other Agencies Involved</strong></p>
+      <ul>
+        <li>Name any agencies currently involved</li>
+      </ul>
+      <p><strong>8. Forensic History</strong></p>
+      <ul>
+        <li>Any known outstanding criminal charges or convictions</li>
+      </ul>
+      <p><strong>9. Alcohol & Drug History</strong></p>
+      <ul>
+        <li>Units of alcohol (C₂H₅OH) per week</li>
+        <li>Use of other substances</li>
+        <li>Outline of any previous treatment related to substance use</li>
+      </ul>
+      <p><strong>10. Medical History</strong></p>
+      <ul>
+        <li>Relevant history of significant medical illnesses</li>
+        <li>Relevant treatments received</li>
+      </ul>
+      <p><strong>11. Current Medication</strong></p>
+      <ul>
+        <li>Include all medications (preferably use generic names)</li>
+      </ul>
+      <p><strong>12. Family, Personal, and Social History</strong></p>
+      <ul>
+        <li>Developmental background</li>
+        <li>Childhood experiences</li>
+        <li>Abuse (sexual, physical, or emotional)</li>
+        <li>Neglect and household dysfunction</li>
+        <li>Employment history</li>
+        <li>Relationship history</li>
+        <li>Psychosexual history</li>
+        <li>Children and caregiving responsibilities</li>
+        <li>Forensic involvement</li>
+        <li>Financial circumstances</li>
+        <li>Place of residence</li>
+      </ul>
+      <p><strong>13. Mental State Examination</strong></p>
+      <p>(To be completed even if the person is not cooperative or unable to complete the interview)</p>
+      <ul>
+        <li>Appearance and behaviour</li>
+        <li>Thoughts</li>
+        <li>Perception</li>
+        <li>Insight</li>
+        <li>Cognition</li>
+        <li>Speech</li>
+        <li>Mood</li>
+      </ul>
+      <p><strong>14. Collateral History</strong></p>
+      <ul>
+        <li>Sources of collateral information (e.g. carer, partner, nursing staff, others)</li>
+        <li>Include contact details when available</li>
+      </ul>
+      <p><strong>15. Additional Information</strong></p>
+      <ul>
+        <li>Any other relevant information not covered above</li>
+      </ul>
+      <p><strong>16. Summary / Diagnostic Formulation</strong></p>
+      <ul>
+        <li>Biopsychosocial formulation</li>
+        <li>Predisposing, precipitating, and perpetuating factors</li>
+      </ul>
+      <p><strong>17. Risks Identified</strong></p>
+      <ul>
+        <li>Risk vulnerabilities</li>
+        <li>Environmental triggers</li>
+      </ul>
+      <p><strong>18. Protective Factors Identified</strong></p>
+      <ul>
+        <li>Sources of support</li>
+        <li>Personal strengths and stabilizing factors</li>
+      </ul>
+      <p><strong>19. Management Plan</strong></p>
+      <ul>
+        <li>Plan to address identified needs and risks</li>
+        <li>Involvement of family or carers where possible</li>
+      </ul>
+      <br>
+      <h4>Resources</h4>
+      <p>Link to BPSA fillable PDF</p>
+      '
 - title: Safety plan
-  definition: 
-    '
-    <h4>Stanley-Brown Safety Planning Intervention</h4>
-    <p>The Stanley-Brown Safety Planning Intervention (SPI) is a brief, collaborative, and 
-    evidence-based clinical intervention designed to support individuals at risk of suicide. 
-    It provides a personalized plan that enhances safety, builds coping capacity, and facilitates 
-    engagement with follow-up care. It can be completed in approximately 20-45 minutes and 
-    is suitable for use in emergency settings.</p>
-    <br>
-    <p>When using the SPI, it is crucial to understand the <strong>suicide risk curve</strong>.</p>
-    <p>Suicide risk is not static-individuals at risk often experience dynamic fluctuations in 
-    their level of suicidality. Acute risk can escalate rapidly and may subside within hours or days.</p>
-    <br>
-    <h4>Why is this important?</h4>
-    <ul>
-      <li>Suicide risk tends to increase and then decrease over a relatively short time frame.</li>
-      <li>The SPI is designed to help patients recognize their personal warning signs early, 
-      before the peak of the crisis.</li>
-      <li>By acting early in the curve, individuals are more likely to use coping strategies 
-      or seek help before their risk becomes overwhelming.</li>
-    </ul>
-    <p>The goal of the SPI is to increase awareness of these warning signs and empower patients to take 
-    preventative action before they are in immediate danger of acting on suicidal thoughts.</p>
-    '
-  practical implementation: 
-    '
-    <h4>The Safety Plan includes the following six steps:</h4>
-    <ul>
-      <li><strong>Warning Signs: </strong>Recognizing personal warning signs (thoughts, images, moods, 
-      situations, behaviors) that signal a suicidal crisis may be developing.Example: "I start isolating myself"</li>
-      <li><strong>Internal Coping Strategies: </strong>Identifying activities or strategies the person 
-      can use on their own to distract from suicidal thoughts without needing to contact another 
-      person.Example: listening to music, taking a walk</li>
-      <li><strong>People and Social Settings That Provide Distraction: </strong>Listing places 
-      or people (not necessarily for disclosure) that can help distract the person from suicidal 
-      thoughts.Example: going to a café, visiting a friend</li>
-      <li><strong>People to Ask for Help: </strong>Naming specific individuals the person can contact 
-      during a crisis.Example: family members, friends</li>
-      <li><strong>Professionals or Agencies to Contact for Help: </strong>Listing mental health 
-      professionals and services that can be contacted in case of crisis, including emergency services 
-      if necessary.Example: clinicians contact info, emergency hotline</li>
-      <li><strong>Making the Environment Safe: </strong>Reducing access to lethal means and other items 
-      that could be used for self-harm.Example: removing firearms, securing medications</li>
-    </ul>
-    <br>
-    <h4>Training Resources</h4>
-    <p>Comprehensive training and implementation support for the SPI is available through the 
-    official <a href="https://suicidesafetyplan.com/">Safety Plan website</a>, 
-    including short step-by-step <a href="https://suicidesafetyplan.com/training/">training videos</a>.</p>
-    <br>
-    <p>Click here to download printable Stanley-Brown Safety Plan forms: 
-    <a href="https://suicidesafetyplan.com/wp-content/uploads/2024/12/Stanley-Brown-Safety-Plan-05-02-2024.pdf"><i>English</i></a> - 
-    <a href="https://suicidesafetyplan.com/wp-content/uploads/2025/02/Spanish-Safety-Plan-Template-Six-Steps-Revised-FINAL.pdf"><i>Spanish</i></a></p>
-    '
+  content: 
+  - title: Safety Plan
+    content:
+      '
+      <p>The Stanley-Brown Safety Planning Intervention (SPI) is a brief, collaborative, and 
+      evidence-based clinical intervention designed to support individuals at risk of suicide. 
+      It provides a personalized plan that enhances safety, builds coping capacity, and facilitates 
+      engagement with follow-up care. It can be completed in approximately 20-45 minutes and 
+      is suitable for use in emergency settings.</p>
+      <br>
+      <p>When using the SPI, it is crucial to understand the <strong>suicide risk curve</strong>.</p>
+      <p>Suicide risk is not static-individuals at risk often experience dynamic fluctuations in 
+      their level of suicidality. Acute risk can escalate rapidly and may subside within hours or days.</p>
+      <br>
+      <h4>Why is this important?</h4>
+      <ul>
+        <li>Suicide risk tends to increase and then decrease over a relatively short time frame.</li>
+        <li>The SPI is designed to help patients recognize their personal warning signs early, 
+        before the peak of the crisis.</li>
+        <li>By acting early in the curve, individuals are more likely to use coping strategies 
+        or seek help before their risk becomes overwhelming.</li>
+      </ul>
+      <p>The goal of the SPI is to increase awareness of these warning signs and empower patients to take 
+      preventative action before they are in immediate danger of acting on suicidal thoughts.</p>
+      '
+  - title: Practical implementation 
+    content:
+      '
+      The Safety Plan includes the following six steps:
+      <ul>
+        <li><strong>Warning Signs: </strong>Recognizing personal warning signs (thoughts, images, moods, 
+        situations, behaviors) that signal a suicidal crisis may be developing.Example: "I start isolating myself"</li>
+        <li><strong>Internal Coping Strategies: </strong>Identifying activities or strategies the person 
+        can use on their own to distract from suicidal thoughts without needing to contact another 
+        person.Example: listening to music, taking a walk</li>
+        <li><strong>People and Social Settings That Provide Distraction: </strong>Listing places 
+        or people (not necessarily for disclosure) that can help distract the person from suicidal 
+        thoughts.Example: going to a café, visiting a friend</li>
+        <li><strong>People to Ask for Help: </strong>Naming specific individuals the person can contact 
+        during a crisis.Example: family members, friends</li>
+        <li><strong>Professionals or Agencies to Contact for Help: </strong>Listing mental health 
+        professionals and services that can be contacted in case of crisis, including emergency services 
+        if necessary.Example: clinicians contact info, emergency hotline</li>
+        <li><strong>Making the Environment Safe: </strong>Reducing access to lethal means and other items 
+        that could be used for self-harm.Example: removing firearms, securing medications</li>
+      </ul>
+      <br>
+      <h4>Training Resources</h4>
+      <p>Comprehensive training and implementation support for the SPI is available through the 
+      official <a href="https://suicidesafetyplan.com/">Safety Plan website</a>, 
+      including short step-by-step <a href="https://suicidesafetyplan.com/training/">training videos</a>.</p>
+      <br>
+      <p>Click here to download printable Stanley-Brown Safety Plan forms: 
+      <a href="https://suicidesafetyplan.com/wp-content/uploads/2024/12/Stanley-Brown-Safety-Plan-05-02-2024.pdf"><i>English</i></a> - 
+      <a href="https://suicidesafetyplan.com/wp-content/uploads/2025/02/Spanish-Safety-Plan-Template-Six-Steps-Revised-FINAL.pdf"><i>Spanish</i></a></p>
+      '
