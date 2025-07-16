@@ -4,6 +4,8 @@
   - predictor: substance use disorder
     presence: True
   result: 
+    title: Substance use disorder
+    content: 
      '<h2>Assessment</h2>
      For all people who misuse alcohol, carry out a motivational intervention as part of the initial assessment. 
      The intervention should contain the key elements of motivational interviewing including:
@@ -31,6 +33,8 @@
   - predictor: bipolar disorder
     presence: True
   result: 
+    title: Bipolar disorder
+    content:
      '<h2>Assessment</h2>
      When assessing suspected bipolar disorder:
         <ul>
@@ -71,6 +75,8 @@
   - predictor: Borderline personality disorder
     presence: True
   result: 
+    title: Borderline personality disorder
+    content:
      '<h2>Assessment</h2>
       When assessing a person with possible borderline personality disorder in community mental health services, fully assess:
       <ul>
@@ -107,6 +113,8 @@
   - predictor: Depressive episodes
     presence: True
   result: 
+    title: Severe depression
+    content:
      '<h2>Assessment</h2>
       Conduct a comprehensive assessment that does not rely simply on a symptom count when assessing a person who may 
       have depression, but also considers severity of symptoms, previous history, duration and course of illness. Also, 
@@ -156,6 +164,8 @@
   - predictor: Psychosis
     presence: True
   result: 
+    title: Psychosis
+    content:
      '<h2>Assessment</h2>
       Carry out a comprehensive multidisciplinary assessment of people with psychotic symptoms in secondary 
       care. This should include assessment by a psychiatrist, a psychologist or a professional with expertise 
