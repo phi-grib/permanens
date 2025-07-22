@@ -19,14 +19,14 @@ doctor:
       
   - title: Practical Guidance on Conducting a BPSA
     content:
-      - title: 'a) Engagement and Preparation'
+      - title: a. Engagement and Preparation
         fold: True
         content: 
           '<ul>
             <li>Establish rapport</li>
             <li>Clarify the purpose and scope of the assessment</li>
           </ul>'
-      - title: 'b) Information Gathering'
+      - title: b. Information Gathering
         fold: True
         content:
           '<ul>
@@ -35,7 +35,7 @@ doctor:
             <li>Observe non-verbal cues and contextual factors</li>
             <li>Depending on the mental/physical health status of the patient, the BPSA can be completed over more than one session</li>
           </ul>'
-      - title: 'c) Analysis and Formulation'
+      - title: c. Analysis and Formulation
         fold: True
         content:
           '<ul>
@@ -43,7 +43,7 @@ doctor:
             <li>Consider protective and risk factors for self-harm</li>
             <li>Ensure clarity and clinical relevance in the formulation</li>
           </ul>'
-      - title: 'd) Documentation'
+      - title: d. Documentation
         fold: True
         content:
           '<ul>
@@ -51,22 +51,22 @@ doctor:
             <li>Use professional language and objective descriptions</li>
             <li>Highlight priority areas for intervention or further assessment</li>
           </ul>'
-  - title: 'Biopsychosocial Assessment - Key Information to Assess'
+  - title: Biopsychosocial Assessment - Key Information to Assess
     content:
-      - title: '1. Referral Context'
+      - title: 1. Referral Context
         fold: True
         content:
           '<ul>
             <li>Referral reasons</li>
             <li>Management plan agreed with the referrer between referral and assessment</li>
           </ul>'
-      - title: '2. History of Self-Harm'
+      - title: 2. History of Self-Harm
         fold: True
         content:
           '<ul>
             <li>5 or more self-harm presentations (lifetime) Yes / No</li>
           </ul>'
-      - title: '3. Current Social Circumstances'
+      - title: 3. Current Social Circumstances
         fold: True
         content:
           '<ul>
@@ -75,14 +75,14 @@ doctor:
             <li>Accommodation status</li>
             <li>Legal difficulties</li>
           </ul>'
-      - title: '4. Presenting Complaint'
+      - title: 4. Presenting Complaint
         fold: True
         content:
           '<ul>
             <li>Presenting symptoms or issues</li>
             <li>Circumstances of presentation (if unable to give history)</li>
           </ul>'
-      - title: '5. History of Presentation'
+      - title: 5. History of Presentation
         fold: True
         content:
           '<ul>
@@ -91,7 +91,7 @@ doctor:
             <li>Legal difficulties</li>
             <li>Use of collateral history (if individual is unable to provide a clear account)</li>
           </ul>'
-      - title: '6. Psychiatric History'
+      - title: 6. Psychiatric History
         fold: True
         content:
           '<ul>
@@ -99,19 +99,19 @@ doctor:
             <li>History of self-harm</li>
             <li>Number of previous attempts (if possible)</li>
           </ul>'
-      - title: '7. Other Agencies Involved'
+      - title: 7. Other Agencies Involved
         fold: True
         content:
           '<ul>
             <li>Name any agencies currently involved</li>
           </ul>'
-      - title: '8. Forensic History'
+      - title: 8. Forensic History
         fold: True
         content:
           '<ul>
             <li>Any known outstanding criminal charges or convictions</li>
           </ul>'
-      - title: '9. Alcohol & Drug History'
+      - title: 9. Alcohol & Drug History
         fold: True
         content:
           '<ul>
@@ -119,20 +119,20 @@ doctor:
             <li>Use of other substances</li>
             <li>Outline of any previous treatment related to substance use</li>
           </ul>'
-      - title: '10. Medical History'
+      - title: 10. Medical History
         fold: True
         content:
           <ul>
             <li>Relevant history of significant medical illnesses</li>
             <li>Relevant treatments received</li>
           </ul>
-      - title: '11. Current Medication'
+      - title: 11. Current Medication
         fold: True
         content:
           <ul>
             <li>Include all medications (preferably use generic names)</li>
           </ul>
-      - title: '12. Family, Personal, and Social History'
+      - title: 12. Family, Personal, and Social History
         fold: True
         content:
           <ul>
@@ -148,7 +148,7 @@ doctor:
             <li>Financial circumstances</li>
             <li>Place of residence</li>
           </ul>
-      - title: '13. Mental State Examination'
+      - title: 13. Mental State Examination
         fold: True
         content:
           <p>(To be completed even if the person is not cooperative or unable to complete the interview)</p>
@@ -161,41 +161,41 @@ doctor:
             <li>Speech</li>
             <li>Mood</li>
           </ul>
-      - title: '14. Collateral History'
+      - title: 14. Collateral History
         fold: True
         content:
           <ul>
             <li>Sources of collateral information (e.g. carer, partner, nursing staff, others)</li>
             <li>Include contact details when available</li>
           </ul>
-      - title: '15. Additional Information'
+      - title: 15. Additional Information
         fold: True
         content:
           <ul>
             <li>Any other relevant information not covered above</li>
           </ul>
-      - title: '16. Summary / Diagnostic Formulation'
+      - title: 16. Summary / Diagnostic Formulation
         fold: True
         content:
           <ul>
             <li>Biopsychosocial formulation</li>
             <li>Predisposing, precipitating, and perpetuating factors</li>
           </ul>
-      - title: '17. Risks Identified'
+      - title: 17. Risks Identified
         fold: True
         content:
           <ul>
             <li>Risk vulnerabilities</li>
             <li>Environmental triggers</li>
           </ul>
-      - title: '18. Protective Factors Identified'
+      - title: 18. Protective Factors Identified
         fold: True
         content:
           '<ul>
             <li>Sources of support</li>
             <li>Personal strengths and stabilizing factors</li>
           </ul>'
-      - title: '19. Management Plan'
+      - title: 19. Management Plan
         fold: True
         content:
           <ul>
@@ -237,40 +237,40 @@ doctor:
         preventative action before they are in immediate danger of acting on suicidal thoughts.</p>
     - title: The Safety Plan includes the following six steps 
       content:
-        - title: Warning Signs    
+        - title: 1. Warning Signs    
           fold: True
           content:     
             'Recognizing personal warning signs (thoughts, images, moods, 
             situations, behaviors) that signal a suicidal crisis may be developing. Example: I start isolating myself.'
           
-        - title: Internal Coping Strategies
+        - title: 2. Internal Coping Strategies
           fold: True
           content:  
             'Identifying activities or strategies the person 
             can use on their own to distract from suicidal thoughts without needing to contact another 
             person. Example: listening to music, taking a walk.'
           
-        - title: People and Social Settings That Provide Distraction
+        - title: 3. People and Social Settings That Provide Distraction
           fold: True
           content:         
             'Listing places 
             or people (not necessarily for disclosure) that can help distract the person from suicidal 
             thoughts. Example: going to a café, visiting a friend'
           
-        - title: People to Ask for Help
+        - title: 4. People to Ask for Help
           fold: True
           content:
             'Naming specific individuals the person can contact 
             during a crisis. Example: family members, friends'
 
-        - title: Professionals or Agencies to Contact for Help
+        - title: 5. Professionals or Agencies to Contact for Help
           fold: True
           content: 
             'Listing mental health 
             professionals and services that can be contacted in case of crisis, including emergency services 
             if necessary. Example: clinicians contact info, emergency hotline'
             
-        - title: Making the Environment Safe
+        - title: 6. Making the Environment Safe
           fold: True
           content: 
             'Reducing access to lethal means and other items 
