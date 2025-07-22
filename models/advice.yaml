@@ -208,58 +208,84 @@ doctor:
       
 - title: Safety plan
   content: 
-  - title: Safety Plan
-    content:
-      '
-      <p>The Stanley-Brown Safety Planning Intervention (SPI) is a brief, collaborative, and 
-      evidence-based clinical intervention designed to support individuals at risk of suicide. 
-      It provides a personalized plan that enhances safety, builds coping capacity, and facilitates 
-      engagement with follow-up care. It can be completed in approximately 20-45 minutes and 
-      is suitable for use in emergency settings.</p>
-      <br>
-      <p>When using the SPI, it is crucial to understand the <strong>suicide risk curve</strong>.</p>
-      <p>Suicide risk is not static-individuals at risk often experience dynamic fluctuations in 
-      their level of suicidality. Acute risk can escalate rapidly and may subside within hours or days.</p>
-      <br>
-      <h4>Why is this important?</h4>
-      <ul>
-        <li>Suicide risk tends to increase and then decrease over a relatively short time frame.</li>
-        <li>The SPI is designed to help patients recognize their personal warning signs early, 
-        before the peak of the crisis.</li>
-        <li>By acting early in the curve, individuals are more likely to use coping strategies 
-        or seek help before their risk becomes overwhelming.</li>
-      </ul>
-      <p>The goal of the SPI is to increase awareness of these warning signs and empower patients to take 
-      preventative action before they are in immediate danger of acting on suicidal thoughts.</p>
-      '
-  - title: Practical implementation 
-    content:
-      '
-      The Safety Plan includes the following six steps:
-      <ul>
-        <li><strong>Warning Signs: </strong>Recognizing personal warning signs (thoughts, images, moods, 
-        situations, behaviors) that signal a suicidal crisis may be developing.Example: "I start isolating myself"</li>
-        <li><strong>Internal Coping Strategies: </strong>Identifying activities or strategies the person 
-        can use on their own to distract from suicidal thoughts without needing to contact another 
-        person.Example: listening to music, taking a walk</li>
-        <li><strong>People and Social Settings That Provide Distraction: </strong>Listing places 
-        or people (not necessarily for disclosure) that can help distract the person from suicidal 
-        thoughts.Example: going to a café, visiting a friend</li>
-        <li><strong>People to Ask for Help: </strong>Naming specific individuals the person can contact 
-        during a crisis.Example: family members, friends</li>
-        <li><strong>Professionals or Agencies to Contact for Help: </strong>Listing mental health 
-        professionals and services that can be contacted in case of crisis, including emergency services 
-        if necessary.Example: clinicians contact info, emergency hotline</li>
-        <li><strong>Making the Environment Safe: </strong>Reducing access to lethal means and other items 
-        that could be used for self-harm.Example: removing firearms, securing medications</li>
-      </ul>
-      <br>
-      <h4>Training Resources</h4>
-      <p>Comprehensive training and implementation support for the SPI is available through the 
-      official <a href="https://suicidesafetyplan.com/">Safety Plan website</a>, 
-      including short step-by-step <a href="https://suicidesafetyplan.com/training/">training videos</a>.</p>
-      <br>
-      <p>Click here to download printable Stanley-Brown Safety Plan forms: 
-      <a href="https://suicidesafetyplan.com/wp-content/uploads/2024/12/Stanley-Brown-Safety-Plan-05-02-2024.pdf"><i>English</i></a> - 
-      <a href="https://suicidesafetyplan.com/wp-content/uploads/2025/02/Spanish-Safety-Plan-Template-Six-Steps-Revised-FINAL.pdf"><i>Spanish</i></a></p>
-      '
+    - title: Stanley-Brown Safety Planning Intervention
+      content: 
+        The Stanley-Brown Safety Planning Intervention (SPI) is a brief, collaborative, and 
+        evidence-based clinical intervention designed to support individuals at risk of suicide. 
+        It provides a personalized plan that enhances safety, builds coping capacity, and facilitates 
+        engagement with follow-up care. It can be completed in approximately 20-45 minutes and 
+        is suitable for use in emergency settings.
+
+    - title: Understanding the suicide risk curve
+      fold: True
+      content:
+        <p>When using the SPI, it is crucial to understand the <strong>suicide risk curve</strong>.</p>
+        <p>Suicide risk is not static-individuals at risk often experience dynamic fluctuations in 
+        their level of suicidality. Acute risk can escalate rapidly and may subside within hours or days.</p>
+      
+    - title: Why is this important
+      fold: True
+      content: 
+        <ul>
+          <li>Suicide risk tends to increase and then decrease over a relatively short time frame.</li>
+          <li>The SPI is designed to help patients recognize their personal warning signs early, 
+          before the peak of the crisis.</li>
+          <li>By acting early in the curve, individuals are more likely to use coping strategies 
+          or seek help before their risk becomes overwhelming.</li>
+        </ul>
+        <p>The goal of the SPI is to increase awareness of these warning signs and empower patients to take 
+        preventative action before they are in immediate danger of acting on suicidal thoughts.</p>
+    - title: The Safety Plan includes the following six steps 
+      content:
+        - title: Warning Signs    
+          fold: True
+          content:     
+            'Recognizing personal warning signs (thoughts, images, moods, 
+            situations, behaviors) that signal a suicidal crisis may be developing. Example: I start isolating myself.'
+          
+        - title: Internal Coping Strategies
+          fold: True
+          content:  
+            'Identifying activities or strategies the person 
+            can use on their own to distract from suicidal thoughts without needing to contact another 
+            person. Example: listening to music, taking a walk.'
+          
+        - title: People and Social Settings That Provide Distraction
+          fold: True
+          content:         
+            'Listing places 
+            or people (not necessarily for disclosure) that can help distract the person from suicidal 
+            thoughts. Example: going to a café, visiting a friend'
+          
+        - title: People to Ask for Help
+          fold: True
+          content:
+            'Naming specific individuals the person can contact 
+            during a crisis. Example: family members, friends'
+
+        - title: Professionals or Agencies to Contact for Help
+          fold: True
+          content: 
+            'Listing mental health 
+            professionals and services that can be contacted in case of crisis, including emergency services 
+            if necessary. Example: clinicians contact info, emergency hotline'
+            
+        - title: Making the Environment Safe
+          fold: True
+          content: 
+            'Reducing access to lethal means and other items 
+            that could be used for self-harm. Example: removing firearms, securing medications'
+
+    - title: Training Resources
+      fold: True
+      content: 
+        'Comprehensive training and implementation support for the SPI is available through the 
+        official <a href="https://suicidesafetyplan.com/">Safety Plan website</a>, 
+        including short step-by-step <a href="https://suicidesafetyplan.com/training/">training videos</a>.'
+      
+    - title: Printable version
+      content: 
+        'Click here to download printable Stanley-Brown Safety Plan forms: 
+        <a href="https://suicidesafetyplan.com/wp-content/uploads/2024/12/Stanley-Brown-Safety-Plan-05-02-2024.pdf"><i>English</i></a> - 
+        <a href="https://suicidesafetyplan.com/wp-content/uploads/2025/02/Spanish-Safety-Plan-Template-Six-Steps-Revised-FINAL.pdf"><i>Spanish</i></a>'
+        
