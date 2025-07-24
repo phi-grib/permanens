@@ -344,12 +344,20 @@ doctor:
 - title: Consider admission to inpatient psychiatric care
   fold: True
   content: 
-    'The decision to admit a patient to inpatient care should be based on local clinical routines, guidelines, and legal frameworks. The guidance below provides a general overview of the factors to consider when deciding whether to admit a patient to inpatient care.
-    In general, patients should be treated in the setting that is least restrictive yet most likely to prove safe and effective. Inpatient care may be necessary for patients who are assessed as being at high risk of danger to themselves or others, or if the patient is unable to cooperate with the psychiatric evaluation (e.g., due to intoxication, extreme agitation, psychosis or catatonia). The clinician should also consider the possible negative effects of hospitalization, such as disruption of employment, financial and other psychosocial stress, and shame and stigma.
-    Before discharging a person who has self-harmed from a general hospital, ensure that:
-    <ul>
-      <li>a psychosocial assessment has taken place</a>
-      <li>a plan for further management has been drawn up with all appropriate agencies and people</a>
-      <li>a discharge planning meeting with all appropriate agencies and people has taken place</a>
-      <li>arrangements for aftercare have been specified, including clear written communication with the primary care team.</a>
-    '
+    - title: Considerations
+      content:
+        'The decision to admit a patient to inpatient care should be based on local clinical routines, guidelines, and legal frameworks. The guidance below provides a general overview of the factors to consider when deciding whether to admit a patient to inpatient care.
+        In general, patients should be treated in the setting that is least restrictive yet most likely to prove safe and effective. Inpatient care may be necessary for patients who are assessed as being at high risk of danger to themselves or others, or if the patient is unable to cooperate with the psychiatric evaluation (e.g., due to intoxication, extreme agitation, psychosis or catatonia). 
+        The clinician should also consider the possible negative effects of hospitalization, such as disruption of employment, financial and other psychosocial stress, and shame and stigma.'
+        
+    - title: Checklist
+      fold: True
+      content:
+        'Before discharging a person who has self-harmed from a general hospital, ensure that:
+        <ul>
+          <li>a psychosocial assessment has taken place</li>
+          <li>a plan for further management has been drawn up with all appropriate agencies and people</li>
+          <li>a discharge planning meeting with all appropriate agencies and people has taken place</li>
+          <li>arrangements for aftercare have been specified, including clear written communication with the primary care team.</li>
+        </ul>
+        '
