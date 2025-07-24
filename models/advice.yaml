@@ -284,6 +284,7 @@ doctor:
         including short step-by-step <a href="https://suicidesafetyplan.com/training/">training videos</a>.'
       
     - title: Printable version
+      fold: True
       content: 
         'Click here to download printable Stanley-Brown Safety Plan forms: 
         <a href="https://suicidesafetyplan.com/wp-content/uploads/2024/12/Stanley-Brown-Safety-Plan-05-02-2024.pdf"><i>English</i></a> or  
