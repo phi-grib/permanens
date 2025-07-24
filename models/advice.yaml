@@ -222,10 +222,9 @@ doctor:
         <p>When using the SPI, it is crucial to understand the <strong>suicide risk curve</strong>.</p>
         <p>Suicide risk is not static-individuals at risk often experience dynamic fluctuations in 
         their level of suicidality. Acute risk can escalate rapidly and may subside within hours or days.</p>
-      
-    - title: Why is this important
-      fold: True
-      content: 
+        <br>
+        <b>Why is this important?</b>
+        <br>
         <ul>
           <li>Suicide risk tends to increase and then decrease over a relatively short time frame.</li>
           <li>The SPI is designed to help patients recognize their personal warning signs early, 
@@ -241,40 +240,41 @@ doctor:
           fold: True
           content:     
             'Recognizing personal warning signs (thoughts, images, moods, 
-            situations, behaviors) that signal a suicidal crisis may be developing. Example: I start isolating myself.'
+            situations, behaviors) that signal a suicidal crisis may be developing. 
+            <i>Example: I start isolating myself</i>'
           
         - title: 2. Internal Coping Strategies
           fold: True
           content:  
             'Identifying activities or strategies the person 
             can use on their own to distract from suicidal thoughts without needing to contact another 
-            person. Example: listening to music, taking a walk.'
+            person. <i>Example: listening to music, taking a walk</i>'
           
         - title: 3. People and Social Settings That Provide Distraction
           fold: True
           content:         
             'Listing places 
             or people (not necessarily for disclosure) that can help distract the person from suicidal 
-            thoughts. Example: going to a café, visiting a friend'
+            thoughts. <i>Example: going to a cafe, visiting a friend</i>'
           
         - title: 4. People to Ask for Help
           fold: True
           content:
             'Naming specific individuals the person can contact 
-            during a crisis. Example: family members, friends'
+            during a crisis. <i>Example: family members, friends</i>'
 
         - title: 5. Professionals or Agencies to Contact for Help
           fold: True
           content: 
             'Listing mental health 
             professionals and services that can be contacted in case of crisis, including emergency services 
-            if necessary. Example: clinicians contact info, emergency hotline'
+            if necessary. <i>Example: clinicians contact info, emergency hotline</i>'
             
         - title: 6. Making the Environment Safe
           fold: True
           content: 
             'Reducing access to lethal means and other items 
-            that could be used for self-harm. Example: removing firearms, securing medications'
+            that could be used for self-harm. <i>Example: removing firearms, securing medications</i>'
 
     - title: Training Resources
       fold: True
@@ -286,6 +286,70 @@ doctor:
     - title: Printable version
       content: 
         'Click here to download printable Stanley-Brown Safety Plan forms: 
-        <a href="https://suicidesafetyplan.com/wp-content/uploads/2024/12/Stanley-Brown-Safety-Plan-05-02-2024.pdf"><i>English</i></a> - 
-        <a href="https://suicidesafetyplan.com/wp-content/uploads/2025/02/Spanish-Safety-Plan-Template-Six-Steps-Revised-FINAL.pdf"><i>Spanish</i></a>'
-        
+        <a href="https://suicidesafetyplan.com/wp-content/uploads/2024/12/Stanley-Brown-Safety-Plan-05-02-2024.pdf"><i>English</i></a> or  
+        <a href="https://suicidesafetyplan.com/wp-content/uploads/2025/02/Spanish-Safety-Plan-Template-Six-Steps-Revised-FINAL.pdf"><i>Spanish</i></a>.
+        '
+
+- title: Psychotherapy developed for suicide prevention
+  content:
+    - title: Indication
+      content:
+        Consider offering cognitive behavior therapy (CBT) or dialectical behavior therapy (DBT) 
+        when reducing the risk of repeat self-harm is the primary clinical concern.
+    - title: Cognitive Behavior Therapy (CBT)
+      fold : True
+      content: 
+        'Consider a brief course of CBT involving 12 weekly or biweekly sessions of 60-90 minutes 
+        with the following key elements:
+        <ul>
+          <li>Safety plan (see separate module)</li>
+          <li>Basic emotion regulation skills (relaxation, mindfulness, other skills identified by patient) </li>
+          <li>Cognitive strategies to reduce beliefs and assumptions that serve as vulnerabilities to suicidal behavior (hopelessness, perceived burdensomeness, guilt and shame)</li>
+          <li>Relapse prevention (i.e., identifying precipitating factors and practicing coping skills)</li>
+        </ul>
+        <br>
+        <i>Additional reading</i>
+        <br>
+        Rudd, M. D., Bryan, C. J., Wertenberger, E. G., Peterson, A. L., Young-McCaughan, S., Mintz, J., Williams, S. R., Arne, 
+        K. A., Breitbach, J., Delano, K., Wilkinson, E., & 
+        Bruce, T. O. (2015). Brief Cognitive-Behavioral Therapy Effects on Post-Treatment Suicide Attempts in a Military 
+        Sample: Results of a Randomized Clinical Trial With 2-Year Follow-Up. American Journal of Psychiatry, 
+        172(5), 441-449. <a href="https://doi.org/10.1176/appi.ajp.2014.14070843"> doi.org/10.1176/appi.ajp.2014.1407084</a>
+        <br>
+        Bryan, C. J., & Rudd, M. D. (2018). Brief cognitive-behavioral therapy for suicide prevention.
+         The Guilford Press.'
+    - title: Dialectical Behavior Therapy
+      fold : True
+      content: 
+        'DBT is a comprehensive psychological treatment program that should be delivered by therapists with adequate training.
+        DBT directly targets (1) suicidal behavior, (2) behaviors that interfere with treatment delivery, and (3) other dangerous, severe, or destabilizing behaviors. 
+        The treatment addresses the following five functions: (1) increasing behavioral capabilities, (2) improving motivation for skillful behavior, 
+        (3) assuring generalization of gains to the natural environment, (4) structuring the treatment environment so that it reinforces functional rather 
+        than dysfunctional behaviors, and (5) enhancing therapist capabilities and motivation to treat patients effectively.
+        <br>
+        There are four modes of service delivery: (1) individual psychotherapy once per week, (2) group skills training once per week, 
+        (3) telephone consultation as needed, and (4) weekly therapist consultation team meetings.
+        <br>
+        <i>Additional reading</i>
+        <br>
+        Linehan, M. M., Comtois, K. A., Murray, A. M., Brown, M. Z., Gallop, R. J., Heard, H. L., 
+        Korslund, K. E., Tutek, D. A., Reynolds, S. K., & Lindenboim, N. (2006). 
+        Two-Year Randomized Controlled Trial and Follow-up of Dialectical Behavior Therapy 
+        vs Therapy by Experts for Suicidal Behaviors and Borderline Personality Disorder. 
+        Archives of General Psychiatry, 63(7), 757–766. 
+        <a href="https://doi.org/10.1001/archpsyc.63.7.757"> doi.org/10.1001/archpsyc.63.7.757</a>
+        <br>
+        Linehan, M. (2015). DBT skills training manual (Second edition). The Guilford Press.'
+
+- title: Consider admission to inpatient psychiatric care
+  fold: True
+  content: 
+    'The decision to admit a patient to inpatient care should be based on local clinical routines, guidelines, and legal frameworks. The guidance below provides a general overview of the factors to consider when deciding whether to admit a patient to inpatient care.
+    In general, patients should be treated in the setting that is least restrictive yet most likely to prove safe and effective. Inpatient care may be necessary for patients who are assessed as being at high risk of danger to themselves or others, or if the patient is unable to cooperate with the psychiatric evaluation (e.g., due to intoxication, extreme agitation, psychosis or catatonia). The clinician should also consider the possible negative effects of hospitalization, such as disruption of employment, financial and other psychosocial stress, and shame and stigma.
+    Before discharging a person who has self-harmed from a general hospital, ensure that:
+    <ul>
+      <li>a psychosocial assessment has taken place</a>
+      <li>a plan for further management has been drawn up with all appropriate agencies and people</a>
+      <li>a discharge planning meeting with all appropriate agencies and people has taken place</a>
+      <li>arrangements for aftercare have been specified, including clear written communication with the primary care team.</a>
+    '
