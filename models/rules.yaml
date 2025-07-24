@@ -1,7 +1,11 @@
 - name: Substance use disorder
   connect: or
   rules:
-  - predictor: substance use disorder
+  - predictor: Dependence of alcohol
+    presence: True
+  - predictor: Non-dependent abuse of alcohol
+    presence: True
+  - predictor: Dependence of cocaine
     presence: True
   result: 
     title: Substance use disorder
@@ -14,7 +18,7 @@
          <li>helping to resolve ambivalence and encourage positive change and belief in the ability to change.</li>
          <li>adopting a persuasive and supportive rather than an argumentative and confrontational position.</li>
         </ul>
-     <h2>Pharmacological interventions</h2>Pharmacological interventions
+     <h2>Pharmacological interventions</h2>
      The choice of medication and doses depend on the current situation, for example assisted withdrawal, relapse prevention 
      or maintenance of abstinence.
         <ul>
@@ -25,7 +29,11 @@
         </ul>
      <h2>Psychological and psychosocial interventions</h2>
      Offer a psychological intervention (such as cognitive behavioural therapies, behavioural therapies or social network 
-     and environment-based therapies) focused specifically on alcohol-related cognitions, behaviour, problems and social networks.'
+     and environment-based therapies) focused specifically on alcohol-related cognitions, behaviour, problems and social networks.
+     <br>
+     <a href="https://www.nice.org.uk/guidance/cg115/chapter/Recommendations#interventions-for-alcohol-misuse"> 
+     NICE-guideline</a>
+     '
 
 - name: Bipolar disorder
   connect: and
@@ -67,7 +75,10 @@
          in line with the advice on treatment options for more severe depression.</li>
         </ul>
      Discuss with the person the possible benefits and risks of psychological interventions and their preference. 
-     Monitor mood for signs of mania or hypomania or deterioration of the depressive symptoms.'
+     Monitor mood for signs of mania or hypomania or deterioration of the depressive symptoms.
+     <br>
+     <a href="https://www.nice.org.uk/guidance/cg185">NICE-guideline</a>
+     '
 
 - name: Borderline personality disorder
   connect: or
@@ -103,7 +114,10 @@
       <li>the availability of personal and professional support.</li>
       </ul>
       For women with borderline personality disorder for whom reducing recurrent self-harm is a priority, consider a 
-      comprehensive dialectical behaviour therapy programme.'
+      comprehensive dialectical behaviour therapy programme.
+      <br>
+      <a href="https://www.nice.org.uk/guidance/cg78">NICE-guideline</a>
+      '
 
 - name: Severe depression
   connect: or
@@ -157,6 +171,8 @@
       <li>Individual CBT</li>
       <li>Individual behavioural activation</li>
       </ul>
+      <br>
+      <a href="https://www.nice.org.uk/guidance/ng222">NICE-guideline</a>
       '
 - name: Psychosis
   connect: or
@@ -194,4 +210,6 @@
          <li>Offer family intervention to all families of people with psychosis or schizophrenia who live with or are in 
          close contact with the service user. This can be started either during the acute phase or later, including in inpatient settings.</li>
       </ul>
+      <br>
+      <a href="https://www.nice.org.uk/guidance/cg178">NICE-guideline</a>
       '
