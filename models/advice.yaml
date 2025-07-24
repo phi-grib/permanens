@@ -10,202 +10,202 @@ patient:
 doctor:
 - title: Structured Guide for Biopsychosocial Assessment
   content: 
-  - title: Structured Guide for Biopsychosocial Assessment
-    content: 
-      '<p>The Biopsychosocial Assessment (BPSA) is a vital component of a broader care planning and joint decision-making process for 
-      individuals with self-harm. It provides a structured and comprehensive framework to understand the individuals needs by 
-      integrating biological, psychological, and social perspectives. This multidimensional approach supports tailored interventions 
-      and ensures that care is person-centred, context-sensitive, and evidence-informed.</p>'
-      
-  - title: Practical Guidance on Conducting a BPSA
-    content:
-      - title: a. Engagement and Preparation
-        fold: True
-        content: 
-          '<ul>
-            <li>Establish rapport</li>
-            <li>Clarify the purpose and scope of the assessment</li>
-          </ul>'
-      - title: b. Information Gathering
-        fold: True
-        content:
-          '<ul>
-            <li>Use a semi-structured format to guide conversations</li>
-            <li>Include multiple sources of information (e.g., client self-report, family/carer input, previous records)</li>
-            <li>Observe non-verbal cues and contextual factors</li>
-            <li>Depending on the mental/physical health status of the patient, the BPSA can be completed over more than one session</li>
-          </ul>'
-      - title: c. Analysis and Formulation
-        fold: True
-        content:
-          '<ul>
-            <li>Integrate findings across all domains to identify patterns, risks and needs</li>
-            <li>Consider protective and risk factors for self-harm</li>
-            <li>Ensure clarity and clinical relevance in the formulation</li>
-          </ul>'
-      - title: d. Documentation
-        fold: True
-        content:
-          '<ul>
-            <li>Record findings in a structured and concise manner</li>
-            <li>Use professional language and objective descriptions</li>
-            <li>Highlight priority areas for intervention or further assessment</li>
-          </ul>'
-  - title: Biopsychosocial Assessment - Key Information to Assess
-    content:
-      - title: 1. Referral Context
-        fold: True
-        content:
-          '<ul>
-            <li>Referral reasons</li>
-            <li>Management plan agreed with the referrer between referral and assessment</li>
-          </ul>'
-      - title: 2. History of Self-Harm
-        fold: True
-        content:
-          '<ul>
-            <li>5 or more self-harm presentations (lifetime) Yes / No</li>
-          </ul>'
-      - title: 3. Current Social Circumstances
-        fold: True
-        content:
-          '<ul>
-            <li>Relationship status</li>
-            <li>Employment status</li>
-            <li>Accommodation status</li>
-            <li>Legal difficulties</li>
-          </ul>'
-      - title: 4. Presenting Complaint
-        fold: True
-        content:
-          '<ul>
-            <li>Presenting symptoms or issues</li>
-            <li>Circumstances of presentation (if unable to give history)</li>
-          </ul>'
-      - title: 5. History of Presentation
-        fold: True
-        content:
-          '<ul>
-            <li>Recent stressors and life events</li>
-            <li>Recent drug and alcohol use</li>
-            <li>Legal difficulties</li>
-            <li>Use of collateral history (if individual is unable to provide a clear account)</li>
-          </ul>'
-      - title: 6. Psychiatric History
-        fold: True
-        content:
-          '<ul>
-            <li>Details of service attendance and nature of treatment (if known)</li>
-            <li>History of self-harm</li>
-            <li>Number of previous attempts (if possible)</li>
-          </ul>'
-      - title: 7. Other Agencies Involved
-        fold: True
-        content:
-          '<ul>
-            <li>Name any agencies currently involved</li>
-          </ul>'
-      - title: 8. Forensic History
-        fold: True
-        content:
-          '<ul>
-            <li>Any known outstanding criminal charges or convictions</li>
-          </ul>'
-      - title: 9. Alcohol & Drug History
-        fold: True
-        content:
-          '<ul>
-            <li>Units of alcohol (ethanol) per week</li>
-            <li>Use of other substances</li>
-            <li>Outline of any previous treatment related to substance use</li>
-          </ul>'
-      - title: 10. Medical History
-        fold: True
-        content:
-          <ul>
-            <li>Relevant history of significant medical illnesses</li>
-            <li>Relevant treatments received</li>
-          </ul>
-      - title: 11. Current Medication
-        fold: True
-        content:
-          <ul>
-            <li>Include all medications (preferably use generic names)</li>
-          </ul>
-      - title: 12. Family, Personal, and Social History
-        fold: True
-        content:
-          <ul>
-            <li>Developmental background</li>
-            <li>Childhood experiences</li>
-            <li>Abuse (sexual, physical, or emotional)</li>
-            <li>Neglect and household dysfunction</li>
-            <li>Employment history</li>
-            <li>Relationship history</li>
-            <li>Psychosexual history</li>
-            <li>Children and caregiving responsibilities</li>
-            <li>Forensic involvement</li>
-            <li>Financial circumstances</li>
-            <li>Place of residence</li>
-          </ul>
-      - title: 13. Mental State Examination
-        fold: True
-        content:
-          <p>(To be completed even if the person is not cooperative or unable to complete the interview)</p>
-          <ul>
-            <li>Appearance and behaviour</li>
-            <li>Thoughts</li>
-            <li>Perception</li>
-            <li>Insight</li>
-            <li>Cognition</li>
-            <li>Speech</li>
-            <li>Mood</li>
-          </ul>
-      - title: 14. Collateral History
-        fold: True
-        content:
-          <ul>
-            <li>Sources of collateral information (e.g. carer, partner, nursing staff, others)</li>
-            <li>Include contact details when available</li>
-          </ul>
-      - title: 15. Additional Information
-        fold: True
-        content:
-          <ul>
-            <li>Any other relevant information not covered above</li>
-          </ul>
-      - title: 16. Summary / Diagnostic Formulation
-        fold: True
-        content:
-          <ul>
-            <li>Biopsychosocial formulation</li>
-            <li>Predisposing, precipitating, and perpetuating factors</li>
-          </ul>
-      - title: 17. Risks Identified
-        fold: True
-        content:
-          <ul>
-            <li>Risk vulnerabilities</li>
-            <li>Environmental triggers</li>
-          </ul>
-      - title: 18. Protective Factors Identified
-        fold: True
-        content:
-          '<ul>
-            <li>Sources of support</li>
-            <li>Personal strengths and stabilizing factors</li>
-          </ul>'
-      - title: 19. Management Plan
-        fold: True
-        content:
-          <ul>
-            <li>Plan to address identified needs and risks</li>
-            <li>Involvement of family or carers where possible</li>
-          </ul>
-  - title: Resources
-    content:
-      <p>Link to BPSA fillable PDF</p>
-      
+    - title: Structured Guide for Biopsychosocial Assessment
+      content: 
+        '<p>The Biopsychosocial Assessment (BPSA) is a vital component of a broader care planning and joint decision-making process for 
+        individuals with self-harm. It provides a structured and comprehensive framework to understand the individuals needs by 
+        integrating biological, psychological, and social perspectives. This multidimensional approach supports tailored interventions 
+        and ensures that care is person-centred, context-sensitive, and evidence-informed.</p>'
+        
+    - title: Practical Guidance on Conducting a BPSA
+      content:
+        - title: a. Engagement and Preparation
+          fold: True
+          content: 
+            '<ul>
+              <li>Establish rapport</li>
+              <li>Clarify the purpose and scope of the assessment</li>
+            </ul>'
+        - title: b. Information Gathering
+          fold: True
+          content:
+            '<ul>
+              <li>Use a semi-structured format to guide conversations</li>
+              <li>Include multiple sources of information (e.g., client self-report, family/carer input, previous records)</li>
+              <li>Observe non-verbal cues and contextual factors</li>
+              <li>Depending on the mental/physical health status of the patient, the BPSA can be completed over more than one session</li>
+            </ul>'
+        - title: c. Analysis and Formulation
+          fold: True
+          content:
+            '<ul>
+              <li>Integrate findings across all domains to identify patterns, risks and needs</li>
+              <li>Consider protective and risk factors for self-harm</li>
+              <li>Ensure clarity and clinical relevance in the formulation</li>
+            </ul>'
+        - title: d. Documentation
+          fold: True
+          content:
+            '<ul>
+              <li>Record findings in a structured and concise manner</li>
+              <li>Use professional language and objective descriptions</li>
+              <li>Highlight priority areas for intervention or further assessment</li>
+            </ul>'
+    - title: Biopsychosocial Assessment - Key Information to Assess
+      content:
+        - title: 1. Referral Context
+          fold: True
+          content:
+            '<ul>
+              <li>Referral reasons</li>
+              <li>Management plan agreed with the referrer between referral and assessment</li>
+            </ul>'
+        - title: 2. History of Self-Harm
+          fold: True
+          content:
+            '<ul>
+              <li>5 or more self-harm presentations (lifetime) Yes / No</li>
+            </ul>'
+        - title: 3. Current Social Circumstances
+          fold: True
+          content:
+            '<ul>
+              <li>Relationship status</li>
+              <li>Employment status</li>
+              <li>Accommodation status</li>
+              <li>Legal difficulties</li>
+            </ul>'
+        - title: 4. Presenting Complaint
+          fold: True
+          content:
+            '<ul>
+              <li>Presenting symptoms or issues</li>
+              <li>Circumstances of presentation (if unable to give history)</li>
+            </ul>'
+        - title: 5. History of Presentation
+          fold: True
+          content:
+            '<ul>
+              <li>Recent stressors and life events</li>
+              <li>Recent drug and alcohol use</li>
+              <li>Legal difficulties</li>
+              <li>Use of collateral history (if individual is unable to provide a clear account)</li>
+            </ul>'
+        - title: 6. Psychiatric History
+          fold: True
+          content:
+            '<ul>
+              <li>Details of service attendance and nature of treatment (if known)</li>
+              <li>History of self-harm</li>
+              <li>Number of previous attempts (if possible)</li>
+            </ul>'
+        - title: 7. Other Agencies Involved
+          fold: True
+          content:
+            '<ul>
+              <li>Name any agencies currently involved</li>
+            </ul>'
+        - title: 8. Forensic History
+          fold: True
+          content:
+            '<ul>
+              <li>Any known outstanding criminal charges or convictions</li>
+            </ul>'
+        - title: 9. Alcohol & Drug History
+          fold: True
+          content:
+            '<ul>
+              <li>Units of alcohol (ethanol) per week</li>
+              <li>Use of other substances</li>
+              <li>Outline of any previous treatment related to substance use</li>
+            </ul>'
+        - title: 10. Medical History
+          fold: True
+          content:
+            <ul>
+              <li>Relevant history of significant medical illnesses</li>
+              <li>Relevant treatments received</li>
+            </ul>
+        - title: 11. Current Medication
+          fold: True
+          content:
+            <ul>
+              <li>Include all medications (preferably use generic names)</li>
+            </ul>
+        - title: 12. Family, Personal, and Social History
+          fold: True
+          content:
+            <ul>
+              <li>Developmental background</li>
+              <li>Childhood experiences</li>
+              <li>Abuse (sexual, physical, or emotional)</li>
+              <li>Neglect and household dysfunction</li>
+              <li>Employment history</li>
+              <li>Relationship history</li>
+              <li>Psychosexual history</li>
+              <li>Children and caregiving responsibilities</li>
+              <li>Forensic involvement</li>
+              <li>Financial circumstances</li>
+              <li>Place of residence</li>
+            </ul>
+        - title: 13. Mental State Examination
+          fold: True
+          content:
+            <p>(To be completed even if the person is not cooperative or unable to complete the interview)</p>
+            <ul>
+              <li>Appearance and behaviour</li>
+              <li>Thoughts</li>
+              <li>Perception</li>
+              <li>Insight</li>
+              <li>Cognition</li>
+              <li>Speech</li>
+              <li>Mood</li>
+            </ul>
+        - title: 14. Collateral History
+          fold: True
+          content:
+            <ul>
+              <li>Sources of collateral information (e.g. carer, partner, nursing staff, others)</li>
+              <li>Include contact details when available</li>
+            </ul>
+        - title: 15. Additional Information
+          fold: True
+          content:
+            <ul>
+              <li>Any other relevant information not covered above</li>
+            </ul>
+        - title: 16. Summary / Diagnostic Formulation
+          fold: True
+          content:
+            <ul>
+              <li>Biopsychosocial formulation</li>
+              <li>Predisposing, precipitating, and perpetuating factors</li>
+            </ul>
+        - title: 17. Risks Identified
+          fold: True
+          content:
+            <ul>
+              <li>Risk vulnerabilities</li>
+              <li>Environmental triggers</li>
+            </ul>
+        - title: 18. Protective Factors Identified
+          fold: True
+          content:
+            '<ul>
+              <li>Sources of support</li>
+              <li>Personal strengths and stabilizing factors</li>
+            </ul>'
+        - title: 19. Management Plan
+          fold: True
+          content:
+            <ul>
+              <li>Plan to address identified needs and risks</li>
+              <li>Involvement of family or carers where possible</li>
+            </ul>
+    - title: Resources
+      content:
+        <p>Link to BPSA fillable PDF</p>
+        
 - title: Safety plan
   content: 
     - title: Stanley-Brown Safety Planning Intervention
