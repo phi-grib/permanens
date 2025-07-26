@@ -1,0 +1,179 @@
+- name: Substance use disorder
+  connect: or
+  rules:
+  - predictor: Dependence of alcohol
+    presence: True
+  - predictor: Non-dependent abuse of alcohol
+    presence: True
+  - predictor: Dependence of cocaine
+    presence: True
+  result:
+    title: Trastorno por uso de sustancias
+    content: 
+      '<h2>Evaluación</h2>
+      Para todas las personas que abusan del alcohol, lleve a cabo una intervención motivacional como parte de la evaluación inicial. La intervención debe contener los elementos clave de la entrevista motivacional, incluyendo:
+        <ul>
+          <li>ayudar a las personas a reconocer problemas o problemas potenciales relacionados con su consumo de alcohol.</li>
+          <li>ayudar a resolver la ambivalencia y fomentar un cambio positivo y la creencia en la capacidad de cambiar.</li>
+          <li>adoptar una postura persuasiva y de apoyo en lugar de una postura argumentativa y de confrontación.</li>
+        </ul>
+      <h2>Intervenciones farmacológicas</h2>
+      La elección de la medicación y las dosis dependen de la situación actual, por ejemplo, la abstinencia asistida, la prevención de recaídas o el mantenimiento de la abstinencia.
+        <ul>
+          <li>La medicación preferida para la abstinencia asistida es una benzodiazepina (clordiazepóxido o diazepam) en un régimen de dosis fija que comienza con una dosis estándar y reduce la dosis a cero durante 7 a 10 días.</li>
+          <li>Después de una abstinencia exitosa para personas con dependencia moderada y grave del alcohol, considere ofrecer acamprosato o naltrexona oral en combinación con una intervención psicológica individual.</li>
+        </ul>
+      <h2>Intervenciones psicológicas y psicosociales</h2>
+      Ofrezca una intervención psicológica (como terapias cognitivo-conductuales, terapias conductuales o terapias basadas en redes sociales y el entorno) centrada específicamente en las cogniciones, el comportamiento, los problemas y las redes sociales relacionados con el alcohol.
+      <br>
+      <a href="https://www.nice.org.uk/guidance/cg115/chapter/Recommendations#interventions-for-alcohol-misuse"> NICE-guideline</a>'
+
+- name: Bipolar disorder
+  connect: and
+  rules: 
+  - predictor: bipolar disorder
+    presence: True
+  result:
+    title: Trastorno bipolar
+    content: 
+      '<h2>Evaluación</h2>
+      Al evaluar un presunto trastorno bipolar:
+        <ul>
+          <li>realizar una evaluación psiquiátrica completa, documentando un historial detallado del estado de ánimo, episodios de hiperactividad y desinhibición u otros cambios episódicos y sostenidos en el comportamiento, síntomas entre episodios, desencadenantes de episodios previos y patrones de recaída, e historial familiar.</li>
+          <li>evaluar el desarrollo y la naturaleza cambiante del trastorno del estado de ánimo y los problemas clínicos asociados a lo largo de la vida de la persona (por ejemplo, trauma en la primera infancia, trastorno del desarrollo o disfunción cognitiva en la vida posterior).</li>
+          <li>evaluar el funcionamiento social y personal y los factores estresantes psicosociales actuales.</li>
+          <li>evaluar posibles comorbilidades mentales y físicas.</li>
+          <li>evaluar la salud física de la persona y revisar la medicación y los efectos secundarios, incluido el aumento de peso.</li>
+          <li>discutir el historial de tratamiento e identificar las intervenciones que han sido efectivas o ineficaces en el pasado.</li>
+          <li>animar a las personas a invitar a un familiar o cuidador para que proporcione un historial corroborativo.</li>
+          <li>discutir posibles factores asociados con cambios en el estado de ánimo, incluyendo relaciones, factores psicosociales y cambios en el estilo de vida.</li>
+          <li>identificar objetivos de recuperación personal.</li>
+          </ul>
+
+      <h2>Intervenciones farmacológicas</h2>
+      Si una persona desarrolla depresión bipolar moderada o grave y no está tomando un medicamento para tratar su trastorno bipolar, ofrezca fluoxetina combinada con olanzapina, o quetiapina sola, dependiendo de la preferencia de la persona y la respuesta previa al tratamiento.
+        <ul>
+          <li>Si la persona lo prefiere, considere olanzapina (sin fluoxetina) o lamotrigina sola.</li>
+          <li>Si no hay respuesta a la fluoxetina combinada con olanzapina, o quetiapina, considere lamotrigina sola.</ul>
+
+      <h2>Intervenciones psicológicas y psicosociales</h2>
+      Ofrecer a los adultos con depresión bipolar:
+        <ul>
+          <li>una intervención psicológica que haya sido desarrollada específicamente para el trastorno bipolar y que tenga un manual publicado basado en la evidencia que describa cómo debe administrarse o una opción de intervención psicológica (terapia cognitivo-conductual, terapia interpersonal o terapia conductual de pareja) de acuerdo con el consejo sobre las opciones de tratamiento para la depresión más grave.</li>
+        </ul>
+      Discutir con la persona los posibles beneficios y riesgos de las intervenciones psicológicas y su preferencia. Monitorear el estado de ánimo en busca de signos de manía o hipomanía o deterioro de los síntomas depresivos.
+      <br>
+      <a href="https://www.nice.org.uk/guidance/cg185">NICE-guideline</a>'
+
+- name: Borderline personality disorder
+  connect: or
+  rules: 
+  - predictor: Borderline personality disorder
+    presence: True
+  result:
+    title: Trastorno límite de la personalidad
+    content: 
+      '<h2>Evaluación</h2>
+       Al evaluar a una persona con posible trastorno límite de la personalidad en los servicios de salud mental comunitarios, evaluar completamente:
+       <ul>
+       <li>el funcionamiento psicosocial y ocupacional, las estrategias de afrontamiento, las fortalezas y las vulnerabilidades</li>
+       <li>los trastornos mentales comórbidos y los problemas sociales</li>
+       <li>la necesidad de tratamiento psicológico, atención y apoyo social, y rehabilitación o desarrollo ocupacional</li>
+       <li>las necesidades de cualquier niño dependiente</li>
+       </ul>
+
+       <h2>Intervenciones farmacológicas</h2>
+       El tratamiento farmacológico no debe utilizarse específicamente para el trastorno límite de la personalidad ni para los síntomas o comportamientos individuales asociados con el trastorno (por ejemplo, autolesiones repetidas, inestabilidad emocional marcada, comportamiento de riesgo y síntomas psicóticos transitorios).
+       El tratamiento farmacológico puede considerarse en el tratamiento general de las afecciones comórbidas.
+       Intervenciones psicológicas y psicosociales
+
+       <h2>Intervenciones psicológicas y psicosociales</h2>
+       Al considerar un tratamiento psicológico para una persona con trastorno límite de la personalidad, tenga en cuenta:
+       <ul>
+       <li>la elección y preferencia del usuario del servicio</li>
+       <li>el grado de deterioro y la gravedad del trastorno</li>
+       <li>la voluntad de la persona para comprometerse con la terapia y su motivación para cambiar</li>
+       <li>la capacidad de la persona para permanecer dentro de los límites de una relación terapéutica</li>
+       <li>la disponibilidad de apoyo personal y profesional.</li>
+       </ul>
+       Para las mujeres con trastorno límite de la personalidad para quienes la reducción de las autolesiones recurrentes es una prioridad, considere un programa integral de terapia dialéctico-conductual.
+       <br>
+       <a href="https://www.nice.org.uk/guidance/cg78">NICE-guideline</a>'
+
+- name: Severe depression
+  connect: or
+  rules: 
+  - predictor: Severe depression
+    presence: True
+  - predictor: Depressive episodes
+    presence: True
+  result:
+    title: Depresión grave
+    content: 
+      '<h2>Evaluación</h2>
+      Realizar una evaluación exhaustiva que no se base simplemente en el recuento de síntomas al evaluar a una persona que pueda tener depresión, sino que también considere la gravedad de los síntomas, el historial previo, la duración y el curso de la enfermedad. Además, considere tanto el grado de deterioro funcional y/o la discapacidad asociada con la posible depresión como la duración del episodio.
+      Discuta con la persona cómo los factores a continuación pueden haber afectado el desarrollo, el curso y la gravedad de su depresión, además de evaluar los síntomas y el deterioro funcional asociado:
+      <ul>
+          <li>cualquier historial de depresión y trastornos de salud mental o físicos coexistentes</li>
+          <li>cualquier historial de euforia (para determinar si la depresión puede ser parte de un trastorno bipolar)</li>
+          <li>cualquier experiencia pasada y respuesta a tratamientos previos</li>
+          <li>fortalezas y recursos personales, incluidas las relaciones de apoyo</li>
+          <li>dificultades con las relaciones interpersonales previas y actuales</li>
+          <li>estilo de vida actual (por ejemplo, dieta, actividad física, sueño)</li>
+          <li>cualquier experiencia reciente o pasada de eventos vitales estresantes o traumáticos, como despido, divorcio, duelo, trauma (ver también la guía NICE sobre el trastorno de estrés postraumático)</li>
+          <li>condiciones de vida, consumo de drogas (recetadas o ilícitas) y alcohol, deudas, situación laboral, soledad y aislamiento social.</li>
+      </ul>
+
+      <h2>Intervenciones farmacológicas</h2>
+      Al ofrecer a una persona medicación para el tratamiento de la depresión, discuta y acuerde un plan de manejo con la persona. Incluya:
+      <ul>
+          <li>las razones para ofrecer medicación</li>
+          <li>las opciones de medicación (si un número de antidepresivos diferentes son adecuados)</li>
+          <li>la dosis y cómo puede ser necesario ajustarla</li>
+          <li>los beneficios, cubriendo las mejoras que la persona desea ver en su vida y cómo la medicación puede ayudar</li>
+          <li>los daños, cubriendo tanto los posibles efectos secundarios como los efectos de abstinencia, incluidos los efectos secundarios que desearían evitar particularmente (por ejemplo, aumento de peso, sedación, efectos sobre la función sexual)</li>
+          <li>cualquier preocupación que tengan sobre tomar o suspender la medicación (ver también las recomendaciones sobre la suspensión de la medicación).</li>
+      </ul>
+      Asegúrese de que tengan información escrita para llevar y revisar que sea apropiada para sus necesidades.
+
+      <h2>Intervenciones psicológicas y psicosociales</h2>
+      Considere una de las siguientes opciones de tratamiento psicológico si el paciente experimenta un episodio de depresión moderada o grave:
+      <ul>
+      <li>Combinación de TCC individual y un antidepresivo</li>
+      <li>TCC individual</li>
+      <li>Activación conductual individual</li>
+      </ul>
+      <br>
+      <a href="https://www.nice.org.uk/guidance/ng222">NICE-guideline</a>'
+
+- name: Psychosis
+  connect: or
+  rules: 
+  - predictor: Psychosis
+    presence: True
+  result:
+    title: Psicosis
+    content: 
+      '<h2>Evaluación</h2>
+      Realizar una evaluación multidisciplinar integral de las personas con síntomas psicóticos en atención secundaria. Esto debe incluir la evaluación por un psiquiatra, un psicólogo o un profesional con experiencia en el tratamiento psicológico de personas con psicosis o esquizofrenia. Abordar los siguientes dominios:
+      <ul>
+          <li>psiquiátricos (problemas de salud mental, riesgo de daño a sí mismo o a otros, consumo de alcohol e historial de drogas recetadas y no recetadas)</li>
+          <li>médicos, incluidos el historial médico y un examen físico completo para identificar enfermedades físicas (incluidos los trastornos cerebrales orgánicos) y los tratamientos farmacológicos recetados que pueden provocar psicosis</li>
+          <li>salud física y bienestar (incluidos el peso, el tabaquismo, la nutrición, la actividad física y la salud sexual)</li>
+          <li>psicológicos y psicosociales, incluidas las redes sociales, las relaciones y el historial de trauma</li>
+          <li>del desarrollo (desarrollo y habilidades sociales, cognitivas y motoras, incluidas las afecciones del neurodesarrollo coexistentes)</li>
+          <li>sociales (alojamiento, cultura y etnia, actividades de ocio y recreación, y responsabilidades con los hijos o como cuidador)</li>
+          <li>ocupacionales y educativos (asistencia a la universidad, logros educativos, empleo y actividades de la vida diaria)</li>
+          <li>calidad de vida</li>
+          <li>estado económico.</li>
+      </ul>
+
+      <h2>Intervenciones farmacológicas</h2>
+      Para las personas con una exacerbación aguda o recurrencia de psicosis o esquizofrenia, ofrecer medicación antipsicótica oral o revisar la medicación existente. La elección del fármaco debe estar influenciada por los mismos criterios recomendados para iniciar el tratamiento. Tener en cuenta la respuesta clínica y los efectos secundarios de la medicación actual y previa del usuario del servicio.
+      <h2>Intervenciones psicológicas y psicosociales</h2>
+      <ul>
+          <li>Ofrecer TCC a todas las personas con psicosis o esquizofrenia</li>
+          <li>Ofrecer intervención familiar a todas las familias de personas con psicosis o esquizofrenia que vivan con el usuario del servicio o estén en contacto cercano con él. Esto puede iniciarse durante la fase aguda o más tarde, incluso en entornos de hospitalización.</li>
+      </ul>
+      <br>
+      <a href="https://www.nice.org.uk/guidance/cg178">NICE-guideline</a>'

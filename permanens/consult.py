@@ -78,9 +78,9 @@ class Consult:
         self.rules_dict['rules'] = {}
         self.rules_dict['rules_pred'] = []
 
-        rpath = os.path.join(model_repo,'rules.yaml')
+        rpath = os.path.join(model_repo,'rules_es.yaml')
         if os.path.isfile(rpath):
-            with open(rpath,'r') as f:
+            with open(rpath,'r',encoding='utf8') as f:
                 self.rules_dict['rules'] = yaml.safe_load(f)
         
             # get a list of relevant predictors (used by any rule) 
@@ -93,9 +93,9 @@ class Consult:
         #TODO: read the static adice formatted for the GUI
         self.advice = {'patient':['be good'], 'doctor':['tell him to be good']}
         
-        apath = os.path.join(model_repo,'advice.yaml')
+        apath = os.path.join(model_repo,'advice_es.yaml')
         if os.path.isfile(apath):
-            with open(apath,'r') as f:
+            with open(apath,'r', encoding='utf8') as f:
                 self.advice = yaml.safe_load(f)
 
         LOG.info ('INITIALIZATION COMPLETE')
