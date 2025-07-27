@@ -8,9 +8,9 @@ patient:
       - title: directorio
         content: lista de enlaces
 doctor:
-  - title: Guía Estructurada para la Evaluación Biopsicosocial'
+  - title: Guía Estructurada para la Evaluación Biopsicosocial
     content:
-      - title: 'Guía Estructurada para la Evaluación Biopsicosocial'
+      - title: Guía Estructurada para la Evaluación Biopsicosocial
 
         content: 
           '<p>La Evaluación Biopsicosocial (EBP) es un componente vital de un proceso más amplio de planificación de la 

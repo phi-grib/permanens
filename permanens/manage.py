@@ -42,7 +42,7 @@ def valid_token (token):
         return True
     return False
 
-def action_consult (form=None, formfile=None, id=None):
+def action_consult (form=None, formfile=None, id=None, lang='en'):
     ''' uses the input data provided in the arguments to run the consult  
     '''
      
@@ -60,11 +60,11 @@ def action_consult (form=None, formfile=None, id=None):
         
     # c = Consult()
 
-    success, result = c.run (form, id)
+    success, result = c.run (form, id, lang)
 
     return success, result
 
-def action_rules (form=None, formfile=None, id=None):
+def action_rules (form=None, formfile=None, id=None, lang='en'):
     ''' uses the input data provided in the arguments to run the consult  
     '''
      
@@ -82,19 +82,19 @@ def action_rules (form=None, formfile=None, id=None):
         
     # c = Consult()
 
-    success, result = c.apply_rules (form)
+    success, result = c.apply_rules (form, lang)
 
     return success, result
 
-def action_advice(token):
+def action_advice(token, lang='en'):
     ''' returns static advice formated to fit in the GUI'''
 
     if valid_token (token):
-       return True, c.advice['doctor']
+       return True, c.advice[lang]['doctor']
 
-    return True, c.advice['patient']
+    return True, c.advice[lang]['patient']
 
-def action_rerun (id, token):
+def action_rerun (id, token, lang='en'):
     ''' loads a form with the ID given as argument, saved in the repository 
         and run the consult. The token informs if the GUI is in "doctor mode".
         Protected consults (view=False) can only be run in doctor mode  
@@ -111,7 +111,7 @@ def action_rerun (id, token):
         if not valid_token (token):
             return False, 'invalid token'
 
-    success, result = c.run (form, id)
+    success, result = c.run (form, id, lang=lang)
 
     return success, result
 

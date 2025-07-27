@@ -78,25 +78,36 @@ class Consult:
         self.rules_dict['rules'] = {}
         self.rules_dict['rules_pred'] = []
 
-        rpath = os.path.join(model_repo,'rules_es.yaml')
+        rpath = os.path.join(model_repo,'rules_en.yaml')
         if os.path.isfile(rpath):
             with open(rpath,'r',encoding='utf8') as f:
-                self.rules_dict['rules'] = yaml.safe_load(f)
-        
+                self.rules_dict['rules']['en'] = yaml.safe_load(f)
+
             # get a list of relevant predictors (used by any rule) 
-            for item in self.rules_dict['rules']:
+            for item in self.rules_dict['rules']['en']:
                 for iitem in item['rules']:
                     ipredictor = iitem['predictor']
                     if ipredictor not in self.rules_dict['rules_pred']:
                         self.rules_dict['rules_pred'].append(ipredictor)
+
+        # other lenguajes
+        rpath = os.path.join(model_repo,'rules_es.yaml')
+        if os.path.isfile(rpath):
+            with open(rpath,'r',encoding='utf8') as f:
+                self.rules_dict['rules']['es'] = yaml.safe_load(f)
+                 
         
         #TODO: read the static adice formatted for the GUI
-        self.advice = {'patient':['be good'], 'doctor':['tell him to be good']}
+        self.advice = {}
         
+        apath = os.path.join(model_repo,'advice_en.yaml')
+        if os.path.isfile(apath):
+            with open(apath,'r', encoding='utf8') as f:
+                self.advice['en'] = yaml.safe_load(f)
         apath = os.path.join(model_repo,'advice_es.yaml')
         if os.path.isfile(apath):
             with open(apath,'r', encoding='utf8') as f:
-                self.advice = yaml.safe_load(f)
+                self.advice['es'] = yaml.safe_load(f)
 
         LOG.info ('INITIALIZATION COMPLETE')
         
@@ -145,7 +156,7 @@ class Consult:
             return True, self.predictors_ord
         return False, 'predictors undefined'
 
-    def run (self, form, cname=None):
+    def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 
         '''
         if cname == None:
@@ -163,7 +174,7 @@ class Consult:
             return False, result
            
         # send to rules
-        success, result_rules = self.apply_rules(form)
+        success, result_rules = self.apply_rules(form, lang)
         if not success:
             return True, result
 
@@ -316,10 +327,10 @@ class Consult:
 
         return True, result
 
-    def apply_rules (self, form):
+    def apply_rules (self, form, lang='en'):
         ''' returns a piece of text depending if the forms have certain contents, defined by some rules
         '''
-        if len(self.rules_dict['rules']) == 0:
+        if len(self.rules_dict['rules'][lang]) == 0:
             return False, 'no rules found'
         
         results = []
@@ -332,7 +343,7 @@ class Consult:
         # print (x_rules)
 
         # process rules
-        for irule in self.rules_dict['rules']:
+        for irule in self.rules_dict['rules'][lang]:
             conn = irule['connect']
             ruleset = irule['rules']
             nrule_true = 0
