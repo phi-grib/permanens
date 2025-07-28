@@ -96,7 +96,13 @@ class Consult:
             with open(rpath,'r',encoding='utf8') as f:
                 self.rules_dict['rules']['es'] = yaml.safe_load(f)
                  
-        
+        # mapp
+        self.mapp = {}
+        rpath = os.path.join(model_repo,'predictor_mappings.yaml')
+        if os.path.isfile(rpath):
+            with open(rpath,'r',encoding='utf8') as f:
+                self.mapp = yaml.safe_load(f)     
+
         #TODO: read the static adice formatted for the GUI
         self.advice = {}
         
@@ -148,6 +154,15 @@ class Consult:
     def get_model_labels (self):
         return self.model_labels
 
+    def mapped (self, text, lang):
+        if lang == 'en':
+            return text
+        else:
+            if lang in self.mapp:
+                if text in self.mapp[lang]:
+                    return self.mapp[lang][text]    
+        return text
+
     def get_predictors (self, lang):
         ''' provides a list of VAR_MAX predictors for drugs and conditions categories, which can
             be used as selectable predictor variables in the front-end
@@ -155,12 +170,16 @@ class Consult:
         if self.predictors_ord['drugs'] == [] or self.predictors_ord['conditions'] == []:
             return False, 'predictors undefined'
 
-
         if lang is None:
             return True, self.predictors_ord
         else:
-
-            return False, 'languajes not implemented'
+            self.predictors_mapped = {'drugs':[], 'conditions':[]}
+            for idrug in self.predictors_ord['drugs']:
+                self.predictors_mapped['drugs'].append( (idrug, self.mapped(idrug, lang) ))
+            for icond in self.predictors_ord['conditions']:
+                self.predictors_mapped['conditions'].append( (icond, self.mapped(icond, lang) ))
+            return True, self.predictors_mapped
+        
 
     def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 
