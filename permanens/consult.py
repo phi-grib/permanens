@@ -211,7 +211,7 @@ class Consult:
                 return False, 'unable to save input'
         
         # send to prediction 
-        success, result = self.predict(form, cname)
+        success, result = self.predict(form, cname, lang)
         if not success:
             return False, result
            
@@ -315,7 +315,7 @@ class Consult:
         # print (x_rules)        
         return True, x_rules
 
-    def predict (self, form, cname):
+    def predict (self, form, cname, lang = None):
         ''' uses the form to run the prediction pipeline
         '''
         LOG.info (f'predicting {cname} form')
@@ -341,7 +341,10 @@ class Consult:
             for i in importance_all:
                 ilabel = i[0]
                 if ' > 0.0' in ilabel:
-                    importance_sel.append( (ilabel[:-7], i[1]))
+                    ilabel = ilabel[:-7]
+                    if lang is not None:
+                        ilabel = self.mapped(ilabel, lang)
+                    importance_sel.append( (ilabel, i[1]))
                 
         result['outcome'] = r
         result['probability'] = p
