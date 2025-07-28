@@ -118,6 +118,10 @@ class Consult:
         LOG.info ('INITIALIZATION COMPLETE')
         
     def set_model (self, modelID, lang=None):
+        ''' defines the model with the given modelID as the current model
+            if the lang parameter is provided, the predictor variable names are
+            translated
+        '''
         if modelID >= len (self.model_dicts):
             return False, 'modeID out of range'
         
@@ -162,9 +166,13 @@ class Consult:
         return True, result
 
     def get_model_labels (self):
+        ''' returns model labels'''
         return self.model_labels
 
     def mapped (self, text, lang):
+        ''' utility function to translate predictor names (text) to the lenguaje defined by lang parameter
+            English is considered the default name
+        '''
         if lang == 'en':
             return text
         else:
@@ -190,7 +198,6 @@ class Consult:
                 self.predictors_mapped['conditions'].append( (icond, self.mapped(icond, lang) ))
             return True, self.predictors_mapped
         
-
     def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 
         '''
