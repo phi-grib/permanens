@@ -117,7 +117,7 @@ class Consult:
 
         LOG.info ('INITIALIZATION COMPLETE')
         
-    def set_model (self, modelID):
+    def set_model (self, modelID, lang=None):
         if modelID >= len (self.model_dicts):
             return False, 'modeID out of range'
         
@@ -147,8 +147,18 @@ class Consult:
         result['model_metrics_training'] = self.model_dict['metrics_fitting']
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
         result['model_hash'] = self.model_dict['model_hash']
-        result['drugs'] = self.predictors_ord['drugs'] 
-        result['conditions'] = self.predictors_ord['conditions'] 
+
+        if lang is None:
+            result['drugs'] = self.predictors_ord['drugs'] 
+            result['conditions'] = self.predictors_ord['conditions'] 
+        else:
+            result['drugs'] = []
+            result['conditions'] = []
+            for idrug in self.predictors_ord['drugs']:
+                result['drugs'].append( (idrug, self.mapped(idrug, lang) ))
+            for icond in self.predictors_ord['conditions']:
+                result['conditions'].append( (icond, self.mapped(icond, lang) ))
+
         return True, result
 
     def get_model_labels (self):
@@ -160,7 +170,10 @@ class Consult:
         else:
             if lang in self.mapp:
                 if text in self.mapp[lang]:
+                    print ('found', self.mapp[lang][text])
                     return self.mapp[lang][text]    
+                else:
+                    print ('not found', text)
         return text
 
     def get_predictors (self, lang):

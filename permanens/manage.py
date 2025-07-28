@@ -165,11 +165,11 @@ def action_models(out='text'):
     
     return True, c.get_model_labels()
 
-def action_setmodel(model_id):
+def action_setmodel(model_id, lang=None):
     '''
     changes the current model to the one identified by the model_id
     '''
-    return c.set_model(model_id)
+    return c.set_model(model_id, lang)
 
 def action_predictors(lang=None):
     '''
