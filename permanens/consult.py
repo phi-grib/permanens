@@ -170,10 +170,7 @@ class Consult:
         else:
             if lang in self.mapp:
                 if text in self.mapp[lang]:
-                    print ('found', self.mapp[lang][text])
                     return self.mapp[lang][text]    
-                else:
-                    print ('not found', text)
         return text
 
     def get_predictors (self, lang):
