@@ -148,13 +148,19 @@ class Consult:
     def get_model_labels (self):
         return self.model_labels
 
-    def get_predictors (self):
+    def get_predictors (self, lang):
         ''' provides a list of VAR_MAX predictors for drugs and conditions categories, which can
             be used as selectable predictor variables in the front-end
         '''
-        if self.predictors_ord['drugs'] != [] and self.predictors_ord['conditions'] != []:
+        if self.predictors_ord['drugs'] == [] or self.predictors_ord['conditions'] == []:
+            return False, 'predictors undefined'
+
+
+        if lang is None:
             return True, self.predictors_ord
-        return False, 'predictors undefined'
+        else:
+
+            return False, 'languajes not implemented'
 
     def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 

@@ -171,14 +171,14 @@ def action_setmodel(model_id):
     '''
     return c.set_model(model_id)
 
-def action_predictors():
+def action_predictors(lang=None):
     '''
     returns predictors by category, to be used by the front-end as selectable predictors
     '''
 
     # c = Consult()
     
-    success, predictors = c.get_predictors()
+    success, predictors = c.get_predictors(lang)
 
     return success, predictors 
 
