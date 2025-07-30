@@ -13,18 +13,18 @@ doctor:
       - title: Guía Estructurada para la Evaluación Biopsicosocial
 
         content: 
-          '<p>La Evaluación Biopsicosocial (EBP) es un componente vital de un proceso más amplio de planificación de la 
-          atención y toma de decisiones conjuntas para personas con autolesiones. Proporciona un marco estructurado y 
+          '<p>La Evaluación Biopsicosocial (BPSA, por sus siglas en inglés) es un componente vital de un proceso más amplio de planificación de la 
+          atención y toma de decisiones conjuntas para personas con conducta autolesiva. Proporciona un marco estructurado y 
           completo para comprender las necesidades individuales mediante la integración de perspectivas biológicas, 
           psicológicas y sociales. Este enfoque multidimensional apoya intervenciones adaptadas y asegura que la 
           atención esté centrada en la persona, tenga en cuenta su contexto y esté basada en la evidencia.</p>'
-      - title: Orientación Práctica para la Realización de una EBP
+      - title: Orientación Práctica para la Realización de una BPSA
         content:
           - title: a. Compromiso y Preparación
             fold: True
             content: 
               <ul>
-                <li>Establecer una buena relación</li>
+                <li>Establecer una buena relación de confianza y empatía con el paciente</li>
                 <li>Aclarar el propósito y alcance de la evaluación</li>
               </ul>
           - title: b. Recopilación de Información
@@ -32,9 +32,9 @@ doctor:
             content: 
               <ul>
                 <li>Utilizar un formato semiestructurado para guiar las conversaciones</li>
-                <li>Incluir múltiples fuentes de información (ej., autoinforme del paciente, aportes de familiares/cuidadores, registros previos)</li>
+                <li>Incluir múltiples fuentes de información (ej., información autoreportada por el paciente, aportaciones de familiares/cuidadores, registros previos)</li>
                 <li>Observar las señales no verbales y los factores contextuales</li>
-                <li>Dependiendo del estado de salud mental/física del paciente, la EBP puede completarse en más de una sesión</li>
+                <li>Según el estado de salud mental/física del paciente, la BPSA puede completarse en más de una sesión</li>
               </ul>
           - title: c. Análisis y Formulación
             fold: True
@@ -52,13 +52,13 @@ doctor:
                 <li>Usar lenguaje profesional y descripciones objetivas</li>
                 <li>Resaltar las áreas prioritarias para la intervención o evaluación adicional</li>
               </ul>
-      - title: Evaluación Biopsicosocial - Información clave a evaluar
+      - title: Información clave a evaluar en una Evaluación Biopsicosocial 
         content:
           - title: 1. Contexto de la derivación
             fold: True
             content: 
               <ul>
-                <li>Razones de la derivación</li>
+                <li>Motivos de la derivación</li>
                 <li>Plan de manejo acordado con el referente entre la derivación y la evaluación</li>
               </ul>
           - title: 2. Antecedentes de autolesiones
@@ -72,8 +72,8 @@ doctor:
             content: 
               <ul>
                 <li>Estado civil</li>
-                <li>Estado laboral</li>
-                <li>Estado de alojamiento</li>
+                <li>Situación laboral</li>
+                <li>Situación habitacional</li>
                 <li>Dificultades legales</li>
               </ul>
           - title: 4. Motivo de consulta
@@ -81,16 +81,16 @@ doctor:
             content: 
               <ul>
                 <li>Síntomas o problemas presentados</li>
-                <li>Circunstancias de la presentación (si no puede dar un historial)</li>
+                <li>Circunstancias del motivo de consulta (si no puede dar un historial)</li>
               </ul>
-          - title: 5. Historial de la presentación
+          - title: 5. Historial del motivo de consulta
             fold: True
             content: 
               <ul>
-                <li>Factores estresantes y eventos vitales recientes</li>
+                <li>Estresores y eventos vitales recientes</li>
                 <li>Consumo reciente de drogas y alcohol</li>
                 <li>Dificultades legales</li>
-                <li>Uso de historial colateral (si el individuo no puede proporcionar un relato claro)</li>
+                <li>Uso de historial colateral (si el individuo no puede proporcionar un relato claro -ver más adelante-)</li>
               </ul>
           - title: 6. Historial psiquiátrico
             fold: True
@@ -98,13 +98,13 @@ doctor:
               <ul>
                 <li>Detalles de la asistencia al servicio y naturaleza del tratamiento (si se conoce)</li>
                 <li>Historial de autolesiones</li>
-                <li>Número de intentos previos (si es posible)</li>
+                <li>Número de intentos previos (si es posible saberlo)</li>
               </ul>
-          - title: 7. Otras agencias involucradas
+          - title: 7. Otros organismos involucradas
             fold: True
             content: 
               <ul>
-                <li>Nombrar cualquier agencia actualmente involucrada</li>
+                <li>Nombrar cualquier organismo actualmente involucrado</li>
               </ul>
           - title: 8. Historial forense
             fold: True
@@ -118,13 +118,13 @@ doctor:
               <ul>
                 <li>Unidades de alcohol (etanol) por semana</li>
                 <li>Consumo de otras sustancias</li>
-                <li>Esquema de cualquier tratamiento previo relacionado con el consumo de sustancias</li>
+                <li>Descripción de cualquier tratamiento previo relacionado con el consumo de sustancias</li>
               </ul>
           - title: 10. Historial médico
             fold: True
             content: 
               <ul>
-                <li>Historial relevante de enfermedades médicas significativas</li>
+                <li>Antecedentes relevante de enfermedades médicas significativas</li>
                 <li>Tratamientos relevantes recibidos</li>
               </ul>
           - title: 11. Medicación actual
@@ -142,10 +142,10 @@ doctor:
                 <li>Abuso (sexual, físico o emocional)</li>
                 <li>Negligencia y disfunción familiar</li>
                 <li>Historial laboral</li>
-                <li>Historial de relaciones</li>
+                <li>Historial de relaciones interpersonales o de pareja</li>
                 <li>Historial psicosexual</li>
                 <li>Hijos y responsabilidades de cuidado</li>
-                <li>Participación forense</li>
+                <li>Antecendentes judiciales o legales</li>
                 <li>Circunstancias financieras</li>
                 <li>Lugar de residencia</li>
               </ul>
@@ -157,7 +157,7 @@ doctor:
                 <li>Apariencia y comportamiento</li>
                 <li>Pensamientos</li>
                 <li>Percepción</li>
-                <li>Percepción de la enfermedad</li>
+                <li>Conciencia de la enfermedad</li>
                 <li>Cognición</li>
                 <li>Habla</li>
                 <li>Estado de ánimo</li>
@@ -167,13 +167,13 @@ doctor:
             content: 
               <ul>
                 <li>Fuentes de información colateral (ej. cuidador, pareja, personal de enfermería, otros)</li>
-                <li>Incluir datos de contacto cuando estén disponibles</li>
+                <li>Incluir datos de contacto cuando sea posible</li>
               </ul>
           - title: 15. Información adicional
             fold: True
             content: 
               <ul>
-                <li>Cualquier otra información relevante no mencionada anteriormente</li>
+                <li>Cualquier otra información relevante no cubierta anteriormente</li>
               </ul>
           - title: 16. Resumen / Formulación diagnóstica
             fold: True
@@ -201,34 +201,34 @@ doctor:
             content:
               <ul>
                 <li>Plan para abordar las necesidades y riesgos identificados</li>
-                <li>Participación de la familia o cuidadores cuando sea posible</li>
+                <li>Participación de la familia o cuidadores siempre que sea posible</li>
               </ul>
       - title: Recursos
         content:
-          <p>Enlace al PDF rellenable de la EBP</p>
+          <p>Enlace al PDF rellenable de la BPSA</p>
   - title: Plan de seguridad
     content:
-      - title: Intervención de Planificación de Seguridad Stanley-Brown
+      - title: Intervención para la Planificación de la Seguridad Stanley-Brown
         content: 
-          La Intervención de Planificación de Seguridad (IPS) Stanley-Brown es una intervención clínica breve, colaborativa y basada en la evidencia, diseñada para apoyar a 
-          individuos en riesgo de suicidio. Proporciona un plan personalizado que mejora la seguridad, desarrolla la capacidad de afrontamiento y facilita el compromiso 
-          con la atención de seguimiento. Puede completarse en aproximadamente 20-45 minutos y es adecuada para su uso en entornos de emergencia.
+          La Intervención para la Planificación de la Seguridad (SPI, por sus siglas en inglés) Stanley-Brown es una intervención clínica breve, colaborativa y basada en la evidencia, diseñada para apoyar a 
+          individuos en riesgo de suicidio. Proporciona un plan personalizado que mejora la seguridad, desarrolla la capacidad de afrontamiento y facilita 
+          la vinculación con el seguimiento asistencial. Puede completarse en aproximadamente 20-45 minutos y es adecuada para su uso en entornos de emergencia.
       - title: Entendiendo la curva de riesgo de suicidio
         fold: True
         content:
-          '<p>Al usar la IPS, es crucial entender la curva de riesgo de suicidio.</p>
-          <p>El riesgo de suicidio no es estático: los individuos en riesgo a menudo experimentan fluctuaciones dinámicas en su nivel de suicidalidad. El riesgo agudo puede 
+          '<p>Al usar la SPI, es crucial entender la curva de riesgo de suicidio.</p>
+          <p>El riesgo de suicidio no es estático: los individuos en riesgo suelen experimentar fluctuaciones dinámicas en su nivel de suicidalidad. El riesgo agudo puede 
           escalar rápidamente y disminuir en cuestión de horas o días.</p>
           <br>
-          <b>¿Por qué es esto importante?</b>
+          <b>¿Por qué es importante esto?</b>
           <br>
           <ul>
             <li>El riesgo de suicidio tiende a aumentar y luego disminuir en un período de tiempo relativamente corto.</li>
-            <li>La IPS está diseñada para ayudar a los pacientes a reconocer sus señales de advertencia personales temprano, antes del pico de la crisis.</li>
-            <li>Al actuar temprano en la curva, es más probable que las personas utilicen estrategias de afrontamiento o busquen ayuda antes de que su riesgo se vuelva abrumador.</li>
+            <li>La SPI está diseñada para ayudar a los pacientes a reconocer sus señales de advertencia personales temprano, antes del pico de la crisis.</li>
+            <li>Al actuar en las primeras fases de la curva, es más probable que las personas utilicen estrategias de afrontamiento o busquen ayuda antes de que su riesgo se vuelva abrumador.</li>
           </ul>
-          <p>El objetivo de la IPS es aumentar la conciencia sobre estas señales de advertencia y capacitar a los pacientes para que tomen medidas preventivas antes de 
-          que estén en peligro inmediato de actuar según sus pensamientos suicidas.</p>'
+          <p>El objetivo de la SPI es aumentar la conciencia sobre estas señales de alerta y capacitar a los pacientes para que tomen medidas preventivas antes de 
+          que estén en peligro inminente de actuar según sus pensamientos suicidas.</p>'
       - title: El Plan de Seguridad incluye los siguientes seis pasos
         content:
           - title: 1. Señales de advertencia
@@ -242,7 +242,7 @@ doctor:
           - title: 3. Personas y entornos sociales que proporcionan distracción
             fold: True
             content:
-              'Listar lugares o personas (no necesariamente para divulgar) que pueden ayudar a distraer a la persona de los pensamientos suicidas. <i>Ejemplo: ir a un café, visitar a un amigo</i>'
+              'Hacer una lista de lugares o personas (sin necesidad de contarles lo que ocurre) que pueden ayudar a distraer a la persona de los pensamientos suicidas. <i>Ejemplo: ir a un café, visitar a un amigo</i>'
           - title: 4. Personas a las que pedir ayuda
             fold: True
             content:
@@ -250,15 +250,18 @@ doctor:
           - title: 5. Profesionales o agencias a contactar para obtener ayuda
             fold: True
             content:
-              'Listar profesionales y servicios de salud mental que pueden ser contactados en caso de crisis, incluyendo servicios de emergencia si es necesario. <i>Ejemplo: información de contacto de clínicos, línea de ayuda de emergencia</i>'
-          - title: 6. Hacer el entorno seguro
+              'Hacer una lista de profesionales y servicios de salud mental que pueden contactar en caso de crisis, 
+              incluyendo servicios de emergencia si es necesario. <i>Ejemplo: información de contacto del profesional, línea de ayuda de emergencia</i>'
+          - title: 6. Hacer que el entorno sea seguro
             fold: True
             content:
-              'Reducir el acceso a medios letales y otros elementos que podrían usarse para autolesionarse. <i>Ejemplo: retirar armas de fuego, asegurar medicamentos</i>'
+              'Reducir el acceso a medios letales y a otros elementos que podrían usarse para 
+              autolesionarse. <i>Ejemplo: retirar armas de fuego, asegurar los medicamentos</i>'
       - title: Recursos de capacitación
         fold: True
         content:
-          'El soporte integral de capacitación e implementación para la IPS está disponible a través del <a href="https://suicidesafetyplan.com/">sitio web oficial del Plan de Seguridad</a>, incluyendo <a href="https://suicidesafetyplan.com/training/">videos cortos de capacitación paso a paso</a>.'
+          'Hay recursos integrales de capacitación y apoyo para la implementación de la SPI disponibles
+          en el <a href="https://suicidesafetyplan.com/">sitio web oficial del Plan de Seguridad</a>, incluyendo <a href="https://suicidesafetyplan.com/training/">videos cortos de capacitación paso a paso</a>.'
       - title: Versión imprimible
         fold: True
         content:
@@ -275,8 +278,10 @@ doctor:
           <ul>
             <li>Plan de seguridad (ver módulo separado)</li>
             <li>Habilidades básicas de regulación emocional (relajación, mindfulness, otras habilidades identificadas por el paciente)</li>
-            <li>Estrategias cognitivas para reducir creencias y suposiciones que sirven como vulnerabilidades al comportamiento suicida (desesperanza, carga percibida, culpa y vergüenza)</li>
-            <li>Prevención de recaídas (es decir, identificación de factores precipitantes y práctica de habilidades de afrontamiento)</li>
+            <li>Estrategias cognitivas para reducir creencias y suposiciones que sirven como vulnerabilidades 
+            a la conducta suicida (desesperanza, percepción de ser una carga, culpa y vergüenza)</li>
+            <li>Prevención de recaídas (es decir, identificación de factores precipitantes y 
+            práctica de habilidades de afrontamiento)</li>
           </ul>
           <br>
           <i>Lectura adicional</i>
@@ -287,13 +292,15 @@ doctor:
       - title: Terapia Dialéctico-Conductual (TDC)
         fold: True
         content:
-          'La TDC es un programa de tratamiento psicológico integral que debe ser impartido por terapeutas con la formación adecuada. La TDC aborda directamente 
-          (1) el comportamiento suicida, (2) los comportamientos que interfieren con la prestación del tratamiento y (3) otros comportamientos peligrosos, graves o 
+          'La TDC es un programa integral de tratamiento psicológico que debe ser impartido por terapeutas con la formación adecuada. La TDC aborda directamente 
+          (1) el comportamiento suicida, (2) los comportamientos que interfieren con el desarrollo del tratamiento y (3) otros comportamientos peligrosos, graves o 
           desestabilizadores. El tratamiento aborda las siguientes cinco funciones: (1) aumentar las capacidades conductuales, (2) mejorar la motivación para un 
-          comportamiento competente, (3) asegurar la generalización de las mejoras al entorno natural, (4) estructurar el entorno de tratamiento para que refuerce 
-          los comportamientos funcionales en lugar de los disfuncionales, y (5) mejorar las capacidades y la motivación del terapeuta para tratar a los pacientes de manera efectiva.
+          comportamiento habilidoso, (3) asegurar la generalización de las mejoras al entorno natural, (4) 
+          estructurar el entorno terapéutico para que refuerce 
+          los comportamientos funcionales en lugar de los disfuncionales, y (5) potenciar las capacidades y la motivación del terapeuta para tratar a los pacientes de manera efectiva.
           <br>
-          Existen cuatro modalidades de prestación de servicios: (1) psicoterapia individual una vez por semana, (2) capacitación en habilidades grupales una vez por semana, 
+          Existen cuatro modalidades de prestación de servicios: (1) psicoterapia individual una vez por 
+          semana, (2) capacitación en habilidades grupales una vez por semana, 
           (3) consulta telefónica según sea necesario y (4) reuniones semanales del equipo de consulta del terapeuta.
           <br>
           <i>Lectura adicional</i>
@@ -306,21 +313,21 @@ doctor:
     content:
       - title: Consideraciones
         content:
-          'La decisión de ingresar a un paciente en atención hospitalaria debe basarse en las rutinas clínicas locales, las directrices y los marcos legales. 
-          La guía a continuación proporciona una visión general de los factores a considerar al decidir si se debe ingresar a un paciente en atención hospitalaria. 
-          En general, los pacientes deben ser tratados en el entorno menos restrictivo pero con más probabilidades de ser seguro y efectivo. 
-          La atención hospitalaria puede ser necesaria para pacientes que se considera que tienen un alto riesgo de peligro para sí mismos o para otros, 
-          o si el paciente no puede cooperar con la evaluación psiquiátrica (por ejemplo, debido a intoxicación, agitación extrema, psicosis o catatonia). 
-          El clínico también debe considerar los posibles efectos negativos de la hospitalización, como la interrupción del empleo, el estrés financiero y 
+          'La decisión de ingresar a un paciente en atención hospitalaria debe basarse en protocolos clínicos locales, guías asistenciales y el marcos legal aplicable. 
+          La orientación que se ofrece a continuación proporciona una visión general de los factores que deben tenerse en cuenta al valorar si se debe ingresar a un paciente en atención hospitalaria. 
+          En general, los pacientes deben ser tratados en el entorno menos restrictivo que, al mismo tiempo, garantice la seguridad y eficacia del tratamiento. 
+          El ingreso puede ser necesario para pacientes en los que se valora un riesgo alto de hacerse daño a sí mismos o a otros, 
+          o cuando el paciente no puede cooperar con la evaluación psiquiátrica (por ejemplo, debido a intoxicación, agitación extrema, psicosis o catatonia). 
+          El clínico también debe considerar los posibles efectos negativos de la hospitalización, como la interrupción del empleo, el impacto financiero y 
           otros estreses psicosociales, la vergüenza y el estigma.'
       - title: Lista de verificación
         fold: True
         content:
-          'Antes de dar de alta a una persona que se ha autolesionado de un hospital general, asegúrese de que:
+          'Antes de dar de alta de un hospital general a una persona que se ha autolesionado, asegúrese de que:
           <ul>
             <li>se haya realizado una evaluación psicosocial</li>
-            <li>se haya elaborado un plan para el manejo posterior con todas las agencias y personas apropiadas</li>
-            <li>se haya realizado una reunión de planificación del alta con todas las agencias y personas apropiadas</li>
-            <li>se hayan especificado los arreglos para la atención posterior, incluida una comunicación clara por escrito con el equipo de atención primaria.</li>
+            <li>se haya elaborado un plan para el manejo posterior con todas los organismos y personas pertinentes</li>
+            <li>se haya realizado una reunión de planificación del alta con todas las partes involucradas</li>
+            <li>se hayan especificado los recursos para el seguimiento, incluyendo una comunicación clara por escrito con el equipo de atención primaria.</li>
           </ul>
           '
