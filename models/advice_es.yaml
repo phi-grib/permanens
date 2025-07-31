@@ -10,8 +10,7 @@ patient:
 doctor:
   - title: Guía Estructurada para la Evaluación Biopsicosocial
     content:
-      - title: Guía Estructurada para la Evaluación Biopsicosocial
-
+      - title: Introducción
         content: 
           '<p>La Evaluación Biopsicosocial (BPSA, por sus siglas en inglés) es un componente vital de un proceso más amplio de planificación de la 
           atención y toma de decisiones conjuntas para personas con conducta autolesiva. Proporciona un marco estructurado y 
