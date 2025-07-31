@@ -216,6 +216,7 @@ doctor:
         fold: True
         content:
           '<p>Al usar la SPI, es crucial entender la curva de riesgo de suicidio.</p>
+          <img src="curve_es.png" width="400px" alt="suicide curve">
           <p>El riesgo de suicidio no es estático: los individuos en riesgo suelen experimentar fluctuaciones dinámicas en su nivel de suicidalidad. El riesgo agudo puede 
           escalar rápidamente y disminuir en cuestión de horas o días.</p>
           <br>

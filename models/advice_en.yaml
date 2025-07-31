@@ -220,6 +220,7 @@ doctor:
       fold: True
       content:
         <p>When using the SPI, it is crucial to understand the <strong>suicide risk curve</strong>.</p>
+        <img src="curve_en.png" width="400px" alt="suicide curve">
         <p>Suicide risk is not static-individuals at risk often experience dynamic fluctuations in 
         their level of suicidality. Acute risk can escalate rapidly and may subside within hours or days.</p>
         <br>
