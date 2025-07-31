@@ -89,6 +89,9 @@ def action_rules (form=None, formfile=None, id=None, lang='en'):
 def action_advice(token, lang='en'):
     ''' returns static advice formated to fit in the GUI'''
 
+    if not lang in c.advice:
+        lang = 'en'
+        
     if valid_token (token):
        return True, c.advice[lang]['doctor']
 
