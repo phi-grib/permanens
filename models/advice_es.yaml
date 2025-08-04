@@ -2,11 +2,13 @@ patient:
   - title: Si necesitas ayuda
     content: 
       - title: No estás sólo
+        fold: True
         content:
           '<b>Si has llegado a urgencias por una situación difícil, queremos que sepas que no estás solo/a.  
           Muchas personas han pasado por momentos similares. 
           Existen recursos que pueden ayudarte a entender lo que estás viviendo, encontrar apoyo y sentirte 
           acompañado/a</b>
+          <br>
           <br>
           Los recursos que encontrarás aquí están pensados para personas que atraviesan situaciones de autolesión, crisis emocionales o malestar profundo'
 
