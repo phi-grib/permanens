@@ -7,6 +7,7 @@ patient:
           Muchas personas han pasado por momentos similares. 
           Existen recursos que pueden ayudarte a entender lo que estás viviendo, encontrar apoyo y sentirte 
           acompañado/a</b>
+          <br>
           Los recursos que encontrarás aquí están pensados para personas que atraviesan situaciones de autolesión, crisis emocionales o malestar profundo'
 
       - title: En caso de urgencia o peligro inmediato
@@ -35,7 +36,9 @@ patient:
       - title: Para entender mejor lo que ocurre y prevenir riesgos
         fold: True
         content:
-          'App Prevensuic de la Fundación Española para la Prevención del Suicidio <a href="https://www.fsme.es/app-prevensuic">https://www.fsme.es/app-prevensuic/</a> 
+          'App Prevensuic de la Fundación Española para la Prevención del Suicidio <a href="https://www.fsme.es/app-prevensuic">https://www.fsme.es/app-prevensuic</a> 
+          <br>
+          <br>
           También puede acceder desde la página web <a href="https://www.prevensuic.org">https://www.prevensuic.org</a>'
 
   - title: Servicios locales
@@ -46,8 +49,12 @@ patient:
           'La siguiente página web tiene registrados servicios públicos, organismos y entidades asociativas, encaradas a 
           actividades dirigidas al bienestar salud y cuidado de las personas (por ejemplo, autocuidado, deporte o actividades culturales). 
           <a href="https://cercasalut.barcelona/">Cerca Salut Barcelona</a>
+          <br>
+          <br>
           También puedes encontrar servicios para recibir apoyo con otras preocupaciones: 
           violencia machista, violencia familiar, situaciones de vulnerabilidad económica, problemas habitacionales, problemas laborales, soledad, adicciones y un largo etcétera.
+          <br>
+          <br>
           Puedes explorar los recursos a través del mapa o del buscador avanzado. Te permitirá filtrar los recursos para que puedas sentirte cómodo,
           sea por preferencia de edad, género, orientación sexual, etcétera.'
       - title: Cataluña
