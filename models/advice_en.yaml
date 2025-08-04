@@ -1,12 +1,12 @@
 patient:
-- title: general advice
+- title: Resources 
   content: 
-    - title: what to do
-      content: seek professional advice
-- title: resources
-  content:
-    - title: directory
-      content: list of links 
+    - title: Contacts
+      content:
+       'in progress...'
+    - title: Local support services
+      content:
+        'in progress...'
 doctor:
 - title: Structured Guide for Biopsychosocial Assessment
   content: 

@@ -1,12 +1,62 @@
 patient:
-  - title: consejos generales
+  - title: Si necesitas ayuda
+    content: 
+      - title: No estás sólo
+        content:
+          '<b>Si has llegado a urgencias por una situación difícil, queremos que sepas que no estás solo/a.  
+          Muchas personas han pasado por momentos similares. 
+          Existen recursos que pueden ayudarte a entender lo que estás viviendo, encontrar apoyo y sentirte 
+          acompañado/a</b>
+          Los recursos que encontrarás aquí están pensados para personas que atraviesan situaciones de autolesión, crisis emocionales o malestar profundo'
+
+      - title: En caso de urgencia o peligro inmediato
+        fold: True
+        content:
+          'Puedes llamar en <u>cualquier momento</u>
+          <ul>
+            <li>Emergencias generales (ambulancia, policía, bomberos): 112 (24/7) </li>
+            <li>Emergencias sanitarias: 061 (24/7)</li>
+          </ul>'
+
+      - title: Si necesitas hablar con alguien
+        fold: True
+        content: 
+          'Puedes llamar en <u>cualquier momento</u>
+          <ul>
+            <li>Teléfono para la Prevención del Suicidio: 900 925 555 (24/7) </li>
+          </ul>
+          '
+      - title: 'Para el entorno de personas en riesgo de suicidio'
+        fold: True
+        content: 
+          'Associació Catalana per a la Prevenció del Suïcidi (ACPS): <a href="https://acps.cat"> https://acps.cat/</a>
+          Teléfono: 652 87 38 26, e-mail: info@acps.cat.'
+
+      - title: Para entender mejor lo que ocurre y prevenir riesgos
+        fold: True
+        content:
+          'App Prevensuic de la Fundación Española para la Prevención del Suicidio <a href="https://www.fsme.es/app-prevensuic">https://www.fsme.es/app-prevensuic/</a> 
+          También puede acceder desde la página web <a href="https://www.prevensuic.org">https://www.prevensuic.org</a>'
+
+  - title: Servicios locales
     content:
-      - title: 'qué hacer'
-        content: buscar asesoramiento profesional
-  - title: recursos
-    content:
-      - title: directorio
-        content: lista de enlaces
+      - title: Barcelona
+        fold: True
+        content:
+          'La siguiente página web tiene registrados servicios públicos, organismos y entidades asociativas, encaradas a 
+          actividades dirigidas al bienestar salud y cuidado de las personas (por ejemplo, autocuidado, deporte o actividades culturales). 
+          <a href="https://cercasalut.barcelona/">Cerca Salut Barcelona</a>
+          También puedes encontrar servicios para recibir apoyo con otras preocupaciones: 
+          violencia machista, violencia familiar, situaciones de vulnerabilidad económica, problemas habitacionales, problemas laborales, soledad, adicciones y un largo etcétera.
+          Puedes explorar los recursos a través del mapa o del buscador avanzado. Te permitirá filtrar los recursos para que puedas sentirte cómodo,
+          sea por preferencia de edad, género, orientación sexual, etcétera.'
+      - title: Cataluña
+        fold: True
+        content:
+          'Puedes buscar y preguntar por los activos en salud en su municipio: 
+          <a href="https://salutpublica.gencat.cat/ca/agencia/plans-estrategics/pinsap/accions-eines-projectes-relacionats/actius-salut/cercador-actius-salut/index.html">
+          Buscador de Activos en Salud en Cataluña</a>
+          '
 doctor:
   - title: Guía Estructurada para la Evaluación Biopsicosocial
     content:
