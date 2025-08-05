@@ -334,14 +334,27 @@ class Consult:
         r = model.predict(xtest_pd).tolist()[0]
         p = model.predict_proba(xtest_pd).tolist()[0]
 
-        importance_sel = [] # in case of negatives, pass an empty list
-        if r==1:
+        # list of predictors
+        predictors = ['sex', 'age', 'events']
+        predictors += form['conditions']
+        predictors += form['drugs']
+
+        # in case of negatives, pass an empty list
+        importance_sel = [] 
+        
+        # only if the prediction is positive
+        if r==1:  
             exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=40, top_labels=1)
             importance_all = exp.as_list(label=1)
             for i in importance_all:
+                
                 ilabel = i[0]
                 if ' > 0.0' in ilabel:
                     ilabel = ilabel[:-7]
+                elif ' <= 0.0' in ilabel:
+                     ilabel = ilabel[:-8]
+
+                if ilabel in predictors:
                     if lang is not None:
                         ilabel = self.mapped(ilabel, lang)
                     importance_sel.append( (ilabel, i[1]))
@@ -350,9 +363,11 @@ class Consult:
         result['probability'] = p
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']
+
         # result['model_description'] = self.model_dict['description'] 
         # result['model_metrics_training'] = self.model_dict['metrics_fitting']
         # result['model_metrics_test'] = self.model_dict['metrics_prediction']
+
         result['explanation']= importance_sel
         model_percentils = self.model_dict['percentils']
 
