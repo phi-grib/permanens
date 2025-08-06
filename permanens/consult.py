@@ -95,6 +95,12 @@ class Consult:
         if os.path.isfile(rpath):
             with open(rpath,'r',encoding='utf8') as f:
                 self.rules_dict['rules']['es'] = yaml.safe_load(f)
+                rpath = os.path.join(model_repo,'rules_es.yaml')
+        
+        rpath = os.path.join(model_repo,'rules_ca.yaml')
+        if os.path.isfile(rpath):
+            with open(rpath,'r',encoding='utf8') as f:
+                self.rules_dict['rules']['ca'] = yaml.safe_load(f)
                  
         # mapp
         self.mapp = {}
@@ -389,6 +395,9 @@ class Consult:
     def apply_rules (self, form, lang='en'):
         ''' returns a piece of text depending if the forms have certain contents, defined by some rules
         '''
+        if not lang in self.rules_dict['rules']:
+            return False, f'no rules found for lenguaje {lang}'
+
         if len(self.rules_dict['rules'][lang]) == 0:
             return False, 'no rules found'
         
