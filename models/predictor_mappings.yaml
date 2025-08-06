@@ -6,7 +6,7 @@ es:
   age:
     Edad
   Mixed anxiety and depressive disorders, inc. other specified and unspecified types:
-    Trastornos mixtos de ansiedad y depresión, incluidos otros tipos especificados y no especificados
+    Trastornos mixtos de ansiedad y depresión
   Borderline personality disorder:
     Trastorno límite de la personalidad
   Mixed and other personality disorders:
@@ -45,6 +45,16 @@ es:
     antipsicóticos de primera generación
   opioid analgesic:
     analgésico opioide
+en:
+  events:
+    Self-harm visits to ED last year
+  sex:
+    Sex
+  age:
+    Age
+  Mixed anxiety and depressive disorders, inc. other specified and unspecified types:
+    Mixed anxiety and depressive disorders
+
 
 
 

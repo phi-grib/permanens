@@ -171,14 +171,13 @@ class Consult:
 
     def mapped (self, text, lang):
         ''' utility function to translate predictor names (text) to the lenguaje defined by lang parameter
-            English is considered the default name
         '''
-        if lang == 'en':
-            return text
-        else:
-            if lang in self.mapp:
-                if text in self.mapp[lang]:
-                    return self.mapp[lang][text]    
+        # if lang == 'en':
+        #     return text
+        # else:
+        if lang in self.mapp:
+            if text in self.mapp[lang]:
+                return self.mapp[lang][text]    
         return text
 
     def get_predictors (self, lang):
