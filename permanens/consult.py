@@ -349,6 +349,8 @@ class Consult:
         
         # only if the prediction is positive
         if r==1:  
+            #TODO: results vary slighly in every run. A random seed must be defined in the explainer but this doesn't 
+            # seem to be feasible once it was exported. Change in the model side for next models
             exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=40, top_labels=1)
             importance_all = exp.as_list(label=1)
             for i in importance_all:
