@@ -48,6 +48,11 @@ class Consult:
         self.model_labels = []
         self.rules_dict = {}
         for iname in os.listdir (model_repo):
+            
+            # only for files in dill format
+            if not iname.endswith('.dill'):
+                continue
+
             ipath = os.path.join(model_repo,iname)
             self.model_names.append(ipath)
             
@@ -274,8 +279,11 @@ class Consult:
             input string for the model
         '''
         nvarx = len(names)
-        
         xtest_np = np.zeros((1,nvarx))
+
+        if form['events'] == 0:
+            form ['last_event'] = 100
+
         for ikey in form:
             ival = form[ikey]
 
@@ -288,10 +296,13 @@ class Consult:
 
             # for sex and age
             if ikey in names:
+                if ikey == 'age':
+                    ival = int (np.round(ival/10.0))
                 xtest_np[0,names.index(ikey)] = ival
                 # print('assigned from key: ', ikey, ival)
 
         # convert to pandas dataframe 
+
         xtest_pd = pd.DataFrame(xtest_np)
         xtest_pd.columns = names
 
@@ -324,6 +335,7 @@ class Consult:
         ''' uses the form to run the prediction pipeline
         '''
         LOG.info (f'predicting {cname} form')
+
         result = {'cname' : cname} 
 
         model = self.model_dict['model']
@@ -340,7 +352,7 @@ class Consult:
         p = model.predict_proba(xtest_pd).tolist()[0]
 
         # list of predictors
-        predictors = ['sex', 'age', 'events']
+        predictors = ['sex', 'age', 'events', 'last_event']
         predictors += form['conditions']
         predictors += form['drugs']
 
@@ -349,22 +361,37 @@ class Consult:
         
         # only if the prediction is positive
         if r==1:  
-            #TODO: results vary slighly in every run. A random seed must be defined in the explainer but this doesn't 
-            # seem to be feasible once it was exported. Change in the model side for next models
-            exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=40, top_labels=1)
-            importance_all = exp.as_list(label=1)
+            #TODO: results vary slighly in every run. Check this potential solution
+            # https://github.com/marcotcr/lime/issues/119
+            
+            # for j in range (10):
+            #     exp = explainer.explain_instance(xtest_np[0], model.predict_proba, num_features=30, num_samples= 5000, labels=(1), top_labels=1)
+                
+            #     # exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=40, top_labels=1)
+            #     importance_all = exp.as_list(label=1)
+            #     print (importance_all)
+
+            xint = xtest_np[0].astype(np.int32)
+            exp = explainer.explain_instance(xint, model.predict_proba, num_features=30, num_samples=5000)
+            importance_all = exp.as_list(label=1)     
+            print (importance_all)
+
             for i in importance_all:
                 
                 ilabel = i[0]
-                if ' > 0.0' in ilabel:
-                    ilabel = ilabel[:-7]
-                elif ' <= 0.0' in ilabel:
-                     ilabel = ilabel[:-8]
+                # if ' > 0.0' in ilabel:
+                #     ilabel = ilabel[:-7]
+                # elif ' <= 0.0' in ilabel:
+                #     ilabel = ilabel[:-8]
+                # elif '=0' or '=1' in ilabel:
+                #     ilabel = ilabel[:-2]
+                
+                ilabel = ilabel.split('=')[0]
 
                 if ilabel in predictors:
                     if lang is not None:
                         ilabel = self.mapped(ilabel, lang)
-                    importance_sel.append( (ilabel, i[1]))
+                    importance_sel.append( (ilabel, i[1]) )
                 
         result['outcome'] = r
         result['probability'] = p

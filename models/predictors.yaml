@@ -1,0 +1,148 @@
+conditions:
+- Personality and behavioural disorders due to brain disease, damage and dysfunction
+- Mood [affective] disorders
+- Substance dependence
+- Neurotic disorders
+- Non-dependent substance abuse
+- Specific developmental disorders of speech and language
+- Habit and impulse disorders
+- Dementia in Alzheimer's disease
+- Mental and behavioural disorders associated with the puerperium not elsewhere classified
+- Schizophrenia and other non-organic psychosis
+- Dementia in other diseases classified elsewhere (COMB)
+- Mental disorder, not otherwise specified
+- Behavioural and emotional disorders with onset usually occurring in childhood and
+  adolescence
+- Unspecified dementia
+- Unspecified disorder of psychological development
+- Other mental disorders due to brain damage and dysfunction and to physical disease
+  + Unspecified organic or symptomatic mental disorder
+- Psychological or behavioural factors associated with disorders or diseases classified
+  elsewhere
+- Nonorganic sleep disorders
+- Disorders of sexual preference
+- Mental retardation
+- Borderline personality disorder
+- Other disorders of adult personality and behaviour
+- Specific developmental disorders of scholastic skills
+- Premenstrual dysphoric disorder
+- Pervasive developmental disorders
+- Sexual dysfunction, not caused by organic disorder or disease
+- Vascular dementia
+- Delirium, not induced by alcohol and other psychoactive substances
+- Gender identity disorders
+- Specific developmental disorder of motor functions
+- Organic amnesic syndrome, not induced by alcohol and other psychoactive substances
+- Psychological and behavioural disorders associated with sexual development and orientation
+- Mixed specific developmental disorders + Other disorders of psychological development
+- Substance use disorder - tobacco
+- Eating disorders
+- Other personality disorders
+- Diabetes mellitus
+- Other diseases of the musculoskeletal system/connective tissue
+- Transport accidents
+- Other malignant neoplasms
+- Hodgkin disease and lymphomas
+- Homicide, assault
+- Chronic kidney diseases
+- Other chronic lower respiratory diseases
+- Accidental falls
+- Malignant neoplasm of oesophagus
+- Cerebrovascular diseases
+- Alzheimer's disease
+- Other heart diseases
+- Malignant neoplasm of lip, oral cavity, pharynx
+- Rheumatoid arthritis and osteoarthrosis
+- Other malignant neoplasm of lymphoid and haematopoietic tissue
+- Leukaemia
+- Malignant neoplasm of pancreas
+- Malignant neoplasm of trachea, bronchus, lung
+- Asthma
+- Malignant neoplasm of brain and central nervous system
+- Malignant neoplasm of colon, rectum and anus
+- Other ischaemic heart diseases
+- Cirrhosis, fibrosis and chronic hepatitis
+- Malignant neoplasm of stomach
+- Drowning and accidental submersion
+- Malignant neoplasm of bladder
+- Malignant neoplasm of other and unspecified parts of uterus
+- Malignant neoplasm of breast
+- Malignant neoplasm of ovary
+- Malignant neoplasm of cervix uteri
+- Malignant neoplasm of larynx
+- Malignant neoplasm of kidney
+- Malignant neoplasm of thyroid
+- Malignant neoplasm of prostate
+- Other disorders of arteries and arterioles
+- Regional enteritis and ulcerative colitis
+- Intracranial injury
+- Psoriasis
+- Fluid and electrolyte disorders
+- Cystitis
+- Anemia
+- Blindness and diminished vision
+- Abdominal pain
+- Headache; including migraine
+- Hypertension with complications and secondary hypertension
+- Aortic aneurysm and dissection
+- Coagulation and hemorrhagic disorders
+- Cancer of liver and intrahepatic bile duct (malignant only)
+- Spinal muscular atrophy and related syndromes
+- Pulmonary heart disease
+- Spinocerebellar disease
+- Hearing loss
+- Transient cerebral ischemia
+- Multiple sclerosis
+- Facial nerve disorder (inc. Bell's palsy)
+- Acute myocardial infarction
+- Sickle cell anemia
+- Chronic hepatitis
+- Malaise and fatigue
+- Obesity
+- Nonspecific chest pain
+- Malnutrition
+- Endometriosis
+- Irritable bowel syndrome
+- Trigeminal nerve disorder (inc. trigeminal neuralgia)
+- Chest pain on breathing
+- Essential hypertension
+- Throat pain
+- Huntington's disease
+- Dysmenorrhea
+- Pain and other symptoms associated with female genital organs
+- Other extrapyramidal and movement disorders
+- Epilepsy
+- Parkinson's disease
+- HIV/AIDS
+- Mononeuropathies of lower limb
+- Liver disease
+- Mononeuropathies of upper limb & other mononeuropathies
+- Inflammatory polyneuropathy, other PN and PN in DCE
+- Hemiplegia
+- Other headache syndromes
+- Disorders of autonomic nervous system (inc autonomic dysreflexia)
+- Pain, not elsewhere classified
+- Nerve root and plexus disorders
+- Zoster
+- Weight loss
+- Hereditary and idiopathic neuropathy
+drugs:
+- anti-ADHD
+- first generation antipsychotics
+- medication for mood instability
+- anti-vertigo
+- analgesics (opioid or non-opioid)
+- anti-dementia
+- anxiolytic
+- anti-motion sickness
+- other
+- anti-parkinson
+- addiction medicine
+- anti-EPS
+- antidepressants
+- anti-migraine
+generic:
+- sex
+- age
+- events
+- last_event
