@@ -372,26 +372,24 @@ class Consult:
             #     print (importance_all)
 
             xint = xtest_np[0].astype(np.int32)
-            exp = explainer.explain_instance(xint, model.predict_proba, num_features=30, num_samples=5000)
+            exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
             importance_all = exp.as_list(label=1)     
-            print (importance_all)
+            print (xint, importance_all)
 
             for i in importance_all:
-                
                 ilabel = i[0]
-                # if ' > 0.0' in ilabel:
-                #     ilabel = ilabel[:-7]
-                # elif ' <= 0.0' in ilabel:
-                #     ilabel = ilabel[:-8]
-                # elif '=0' or '=1' in ilabel:
-                #     ilabel = ilabel[:-2]
-                
-                ilabel = ilabel.split('=')[0]
 
-                if ilabel in predictors:
-                    if lang is not None:
-                        ilabel = self.mapped(ilabel, lang)
-                    importance_sel.append( (ilabel, i[1]) )
+                # ilabel = ilabel.split('=')[0]
+
+                # LIME includes predictors in labels which either start with the predictor name (e.g.,'anxiolytic=0')
+                # or are inserted between unqualities (e.g., '4.00 < age <= 6.00')
+                for ipredictor in predictors:
+                    if ilabel.startswith(ipredictor) or " "+ipredictor+" " in ilabel:
+                        if lang is not None:
+                            ilabel = self.mapped(ipredictor, lang)
+                        # importance_sel.append( (ipredictor, i[1]) )
+                        importance_sel.append( (ilabel, i[1]) )
+                        break
                 
         result['outcome'] = r
         result['probability'] = p
