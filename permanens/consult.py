@@ -335,6 +335,10 @@ class Consult:
         ''' uses the form to run the prediction pipeline
         '''
         LOG.info (f'predicting {cname} form')
+        print ('>>>>>>>>>>>>>>>>>>>>', form)
+
+        age_ranges = ['18-25','26-35','36-45','46-55','56-65','66-75','76-85','86-95'] 
+        sex_code = ['female','male']
 
         result = {'cname' : cname} 
 
@@ -372,6 +376,7 @@ class Consult:
             #     print (importance_all)
 
             xint = xtest_np[0].astype(np.int32)
+            np.random.seed(1)
             exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
             importance_all = exp.as_list(label=1)     
             print (xint, importance_all)
@@ -395,6 +400,22 @@ class Consult:
         result['probability'] = p
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']
+
+        # extract from model info
+
+        iendpoint = 'self-harm repetition within the next 3 months'
+        iriskpeers = 0.20 # extracted from age
+        risk_histogram = [0, 0.2, 0.4, 0.4, 0, 0, 0, 0, 0, 0] # as %, must sum 1.0
+
+        # for narrative 
+        irisk = p[1]
+        iabove = np.sum(risk_histogram[:int(np.ceil(irisk*10))])
+
+        result['narrative'] = { 
+            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[form['sex']]}<e> is {irisk*100.0:.1f}%." ,
+            'risk_peers': f"Among <s>{sex_code[form['sex']]}<e> aged <s>{age_ranges[int(np.round(form['age']/10.0))-2]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers:.1f}<e>%",
+            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.1f}<e> times higher compared to age-matched <s>{sex_code[form['sex']]}<e> peers and places the patient risk above <s>{iabove*100:.1f}<e>% of age-matched male peers."
+        }
 
         # result['model_description'] = self.model_dict['description'] 
         # result['model_metrics_training'] = self.model_dict['metrics_fitting']
