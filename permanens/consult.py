@@ -335,9 +335,8 @@ class Consult:
         ''' uses the form to run the prediction pipeline
         '''
         LOG.info (f'predicting {cname} form')
-        print ('>>>>>>>>>>>>>>>>>>>>', form)
 
-        age_ranges = ['18-25','26-35','36-45','46-55','56-65','66-75','76-85','86-95'] 
+        age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','84-95'] 
         sex_code = ['female','male']
 
         result = {'cname' : cname} 
@@ -379,7 +378,6 @@ class Consult:
             np.random.seed(1)
             exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
             importance_all = exp.as_list(label=1)     
-            print (xint, importance_all)
 
             for i in importance_all:
                 ilabel = i[0]
@@ -401,27 +399,43 @@ class Consult:
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']
 
-        # extract from model info
+        # Extract from model info
+        risk_histogram = self.model_dict['risk_histogram']
+        
+        histogram_sex_index = form['sex']
+        histogram_age_index = int(np.floor((form['age']+5)/10.0))-2
+        irisk_histogram=risk_histogram[histogram_sex_index][histogram_age_index]
 
-        iendpoint = 'self-harm repetition within the next 3 months'
-        iriskpeers = 0.20 # extracted from age
-        risk_histogram = [0, 0.2, 0.4, 0.4, 0, 0, 0, 0, 0, 0] # as %, must sum 1.0
-
-        # for narrative 
+        risk_segment = self.model_dict['risk_segment'][histogram_sex_index]
+        iendpoint = self.model_dict['endpoint']
+        
+        # variables for graphics and for narrative 
         irisk = p[1]
-        iabove = np.sum(risk_histogram[:int(np.ceil(irisk*10))])
+        ihistobar = int(np.ceil(irisk*10))
 
+        iabove = np.sum(irisk_histogram[:ihistobar])
+        iriskpeers = risk_segment[int(np.floor(iabove))]
+
+        # graphics
+        result['probability_peers'] = iriskpeers
+        result['histogram'] = [float(i) for i in irisk_histogram[0]]
+        result['perc_above'] = iabove
+        result['histogram_bar'] = ihistobar
+
+        # narrative
         result['narrative'] = { 
-            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[form['sex']]}<e> is {irisk*100.0:.1f}%." ,
-            'risk_peers': f"Among <s>{sex_code[form['sex']]}<e> aged <s>{age_ranges[int(np.round(form['age']/10.0))-2]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers:.1f}<e>%",
-            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.1f}<e> times higher compared to age-matched <s>{sex_code[form['sex']]}<e> peers and places the patient risk above <s>{iabove*100:.1f}<e>% of age-matched male peers."
+            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{histogram_sex_index}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.1f}%." ,
+            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers:.1f}<e>%",
+            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.1f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{iabove*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
         }
+
 
         # result['model_description'] = self.model_dict['description'] 
         # result['model_metrics_training'] = self.model_dict['metrics_fitting']
         # result['model_metrics_test'] = self.model_dict['metrics_prediction']
 
         result['explanation']= importance_sel
+
         model_percentils = self.model_dict['percentils']
 
         pred_percentil = 100
