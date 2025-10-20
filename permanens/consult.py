@@ -404,7 +404,7 @@ class Consult:
         
         histogram_sex_index = form['sex']
         histogram_age_index = int(np.floor((form['age']+5)/10.0))-2
-        irisk_histogram=risk_histogram[histogram_sex_index][histogram_age_index]
+        irisk_histogram=risk_histogram[histogram_sex_index][histogram_age_index][0]
 
         risk_segment = self.model_dict['risk_segment'][histogram_sex_index]
         iendpoint = self.model_dict['endpoint']
@@ -418,7 +418,7 @@ class Consult:
 
         # graphics
         result['probability_peers'] = iriskpeers
-        result['histogram'] = [float(i) for i in irisk_histogram[0]]
+        result['histogram'] = [float(i) for i in irisk_histogram] # needed for serializing this np.array as JSON
         result['perc_above'] = iabove
         result['histogram_bar'] = ihistobar
 
