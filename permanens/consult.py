@@ -424,9 +424,9 @@ class Consult:
 
         # narrative
         result['narrative'] = { 
-            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{histogram_sex_index}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.3f}%." ,
+            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.1f}%." ,
             'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers:.3f}<e>%",
-            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.3f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{iabove*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
+            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{iabove*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
         }
 
 
