@@ -73,8 +73,13 @@ class Consult:
                 dfile = idict['description']
             else:
                 dfile = 'unknown'
+            # models are identified by the descrition and a hashed unique ID
+            if 'endpoint' in idict:
+                efile = idict['endpoint']
+            else:
+                efile = 'unknown'
             
-            self.model_labels.append((dfile, hfile))
+            self.model_labels.append((efile, hfile, dfile))
                 
         # use first model as default
         self.set_model(0)
