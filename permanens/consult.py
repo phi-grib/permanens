@@ -286,6 +286,9 @@ class Consult:
         nvarx = len(names)
         xtest_np = np.zeros((1,nvarx))
 
+        if 'events' not in form:
+            form['events'] == 0
+            
         if form['events'] == 0:
             form ['last_event'] = 100
 
