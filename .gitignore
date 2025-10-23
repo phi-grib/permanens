@@ -8,3 +8,6 @@ dist/*
 consults/*
 *.dill
 permanens.egg-info/*
+static/*
+*.png
+*.html
