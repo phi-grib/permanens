@@ -121,12 +121,23 @@ def action_rerun (id, token, lang='en'):
 def action_retrieve (id):
     ''' tries to load a form with the ID given as argument, saved in the repository 
     '''
-
     # c = Consult()
-
     success, form = c.load_form(id)
     return success, form
 
+def action_save_care (care, id, lang='en'):
+    #TODO complete this dummy function
+    success = True
+    data = 'prueba'
+    return success, data
+
+    success, data = manage.action_save_care(care=care, id=id, lang=lang)
+def action_load_care (id):
+    #TODO complete this dummy function
+    # success, form = c.load_form(id)
+    success = True
+    care = {'bip': 'bip-bip'}
+    return success, care
 
 def action_kill(cname=None):
     '''
