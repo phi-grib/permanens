@@ -534,3 +534,32 @@ class Consult:
             return True, 'OK'
         else:
             return False, 'file not found'
+
+    def save_care (self, care):
+        ''' save care information in YAML file
+        '''
+
+        if 'id' in care:
+            careid = care['id']
+        else:
+            return False, 'id not found'
+
+        carefile = os.path.join (self.cpath, careid+'_care')
+
+        with open(carefile,'w') as f:
+            f.write(yaml.dump(care))
+
+        return True, 'OK'
+    
+    def load_care (self, id):
+        ''' load care information from YAML file
+        '''
+
+        carefile = os.path.join (self.cpath, id+'_care')
+        if not os.path.isfile(carefile):
+            return False, 'file not found'
+
+        with open(carefile,'r') as f:
+            care = yaml.safe_load(f)
+
+        return True, care

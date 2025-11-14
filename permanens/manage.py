@@ -125,18 +125,12 @@ def action_retrieve (id):
     success, form = c.load_form(id)
     return success, form
 
-def action_save_care (care, id, lang='en'):
-    #TODO complete this dummy function
-    success = True
-    data = 'prueba'
-    return success, data
+def action_save_care (care, lang='en'):
+    success, result = c.save_care(care)
+    return success, result
 
-    success, data = manage.action_save_care(care=care, id=id, lang=lang)
 def action_load_care (id):
-    #TODO complete this dummy function
-    # success, form = c.load_form(id)
-    success = True
-    care = {'bip': 'bip-bip'}
+    success, care = c.load_care(id)
     return success, care
 
 def action_kill(cname=None):
