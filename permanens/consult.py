@@ -350,6 +350,7 @@ class Consult:
         result = {'cname' : cname} 
 
         model = self.model_dict['model']
+        calib = self.model_dict['calib']
         explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
 
@@ -360,7 +361,10 @@ class Consult:
 
         # submit to model
         r = model.predict(xtest_pd).tolist()[0]
-        p = model.predict_proba(xtest_pd).tolist()[0]
+        praw = calib.predict_proba(xtest_pd).tolist()[0]
+        p = praw[1]
+
+        print (r,p)
 
         # list of predictors
         predictors = ['sex', 'age', 'events', 'last_event']
@@ -384,7 +388,8 @@ class Consult:
 
             xint = xtest_np[0].astype(np.int32)
             np.random.seed(1)
-            exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
+            # exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
+            exp = explainer.explain_instance(xint, calib.predict_proba, num_features=len(names), num_samples=10000)
             importance_all = exp.as_list(label=1)     
 
             for i in importance_all:
@@ -403,7 +408,7 @@ class Consult:
                         break
                 
         result['outcome'] = r
-        result['probability'] = p
+        result['probability'] = praw # expects an array
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']
 
@@ -418,8 +423,8 @@ class Consult:
         iendpoint = self.model_dict['endpoint']
         
         # variables for graphics and for narrative 
-        irisk = p[1]
-        ihistobar = int(np.ceil(irisk*10))
+        irisk = p
+        ihistobar = int(np.ceil(irisk*10)-1) #TODO double check this
 
         iabove = np.sum(irisk_histogram[:ihistobar])
         iriskpeers = risk_segment[int(np.floor(iabove))]
@@ -433,7 +438,7 @@ class Consult:
         # narrative
         result['narrative'] = { 
             'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.1f}%." ,
-            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers:.3f}<e>%",
+            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.3f}<e>%",
             'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{iabove*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
         }
 
@@ -448,14 +453,14 @@ class Consult:
 
         pred_percentil = 100
         for i, pi in enumerate(model_percentils):
-            if pi > p[1] :
+            if pi > p :
                 pred_percentil = i
                 break
         result['percentil'] = pred_percentil
         
         pred_decil = 10
         for i, d in enumerate(result['decil_info']):
-            if d['pmax'] > p[1]:
+            if d['pmax'] > p:
                 pred_decil = i+1
                 break
         result['decil'] = pred_decil
