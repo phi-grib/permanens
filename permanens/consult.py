@@ -408,7 +408,8 @@ class Consult:
                         break
                 
         result['outcome'] = r
-        result['probability'] = praw # expects an array
+        # result['probability'] = praw # expects an array
+        result['probability'] = p
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']
 
