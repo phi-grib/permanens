@@ -412,34 +412,63 @@ class Consult:
         result['input'] = form
         result['decil_info'] = self.model_dict['decil_info']
 
-        # Extract from model info
+        # Extract the histogram for this particular segment of population
+        # Obtain all the histogram information
         risk_histogram = self.model_dict['risk_histogram']
+        risk_histogram_bins = self.model_dict['risk_histogram_bins']
         
+        # Identify the sex/age segment
         histogram_sex_index = form['sex']
         histogram_age_index = int(np.floor((form['age']+5)/10.0))-2
-        irisk_histogram=risk_histogram[histogram_sex_index][histogram_age_index][0]
 
+        # Histogram for this particular sex/age segment
+        irisk_histogram=risk_histogram[histogram_sex_index][histogram_age_index][0]
+        irisk_histogram_bins=risk_histogram_bins[histogram_sex_index][histogram_age_index][0]
+
+        # proportion of observed positives for the 9 age segments considered
         risk_segment = self.model_dict['risk_segment'][histogram_sex_index]
+
+        # endpoint name
         iendpoint = self.model_dict['endpoint']
         
         # variables for graphics and for narrative 
+        
+        # risk of patient
         irisk = p
-        ihistobar = int(np.ceil(irisk*10)-1) #TODO double check this
 
-        iabove = np.sum(irisk_histogram[:ihistobar])
-        iriskpeers = risk_segment[int(np.floor(iabove))]
+        # risk of peers
+        iriskpeers = risk_segment[histogram_age_index]
+
+        # proportion of population with risk lower or equal than
+        population_below = 0.0
+        for ibar in range(20):
+            if p > irisk_histogram_bins[ibar+1]: # uper limit of risk
+                population_below+=irisk_histogram[ibar] 
+            else:
+                # proportion of the last bar
+                pnorm = (p - irisk_histogram_bins[ibar]) / (irisk_histogram_bins[ibar+1] - irisk_histogram_bins[ibar])
+                population_below+= pnorm * irisk_histogram[ibar] 
+                print (p, ibar, pnorm, irisk_histogram_bins[ibar], irisk_histogram_bins[ibar+1])
+                break
 
         # graphics
         result['probability_peers'] = iriskpeers
         result['histogram'] = [float(i) for i in irisk_histogram] # needed for serializing this np.array as JSON
-        result['perc_above'] = iabove
-        result['histogram_bar'] = ihistobar
+        result['histogram_bins'] = [float(i) for i in irisk_histogram_bins] # needed for serializing this np.array as JSON
+        result['population_below'] = population_below
+        result['risk_max'] = float(irisk_histogram_bins[-1])
+
+        ####################################################
+        # OBSOLETE, REMOVE!!!!!!
+        result['perc_above'] = 0.0
+        result['histogram_bar'] = 0
+        ####################################################
 
         # narrative
         result['narrative'] = { 
             'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.1f}%." ,
-            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.3f}<e>%",
-            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{iabove*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
+            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.1f}<e>%",
+            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
         }
 
 
