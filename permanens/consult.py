@@ -361,10 +361,7 @@ class Consult:
 
         # submit to model
         r = model.predict(xtest_pd).tolist()[0]
-        praw = calib.predict_proba(xtest_pd).tolist()[0]
-        p = praw[1]
-
-        print (r,p)
+        irisk = calib.predict_proba(xtest_pd).tolist()[0][1]
 
         # list of predictors
         predictors = ['sex', 'age', 'events', 'last_event']
@@ -408,9 +405,10 @@ class Consult:
                         break
                 
         result['outcome'] = r
-        # result['probability'] = praw # expects an array
-        result['probability'] = p
+        result['probability'] = irisk
         result['input'] = form
+
+        # OBSOLETE
         result['decil_info'] = self.model_dict['decil_info']
 
         # Extract the histogram for this particular segment of population
@@ -432,24 +430,18 @@ class Consult:
         # endpoint name
         iendpoint = self.model_dict['endpoint']
         
-        # variables for graphics and for narrative 
-        
-        # risk of patient
-        irisk = p
-
         # risk of peers
         iriskpeers = risk_segment[histogram_age_index]
 
         # proportion of population with risk lower or equal than
         population_below = 0.0
         for ibar in range(20):
-            if p > irisk_histogram_bins[ibar+1]: # uper limit of risk
+            if irisk > irisk_histogram_bins[ibar+1]: # uper limit of risk
                 population_below+=irisk_histogram[ibar] 
             else:
                 # proportion of the last bar
-                pnorm = (p - irisk_histogram_bins[ibar]) / (irisk_histogram_bins[ibar+1] - irisk_histogram_bins[ibar])
+                pnorm = (irisk - irisk_histogram_bins[ibar]) / (irisk_histogram_bins[ibar+1] - irisk_histogram_bins[ibar])
                 population_below+= pnorm * irisk_histogram[ibar] 
-                print (p, ibar, pnorm, irisk_histogram_bins[ibar], irisk_histogram_bins[ibar+1])
                 break
 
         # graphics
@@ -472,25 +464,25 @@ class Consult:
             'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
         }
 
-
         # result['model_description'] = self.model_dict['description'] 
         # result['model_metrics_training'] = self.model_dict['metrics_fitting']
         # result['model_metrics_test'] = self.model_dict['metrics_prediction']
 
         result['explanation']= importance_sel
 
+        # OBSOLETE
         model_percentils = self.model_dict['percentils']
 
         pred_percentil = 100
         for i, pi in enumerate(model_percentils):
-            if pi > p :
+            if pi > irisk :
                 pred_percentil = i
                 break
         result['percentil'] = pred_percentil
         
         pred_decil = 10
         for i, d in enumerate(result['decil_info']):
-            if d['pmax'] > p:
+            if d['pmax'] > irisk:
                 pred_decil = i+1
                 break
         result['decil'] = pred_decil
