@@ -344,7 +344,7 @@ class Consult:
         '''
         LOG.info (f'predicting {cname} form')
 
-        age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','84-95'] 
+        age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
         sex_code = ['female','male']
 
         result = {'cname' : cname} 
@@ -419,6 +419,10 @@ class Consult:
         # Identify the sex/age segment
         histogram_sex_index = form['sex']
         histogram_age_index = int(np.floor((form['age']+5)/10.0))-2
+        if histogram_age_index < 0:
+            histogram_age_index = 0
+        elif histogram_age_index > 7:
+            histogram_age_index = 7
 
         # Histogram for this particular sex/age segment
         irisk_histogram=risk_histogram[histogram_sex_index][histogram_age_index][0]
@@ -433,9 +437,10 @@ class Consult:
         # risk of peers
         iriskpeers = risk_segment[histogram_age_index]
 
-        # proportion of population with risk lower or equal than
+        # proportion of population with risk lower or equal than the patient risk
+        # note that we use the high resolution histograma (100 bins) to obtain a better estimation
         population_below = 0.0
-        for ibar in range(20):
+        for ibar in range(len (irisk_histogram)):
             if irisk > irisk_histogram_bins[ibar+1]: # uper limit of risk
                 population_below+=irisk_histogram[ibar] 
             else:
@@ -444,10 +449,16 @@ class Consult:
                 population_below+= pnorm * irisk_histogram[ibar] 
                 break
 
-        # graphics
+        # The histogram information is high-resolution (usually 100 bins), but we only need bins for graphic representation
+        step = int(len(irisk_histogram)/20)
+        graphic_histogram = [float(np.sum(irisk_histogram[i:i+step])) for i in range(0,len(irisk_histogram), step)]
+        graphic_histogram_bins = [float(irisk_histogram_bins[i]) for i in range(0,len(irisk_histogram_bins), step)]
+
+        # information needed for generating graphics
         result['probability_peers'] = iriskpeers
-        result['histogram'] = [float(i) for i in irisk_histogram] # needed for serializing this np.array as JSON
-        result['histogram_bins'] = [float(i) for i in irisk_histogram_bins] # needed for serializing this np.array as JSON
+        result['histogram'] = graphic_histogram 
+        result['histogram_bins'] = graphic_histogram_bins
+
         result['population_below'] = population_below
         result['risk_max'] = float(irisk_histogram_bins[-1])
 
@@ -459,19 +470,24 @@ class Consult:
 
         # narrative
         result['narrative'] = { 
-            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.1f}%." ,
-            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.1f}<e>%",
-            'distribution': f"This means that the risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times higher compared to age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
+            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.2f}%." ,
+            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.2f}<e>%",
+            'distribution': f"The risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times the risk of age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
         }
 
+        ####################################################
+        # OBSOLETE
         # result['model_description'] = self.model_dict['description'] 
         # result['model_metrics_training'] = self.model_dict['metrics_fitting']
         # result['model_metrics_test'] = self.model_dict['metrics_prediction']
+        ####################################################
 
         result['explanation']= importance_sel
 
+        ####################################################
         # OBSOLETE
         model_percentils = self.model_dict['percentils']
+        ####################################################
 
         pred_percentil = 100
         for i, pi in enumerate(model_percentils):
