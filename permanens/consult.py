@@ -31,7 +31,7 @@ from permanens.utils import consult_repository_path, model_repository_path, id_g
 from permanens.logger import get_logger
 
 LOG = get_logger(__name__)
-VAR_MAX = 10
+VAR_MAX = 50
 
 class Consult:
     ''' Class storing all the risk assessment information
