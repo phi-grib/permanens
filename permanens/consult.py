@@ -31,6 +31,9 @@ from permanens.utils import consult_repository_path, model_repository_path, id_g
 from permanens.logger import get_logger
 
 LOG = get_logger(__name__)
+
+age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
+sex_code = ['female','male']
 VAR_MAX = 50
 
 class Consult:
@@ -138,6 +141,8 @@ class Consult:
             if the lang parameter is provided, the predictor variable names are
             translated
         '''
+
+        LOG.info(f'setting model to {modelID}')
         if modelID >= len (self.model_dicts):
             return False, 'modeID out of range'
         
@@ -310,7 +315,6 @@ class Consult:
                 # print('assigned from key: ', ikey, ival)
 
         # convert to pandas dataframe 
-
         xtest_pd = pd.DataFrame(xtest_np)
         xtest_pd.columns = names
 
@@ -344,9 +348,7 @@ class Consult:
         '''
         LOG.info (f'predicting {cname} form')
 
-        age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
-        sex_code = ['female','male']
-
+        # results dictionary will contain a lot of information with the result of the analysis
         result = {'cname' : cname} 
 
         model = self.model_dict['model']
@@ -403,13 +405,15 @@ class Consult:
                         # importance_sel.append( (ipredictor, i[1]) )
                         importance_sel.append( (ilabel, i[1]) )
                         break
-                
+                    
         result['outcome'] = r
         result['probability'] = irisk
         result['input'] = form
 
+        ####################################################
         # OBSOLETE
         result['decil_info'] = self.model_dict['decil_info']
+        ####################################################
 
         # Extract the histogram for this particular segment of population
         # Obtain all the histogram information
@@ -470,9 +474,9 @@ class Consult:
 
         # narrative
         result['narrative'] = { 
-            'risk_individual' : f"Based on the information you entered, the risk of for this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> is {irisk*100.0:.2f}%." ,
-            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED with <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.2f}<e>%",
-            'distribution': f"The risk in this patient is <s>{irisk/iriskpeers:.2f}<e> times the risk of age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places the patient risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
+            'risk_individual' : f"Based on the information you entered, the risk of this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> individual is {irisk*100.0:.2f}%." ,
+            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED, the risk of <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.2f}<e>%",
+            'distribution': f"The risk in this individual is <s>{irisk/iriskpeers:.2f}<e> times the risk of age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places its risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
         }
 
         ####################################################
