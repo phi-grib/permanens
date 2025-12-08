@@ -29,7 +29,7 @@ import numpy as np
 
 from permanens.utils import consult_repository_path, model_repository_path, id_generator, hashfile
 from permanens.logger import get_logger
-from permanens.mapping import predictor_to_label
+from permanens.mapping import condition_to_label, label_to_condition, atc_to_label, label_to_atc
 
 LOG = get_logger(__name__)
 
@@ -168,15 +168,15 @@ class Consult:
                     else:
                         break
         
-
         result = {}
         result['model_description'] = self.model_dict['description']
         result['model_metrics_training'] = self.model_dict['metrics_fitting']
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
         result['model_hash'] = self.model_dict['model_hash']
 
-        result['conditions_labels'] = predictor_to_label (self.predictors_ord['conditions'])
-        
+        result['conditions_labels'] = condition_to_label (self.predictors_ord['conditions'])
+        result['drugs_labels'] = atc_to_label (self.predictors_ord['drugs'])
+
         if lang is None:
             result['drugs'] = self.predictors_ord['drugs'] 
             result['conditions'] = self.predictors_ord['conditions'] 
@@ -344,7 +344,6 @@ class Consult:
                 if not ikey in x_rules:
                     x_rules[ikey] = ival
         
-        # print (x_rules)        
         return True, x_rules
 
     def predict (self, form, cname, lang = None):
@@ -359,6 +358,14 @@ class Consult:
         calib = self.model_dict['calib']
         explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
+
+        #TODO: return "condition_labels" and transform to conditions
+        if 'conditions' in form:
+            form['conditions'] = label_to_condition (form['conditions'])
+
+        #TODO: return "drug_labels" and transform to drugs
+        # if 'drugs' in form:
+        #     form['drugs'] = label_to_atc (form['drugs'])
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)

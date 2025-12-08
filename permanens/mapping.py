@@ -20,7 +20,6 @@
 # You should have received a copy of the GNU General Public License
 # along with permanens. If not, see <http://www.gnu.org/licenses/>.
 
-
 mental_disorders = [
     "Schizophrenia and other non-organic psychoses",
     "Mood [affective] disorders",
@@ -31,7 +30,8 @@ mental_disorders = [
     "Habit and impulse disorders",
     "Behavioural and emotional disorders with onset usually occurring in childhood and adolescence",
     "Mental retardation",
-    "Mental disorder, not otherwise specified"]
+    "Mental disorder, not otherwise specified"
+]
 
 mental_disorders_label = [
     "Psychotic disorders",
@@ -92,7 +92,31 @@ others_label = [
     "Homicide or assault"
 ]
 
-def predictor_to_label (predictors, lang = 'en'):
+ATC = [
+    "antidepressants",
+    "anxiolytic",
+    "medication for mood instability",
+    "anti-ADHD",
+    "first generation antipsychotics",
+    "anti-EPS",
+    "analgesics (opioid or non-opioid)",
+    "anti-vertigo",
+    "addiction medicine",
+]
+
+ATC_label = [
+    "Antidepressants",
+    "Anxiolytics / sedatives",
+    "Medication for mood instability",
+    "ADHD medication",
+    "Antipsychotics (first generation)",
+    "Anti-EPS agents",
+    "Analgesics (opioid / non-opioid)",
+    "Anti-vertigo agents",
+    "Addiction treatment medication"
+]
+
+def condition_to_label (predictors, lang = 'en'):
 
     imental_disorders = []
     isubstance_use = []
@@ -126,7 +150,7 @@ def predictor_to_label (predictors, lang = 'en'):
 
     return (return_list)
 
-def label_to_predictor (labels, lang = 'en'):
+def label_to_condition (labels, lang = 'en'):
     predictors = []
     for ilabel in labels:
         if ilabel in mental_disorders_label:
@@ -137,4 +161,18 @@ def label_to_predictor (labels, lang = 'en'):
             predictors.append(others[others_label.index(ilabel)])
 
     return (predictors)
+
+def atc_to_label (drugs, lang = 'en'):
+    result = []
+    for j,iatc in enumerate(ATC):
+        if iatc in drugs:
+            result.append(ATC_label[j])
+    return result
+
+def label_to_atc (labels, lang='en'):
+    result = []
+    for ilabel in labels:
+        if ilabel in ATC_label:
+            result.append(ATC[ATC_label.index(ilabel)])
+    return result
 
