@@ -84,9 +84,11 @@ class Consult:
                 efile = 'unknown'
             
             self.model_labels.append((efile, hfile, dfile))
-                
+        
+        self.modelID = 0
+
         # use first model as default
-        self.set_model(0)
+        # self.set_model(0)
         
         # # reading a pre-build yaml file containing a ruleset
         # self.rules_dict['rules'] = {}
@@ -142,6 +144,8 @@ class Consult:
             if the lang parameter is provided, the predictor variable names are
             translated
         '''
+
+        self.modelID = modelID
 
         LOG.info(f'setting model to {modelID}')
         if modelID >= len (self.model_dicts):
@@ -309,7 +313,7 @@ class Consult:
     def predict (self, form, cname, lang = None):
         ''' uses the form to run the prediction pipeline
         '''
-        LOG.info (f'predicting {cname} form')
+        LOG.info (f'predicting {cname} form, for model {self.modelID}')
 
         # results dictionary will contain a lot of information with the result of the analysis
         result = {'cname' : cname} 
