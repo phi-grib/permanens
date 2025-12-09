@@ -21,7 +21,7 @@
 # along with permanens. If not, see <http://www.gnu.org/licenses/>.
 
 mental_disorders = [
-    "Schizophrenia and other non-organic psychoses",
+    "Schizophrenia and other non-organic psychosis",
     "Mood [affective] disorders",
     "Neurotic disorders",
     "Eating disorders",
@@ -54,7 +54,7 @@ substance_use = [
     "Substance use disorder - other stimulants (including caffeine)",
     "Substance use disorder - cannabinoids",
     "Substance use disorder - hallucinogens",
-    "Substance use disorder - other, unspecified, or multiple drugs/psychoactive substances",
+    "Substance use disorder - other, unspecified, or multiple drugs or psychoactive substances",
     "Substance use disorder - tobacco"
 ]
 
@@ -79,6 +79,10 @@ others = [
     "Chronic hepatitis",
     "HIV/AIDS",
     "Homicide, assault",
+    "Weight loss",
+    "Hereditary and idiopathic neuropathy",
+    "Disorders of autonomic nervous system (inc autonomic dysreflexia)"
+
 ]
 
 others_label = [
@@ -89,7 +93,10 @@ others_label = [
     "Chest pain (on breathing)",
     "Chronic hepatitis",
     "HIV / AIDS",
-    "Homicide or assault"
+    "Homicide or assault",
+    "Weight loss",
+    "Hereditary and idiopathic neuropathy",
+    "Disorders of autonomic nervous system (inc autonomic dysreflexia)"
 ]
 
 ATC = [
@@ -134,7 +141,13 @@ def condition_to_label (predictors, lang = 'en'):
         if ipred in predictors:
             iothers.append(others_label[j])
 
+    for ipred in predictors:
+        if ipred in mental_disorders or ipred in substance_use or ipred in others:
+            continue
+        print ('*************', ipred)
+
     return_list = []
+
 
     if len(imental_disorders) > 0:
         return_list.append ('Registered mental disorder diagnosis')
@@ -167,6 +180,9 @@ def atc_to_label (drugs, lang = 'en'):
     for j,iatc in enumerate(ATC):
         if iatc in drugs:
             result.append(ATC_label[j])
+    for iatc in drugs:
+        if iatc not in ATC:
+            print ('>>>>>>>>>>>>>>>', iatc)
     return result
 
 def label_to_atc (labels, lang='en'):
