@@ -50,7 +50,7 @@ class Consult:
         self.model_names = []
         self.model_dicts = []
         self.model_labels = []
-        self.rules_dict = {}
+        # self.rules_dict = {}
         for iname in os.listdir (model_repo):
             
             # only for files in dill format
@@ -88,52 +88,52 @@ class Consult:
         # use first model as default
         self.set_model(0)
         
-        # reading a pre-build yaml file containing a ruleset
-        self.rules_dict['rules'] = {}
-        self.rules_dict['rules_pred'] = []
+        # # reading a pre-build yaml file containing a ruleset
+        # self.rules_dict['rules'] = {}
+        # self.rules_dict['rules_pred'] = []
 
-        rpath = os.path.join(model_repo,'rules_en.yaml')
-        if os.path.isfile(rpath):
-            with open(rpath,'r',encoding='utf8') as f:
-                self.rules_dict['rules']['en'] = yaml.safe_load(f)
+        # rpath = os.path.join(model_repo,'rules_en.yaml')
+        # if os.path.isfile(rpath):
+        #     with open(rpath,'r',encoding='utf8') as f:
+        #         self.rules_dict['rules']['en'] = yaml.safe_load(f)
 
-            # get a list of relevant predictors (used by any rule) 
-            for item in self.rules_dict['rules']['en']:
-                for iitem in item['rules']:
-                    ipredictor = iitem['predictor']
-                    if ipredictor not in self.rules_dict['rules_pred']:
-                        self.rules_dict['rules_pred'].append(ipredictor)
+        #     # get a list of relevant predictors (used by any rule) 
+        #     for item in self.rules_dict['rules']['en']:
+        #         for iitem in item['rules']:
+        #             ipredictor = iitem['predictor']
+        #             if ipredictor not in self.rules_dict['rules_pred']:
+        #                 self.rules_dict['rules_pred'].append(ipredictor)
 
-        # other lenguajes
-        rpath = os.path.join(model_repo,'rules_es.yaml')
-        if os.path.isfile(rpath):
-            with open(rpath,'r',encoding='utf8') as f:
-                self.rules_dict['rules']['es'] = yaml.safe_load(f)
-                rpath = os.path.join(model_repo,'rules_es.yaml')
+        # # other lenguajes
+        # rpath = os.path.join(model_repo,'rules_es.yaml')
+        # if os.path.isfile(rpath):
+        #     with open(rpath,'r',encoding='utf8') as f:
+        #         self.rules_dict['rules']['es'] = yaml.safe_load(f)
+        #         rpath = os.path.join(model_repo,'rules_es.yaml')
         
-        rpath = os.path.join(model_repo,'rules_ca.yaml')
-        if os.path.isfile(rpath):
-            with open(rpath,'r',encoding='utf8') as f:
-                self.rules_dict['rules']['ca'] = yaml.safe_load(f)
+        # rpath = os.path.join(model_repo,'rules_ca.yaml')
+        # if os.path.isfile(rpath):
+        #     with open(rpath,'r',encoding='utf8') as f:
+        #         self.rules_dict['rules']['ca'] = yaml.safe_load(f)
                  
-        # mapp
-        self.mapp = {}
-        rpath = os.path.join(model_repo,'predictor_mappings.yaml')
-        if os.path.isfile(rpath):
-            with open(rpath,'r',encoding='utf8') as f:
-                self.mapp = yaml.safe_load(f)     
+        # # mapp
+        # self.mapp = {}
+        # rpath = os.path.join(model_repo,'predictor_mappings.yaml')
+        # if os.path.isfile(rpath):
+        #     with open(rpath,'r',encoding='utf8') as f:
+        #         self.mapp = yaml.safe_load(f)     
 
-        #TODO: read the static adice formatted for the GUI
-        self.advice = {}
+        # #TODO: read the static adice formatted for the GUI
+        # self.advice = {}
         
-        apath = os.path.join(model_repo,'advice_en.yaml')
-        if os.path.isfile(apath):
-            with open(apath,'r', encoding='utf8') as f:
-                self.advice['en'] = yaml.safe_load(f)
-        apath = os.path.join(model_repo,'advice_es.yaml')
-        if os.path.isfile(apath):
-            with open(apath,'r', encoding='utf8') as f:
-                self.advice['es'] = yaml.safe_load(f)
+        # apath = os.path.join(model_repo,'advice_en.yaml')
+        # if os.path.isfile(apath):
+        #     with open(apath,'r', encoding='utf8') as f:
+        #         self.advice['en'] = yaml.safe_load(f)
+        # apath = os.path.join(model_repo,'advice_es.yaml')
+        # if os.path.isfile(apath):
+        #     with open(apath,'r', encoding='utf8') as f:
+        #         self.advice['es'] = yaml.safe_load(f)
 
         LOG.info ('INITIALIZATION COMPLETE')
         
@@ -181,17 +181,6 @@ class Consult:
     def get_model_labels (self):
         ''' returns model labels'''
         return self.model_labels
-
-    def mapped (self, text, lang):
-        ''' utility function to translate predictor names (text) to the lenguaje defined by lang parameter
-        '''
-        # if lang == 'en':
-        #     return text
-        # else:
-        if lang in self.mapp:
-            if text in self.mapp[lang]:
-                return self.mapp[lang][text]    
-        return text
        
     def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 
@@ -210,13 +199,13 @@ class Consult:
         if not success:
             return False, result
            
-        # send to rules
-        success, result_rules = self.apply_rules(form, lang)
-        if not success:
-            return True, result
+        # # send to rules
+        # success, result_rules = self.apply_rules(form, lang)
+        # if not success:
+        #     return True, result
 
         # merge results of prediction and rules
-        result['treatment']= result_rules
+        # result['treatment']= result_rules
          
         return success, result
 
@@ -247,15 +236,15 @@ class Consult:
         if form == None:
             return False, 'unable to load form'
         
-        # if 'model_hash' in form:
-        #     input_hash = form['model_hash']
-        #     found = False
-        #     for i,imodel in enumerate(self.model_labels):
-        #         if imodel[1] == input_hash:
-        #             self.set_model(i)
-        #             found = True
-        #     if not found:
-        #         return False, 'No model matching'
+        if 'model_hash' in form:
+            input_hash = form['model_hash']
+            found = False
+            for i,imodel in enumerate(self.model_labels):
+                if imodel[1] == input_hash:
+                    self.set_model(i)
+                    found = True
+            if not found:
+                return False, 'No model matching'
         
         return True, form
 
@@ -295,27 +284,27 @@ class Consult:
 
         return True, xtest_pd, xtest_np
     
-    def condition_rules (self, form, rules_pred):
-        ''' process the form to generate a dictionary suitable for testing the rules
-        '''        
-        x_rules = {}  # dictionary key:value containing only predictors used by the rule
+    # def condition_rules (self, form, rules_pred):
+    #     ''' process the form to generate a dictionary suitable for testing the rules
+    #     '''        
+    #     x_rules = {}  # dictionary key:value containing only predictors used by the rule
 
-        for ikey in form:
-            ival = form[ikey]
+    #     for ikey in form:
+    #         ival = form[ikey]
 
-            # for lists
-            if isinstance(form[ikey], list):
-                for item in ival:
-                    if item in rules_pred:
-                        if not item in x_rules:
-                           x_rules [item] = True
+    #         # for lists
+    #         if isinstance(form[ikey], list):
+    #             for item in ival:
+    #                 if item in rules_pred:
+    #                     if not item in x_rules:
+    #                        x_rules [item] = True
 
-            # for sex and age
-            if ikey in rules_pred:
-                if not ikey in x_rules:
-                    x_rules[ikey] = ival
+    #         # for sex and age
+    #         if ikey in rules_pred:
+    #             if not ikey in x_rules:
+    #                 x_rules[ikey] = ival
         
-        return True, x_rules
+    #     return True, x_rules
 
     def predict (self, form, cname, lang = None):
         ''' uses the form to run the prediction pipeline
@@ -369,8 +358,8 @@ class Consult:
 
             xint = xtest_np[0].astype(np.int32)
             np.random.seed(1)
-            # exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
-            exp = explainer.explain_instance(xint, calib.predict_proba, num_features=len(names), num_samples=10000)
+            exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
+            # exp = explainer.explain_instance(xint, calib.predict_proba, num_features=len(names), num_samples=10000)
             importance_all = exp.as_list(label=1)     
 
             for i in importance_all:
@@ -380,10 +369,7 @@ class Consult:
                 # or are inserted between unqualities (e.g., '4.00 < age <= 6.00')
                 for ipredictor in predictors:
                     if ilabel.startswith(ipredictor) or " "+ipredictor+" " in ilabel:
-                        # if lang is not None:
-                        #     ilabel = self.mapped(ipredictor, lang)
                         importance_sel.append( (ipredictor, i[1]) )
-                        # importance_sel.append( (ilabel, i[1]) )
                         break
                     
         result['outcome'] = r
@@ -448,8 +434,8 @@ class Consult:
 
         ####################################################
         # OBSOLETE, REMOVE!!!!!!
-        result['perc_above'] = 0.0
-        result['histogram_bar'] = 0
+        # result['perc_above'] = 0.0
+        # result['histogram_bar'] = 0
         ####################################################
 
         # narrative
@@ -473,79 +459,79 @@ class Consult:
         model_percentils = self.model_dict['percentils']
         ####################################################
 
-        pred_percentil = 100
-        for i, pi in enumerate(model_percentils):
-            if pi > irisk :
-                pred_percentil = i
-                break
-        result['percentil'] = pred_percentil
+        # pred_percentil = 100
+        # for i, pi in enumerate(model_percentils):
+        #     if pi > irisk :
+        #         pred_percentil = i
+        #         break
+        # result['percentil'] = pred_percentil
         
-        pred_decil = 10
-        for i, d in enumerate(result['decil_info']):
-            if d['pmax'] > irisk:
-                pred_decil = i+1
-                break
-        result['decil'] = pred_decil
+        # pred_decil = 10
+        # for i, d in enumerate(result['decil_info']):
+        #     if d['pmax'] > irisk:
+        #         pred_decil = i+1
+        #         break
+        # result['decil'] = pred_decil
 
         return True, result
 
-    def apply_rules (self, form, lang='en'):
-        ''' returns a piece of text depending if the forms have certain contents, defined by some rules
-        '''
-        if not lang in self.rules_dict['rules']:
-            return False, f'no rules found for lenguaje {lang}'
+    # def apply_rules (self, form, lang='en'):
+    #     ''' returns a piece of text depending if the forms have certain contents, defined by some rules
+    #     '''
+    #     if not lang in self.rules_dict['rules']:
+    #         return False, f'no rules found for lenguaje {lang}'
 
-        if len(self.rules_dict['rules'][lang]) == 0:
-            return False, 'no rules found'
+    #     if len(self.rules_dict['rules'][lang]) == 0:
+    #         return False, 'no rules found'
         
-        results = []
+    #     results = []
 
-        # submit to rule-based pipeline
-        success, x_rules = self.condition_rules (form, self.rules_dict['rules_pred'])
-        if not success:
-            return False, 'unable to process form'
+    #     # submit to rule-based pipeline
+    #     success, x_rules = self.condition_rules (form, self.rules_dict['rules_pred'])
+    #     if not success:
+    #         return False, 'unable to process form'
 
-        # print (x_rules)
+    #     # print (x_rules)
 
-        # process rules
-        for irule in self.rules_dict['rules'][lang]:
-            conn = irule['connect']
-            ruleset = irule['rules']
-            nrule_true = 0
-            for iirule in ruleset:
-                # rules are formed by a dictionary with 4 keys
-                # predictor: name of the predictor variable
-                # presence: [True|False], true if the value is True and the predictor is present in the form (for binary predictors)
-                #                         true if the value is False and predictor is absent in the form (for binary predictors)
-                # min: true if the predictor is > rule value (for sex, age or #visits)
-                # max: true if the predictor is < rule value (for sex, age or #visits)
-                predictor_name = iirule['predictor']
+    #     # process rules
+    #     for irule in self.rules_dict['rules'][lang]:
+    #         conn = irule['connect']
+    #         ruleset = irule['rules']
+    #         nrule_true = 0
+    #         for iirule in ruleset:
+    #             # rules are formed by a dictionary with 4 keys
+    #             # predictor: name of the predictor variable
+    #             # presence: [True|False], true if the value is True and the predictor is present in the form (for binary predictors)
+    #             #                         true if the value is False and predictor is absent in the form (for binary predictors)
+    #             # min: true if the predictor is > rule value (for sex, age or #visits)
+    #             # max: true if the predictor is < rule value (for sex, age or #visits)
+    #             predictor_name = iirule['predictor']
 
-                if predictor_name in x_rules:
-                    if 'presence' in iirule:
-                        if iirule['presence'] == True:
-                            nrule_true +=1
+    #             if predictor_name in x_rules:
+    #                 if 'presence' in iirule:
+    #                     if iirule['presence'] == True:
+    #                         nrule_true +=1
 
-                    elif 'min' in iirule:
-                        if x_rules[predictor_name] > iirule['min']:
-                            nrule_true +=1
+    #                 elif 'min' in iirule:
+    #                     if x_rules[predictor_name] > iirule['min']:
+    #                         nrule_true +=1
 
-                    elif 'max' in iirule:
-                        if x_rules[iirule[0]] < iirule['max']:
-                            nrule_true +=1
-                else:
-                    if 'presence' in iirule and iirule['presence'] == False:
-                        nrule_true +=1
+    #                 elif 'max' in iirule:
+    #                     if x_rules[iirule[0]] < iirule['max']:
+    #                         nrule_true +=1
+    #             else:
+    #                 if 'presence' in iirule and iirule['presence'] == False:
+    #                     nrule_true +=1
 
 
-            if conn == 'or':
-                if nrule_true > 0:
-                    results.append (irule['result'])
-            else:
-                if nrule_true == len (ruleset):
-                    results.append (irule['result'])
+    #         if conn == 'or':
+    #             if nrule_true > 0:
+    #                 results.append (irule['result'])
+    #         else:
+    #             if nrule_true == len (ruleset):
+    #                 results.append (irule['result'])
 
-        return True, results
+    #     return True, results
 
     def list (self, format):
         ''' lists all the forms stored in the repository
