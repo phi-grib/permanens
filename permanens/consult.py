@@ -172,9 +172,9 @@ class Consult:
         result['conditions_labels'] = condition_to_label (self.predictors['conditions'])
         result['drugs_labels'] = atc_to_label (self.predictors['drugs'])
 
-        # for back-compatibility only
-        result['conditions'] = self.predictors['conditions'] 
-        result['drugs'] = self.predictors['drugs'] 
+        # # for back-compatibility only
+        # result['conditions'] = self.predictors['conditions'] 
+        # result['drugs'] = self.predictors['drugs'] 
 
         return True, result
 
@@ -330,13 +330,13 @@ class Consult:
         explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
 
-        #TODO: return "condition_labels" and transform to conditions
-        if 'conditions' in form:
-            form['conditions'] = label_to_condition (form['conditions'])
+        conditions = []
+        if 'conditions_labels' in form:
+            conditions = label_to_condition (form['conditions_labels'])
 
-        #TODO: return "drug_labels" and transform to drugs
-        if 'drugs' in form:
-            form['drugs'] = label_to_atc (form['drugs'])
+        drugs = []
+        if 'drugs_labels' in form:
+            drugs = label_to_atc (form['drugs_labels'])
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)
@@ -349,8 +349,8 @@ class Consult:
 
         # list of predictors
         predictors = ['sex', 'age', 'events', 'last_event']
-        predictors += form['conditions']
-        predictors += form['drugs']
+        predictors += conditions
+        predictors += drugs
 
         # in case of negatives, pass an empty list
         importance_sel = [] 
@@ -375,9 +375,6 @@ class Consult:
 
             for i in importance_all:
                 ilabel = i[0]
-                # ilabel = ilabel.split('=')[0]
-                # importance_sel.append( (ilabel, i[1]) )
-                
 
                 # LIME includes predictors in labels which either start with the predictor name (e.g.,'anxiolytic=0')
                 # or are inserted between unqualities (e.g., '4.00 < age <= 6.00')
