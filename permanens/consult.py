@@ -313,6 +313,29 @@ class Consult:
     def predict (self, form, cname, lang = None):
         ''' uses the form to run the prediction pipeline
         '''
+
+        if 'modelID' in form and form['modelID'] != self.modelID:
+            
+            self.modelID = form['modelID']
+            
+            LOG.info (f'setting model {self.modelID} for local instance')
+
+            self.model_name = self.model_names[self.modelID]
+            self.model_dict = self.model_dicts[self.modelID]
+
+            # extract top-10 predictor for drugs and conditions
+            var_importance = self.model_dict['var_importance']
+
+            # initialize predictors
+            self.predictors={'drugs': [], 'conditions':[]}
+
+            # assign predictors
+            predictors_dict = self.model_dict['predictors_dict']
+            for item in ['drugs', 'conditions']:
+                for ivar in var_importance:
+                    if ivar in predictors_dict[item]:
+                        self.predictors[item].append(ivar)
+
         LOG.info (f'predicting {cname} form, for model {self.modelID}')
 
         # results dictionary will contain a lot of information with the result of the analysis

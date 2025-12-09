@@ -100,7 +100,6 @@ def action_advice(token, lang='en'):
 def action_rerun (id, token, lang='en'):
     ''' loads a form with the ID given as argument, saved in the repository 
         and run the consult. The token informs if the GUI is in "doctor mode".
-        Protected consults (view=False) can only be run in doctor mode  
     '''
 
     # c = Consult()
@@ -108,11 +107,6 @@ def action_rerun (id, token, lang='en'):
     success, form = c.load_form(id)
     if not success:
         return False, form
-    
-    # if form "visible" is not true, check token
-    if form['view'] == False:
-        if not valid_token (token):
-            return False, 'invalid token'
 
     success, result = c.run (form, id, lang=lang)
 
