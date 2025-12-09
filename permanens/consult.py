@@ -154,19 +154,14 @@ class Consult:
         var_importance = self.model_dict['var_importance']
 
         # initialize predictors
-        self.predictors_ord={}
-        self.predictors_ord['drugs'] = []
-        self.predictors_ord['conditions'] = []
+        self.predictors={'drugs': [], 'conditions':[]}
 
-        # assign more important variables to the predictors
+        # assign predictors
         predictors_dict = self.model_dict['predictors_dict']
         for item in ['drugs', 'conditions']:
             for ivar in var_importance:
                 if ivar in predictors_dict[item]:
-                    if len (self.predictors_ord[item]) < VAR_MAX:
-                        self.predictors_ord[item].append(ivar)
-                    else:
-                        break
+                    self.predictors[item].append(ivar)
         
         result = {}
         result['model_description'] = self.model_dict['description']
@@ -174,19 +169,12 @@ class Consult:
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
         result['model_hash'] = self.model_dict['model_hash']
 
-        result['conditions_labels'] = condition_to_label (self.predictors_ord['conditions'])
-        result['drugs_labels'] = atc_to_label (self.predictors_ord['drugs'])
+        result['conditions_labels'] = condition_to_label (self.predictors['conditions'])
+        result['drugs_labels'] = atc_to_label (self.predictors['drugs'])
 
-        if lang is None:
-            result['drugs'] = self.predictors_ord['drugs'] 
-            result['conditions'] = self.predictors_ord['conditions'] 
-        else:
-            result['drugs'] = []
-            result['conditions'] = []
-            for idrug in self.predictors_ord['drugs']:
-                result['drugs'].append( (idrug, self.mapped(idrug, lang) ))
-            for icond in self.predictors_ord['conditions']:
-                result['conditions'].append( (icond, self.mapped(icond, lang) ))
+        # for back-compatibility only
+        result['conditions'] = self.predictors['conditions'] 
+        result['drugs'] = self.predictors['drugs'] 
 
         return True, result
 
@@ -204,24 +192,7 @@ class Consult:
             if text in self.mapp[lang]:
                 return self.mapp[lang][text]    
         return text
-
-    def get_predictors (self, lang):
-        ''' provides a list of VAR_MAX predictors for drugs and conditions categories, which can
-            be used as selectable predictor variables in the front-end
-        '''
-        if self.predictors_ord['drugs'] == [] or self.predictors_ord['conditions'] == []:
-            return False, 'predictors undefined'
-
-        if lang is None:
-            return True, self.predictors_ord
-        else:
-            self.predictors_mapped = {'drugs':[], 'conditions':[]}
-            for idrug in self.predictors_ord['drugs']:
-                self.predictors_mapped['drugs'].append( (idrug, self.mapped(idrug, lang) ))
-            for icond in self.predictors_ord['conditions']:
-                self.predictors_mapped['conditions'].append( (icond, self.mapped(icond, lang) ))
-            return True, self.predictors_mapped
-        
+       
     def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 
         '''
@@ -364,8 +335,8 @@ class Consult:
             form['conditions'] = label_to_condition (form['conditions'])
 
         #TODO: return "drug_labels" and transform to drugs
-        # if 'drugs' in form:
-        #     form['drugs'] = label_to_atc (form['drugs'])
+        if 'drugs' in form:
+            form['drugs'] = label_to_atc (form['drugs'])
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)
@@ -404,17 +375,18 @@ class Consult:
 
             for i in importance_all:
                 ilabel = i[0]
-
                 # ilabel = ilabel.split('=')[0]
+                # importance_sel.append( (ilabel, i[1]) )
+                
 
                 # LIME includes predictors in labels which either start with the predictor name (e.g.,'anxiolytic=0')
                 # or are inserted between unqualities (e.g., '4.00 < age <= 6.00')
                 for ipredictor in predictors:
                     if ilabel.startswith(ipredictor) or " "+ipredictor+" " in ilabel:
-                        if lang is not None:
-                            ilabel = self.mapped(ipredictor, lang)
-                        # importance_sel.append( (ipredictor, i[1]) )
-                        importance_sel.append( (ilabel, i[1]) )
+                        # if lang is not None:
+                        #     ilabel = self.mapped(ipredictor, lang)
+                        importance_sel.append( (ipredictor, i[1]) )
+                        # importance_sel.append( (ilabel, i[1]) )
                         break
                     
         result['outcome'] = r
