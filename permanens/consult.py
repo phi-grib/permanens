@@ -378,7 +378,7 @@ class Consult:
 
         ####################################################
         # OBSOLETE
-        result['decil_info'] = self.model_dict['decil_info']
+        # result['decil_info'] = self.model_dict['decil_info']
         ####################################################
 
         # Extract the histogram for this particular segment of population
