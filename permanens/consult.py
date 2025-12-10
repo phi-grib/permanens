@@ -86,8 +86,8 @@ class Consult:
             self.model_labels.append((efile, hfile, dfile))
         
         self.modelID = 0
+        self.lang = 'en'
         
-        self.load_predictors_mapping()
 
         # use first model as default
         # self.set_model(0)
@@ -166,6 +166,7 @@ class Consult:
         '''
 
         self.modelID = modelID
+        self.lang = lang
 
         LOG.info(f'setting model to {modelID}')
         if modelID >= len (self.model_dicts):
@@ -197,6 +198,8 @@ class Consult:
                       'SUB': 'Registered substance use disorder diagnosis',
                       'SOM': 'Other registered conditions'}
         
+        self.load_predictors_mapping(lang)
+
         # generate labels for the condition dropdown
         result['conditions_labels'] = [] 
         conditions = self.predictors['conditions']
@@ -376,6 +379,9 @@ class Consult:
                 for ivar in var_importance:
                     if ivar in predictors_dict[item]:
                         self.predictors[item].append(ivar)
+
+        if lang != self.lang:
+            self.load_predictors_mapping(lang)
 
         LOG.info (f'predicting {cname} form, for model {self.modelID}')
 

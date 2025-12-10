@@ -1,0 +1,31 @@
+predictor	label	cat
+Schizophrenia and other non-organic psychosis	Psychosis ES	MEN
+Mood [affective] disorders	Humor ES	MEN
+Neurotic disorders	Anxiety D	MEN
+Borderline personality disorder	Borderline PD	MEN
+Other personality disorders	Non-Borderline PD	MEN
+Eating disorders	Eating D	MEN
+Habit and impulse disorders	Impulse D	MEN
+Behavioural and emotional disorders with onset usually occurring in childhood and adolescence	Childhood-onset D	MEN
+Mental retardation	Intellectual disability	MEN
+Mental disorder, not otherwise specified	Unspecified	MEN
+Substance use disorder - alcohol	Alcohol D	SUB
+Substance use disorder - sedatives or hypnotics	Sedative / Hypnotic D	SUB
+Substance use disorder - cannabinoids	Cannabis D	SUB
+Substance use disorder - cocaine	Cocaine D	SUB
+Substance use disorder - other, unspecified, or multiple drugs or psychoactive substances	Polysubstance / Unspecified	SUB
+Substance use disorder - tobacco	Tobacco D	SUB
+Hemiplegia	Hemiplegia / Paralysis	SOM
+Disorders of autonomic nervous system (inc autonomic dysreflexia)	Autonomic nervous system D	SOM
+Hereditary and idiopathic neuropathy	Hereditary and idiopathic neuropathy	SOM
+Asthma	Asthma	SOM
+Weight loss	Weight loss	SOM
+Homicide, assault	Assault (victim)	SOM
+antidepressants	Antidepressants	ATC
+anxiolytic	Anxiolytics / Sedatives	ATC
+medication for mood instability	Mood stabilizers & Antipsychotics (2nd gen)	ATC
+first generation antipsychotics	Antipsychotics (1st gen)	ATC
+anti-EPS	Anti-EPS agents	ATC
+analgesics (opioid or non-opioid)	Analgesics (opioid / non-opioid)	ATC
+anti-vertigo	Anti-vertigo agents	ATC
+addiction medicine	Addiction treatment	ATC
