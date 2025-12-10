@@ -34,6 +34,7 @@ LOG = get_logger(__name__)
 
 age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
 sex_code = ['female','male']
+cats = ['MEN', 'SUB', 'SOM', 'ATC']
 VAR_MAX = 50
 
 class Consult:
@@ -151,7 +152,6 @@ class Consult:
         self.predictor_dict = mapping_df.set_index('predictor').T.to_dict('list')
         self.labels_dict = mapping_df.set_index('label').T.to_dict('list')
 
-        cats = ['MEN', 'SUB', 'SOM', 'ATC']
         self.predictors_cat = {}
         for icat in cats:
             self.predictors_cat[icat] = [name for name, cat in zip(mapping_df['predictor'], mapping_df['cat']) if cat==icat]
@@ -310,16 +310,18 @@ class Consult:
             # for lists
             if isinstance(form[ikey], list):
                 for item in ival:
+
+                    if ikey == 'conditions_labels' or 'drugs_labels':
+                        item = self.labels_dict[item][0]
+                    
                     if item in names:
                         xtest_np[0,names.index(item)] = 1
-                        # print ('assigned from list: ', item)
 
             # for sex and age
             if ikey in names:
                 if ikey == 'age':
                     ival = int (np.round(ival/10.0))
                 xtest_np[0,names.index(ikey)] = ival
-                # print('assigned from key: ', ikey, ival)
 
         # convert to pandas dataframe 
         xtest_pd = pd.DataFrame(xtest_np)
@@ -433,6 +435,8 @@ class Consult:
             # or are inserted between unqualities (e.g., '4.00 < age <= 6.00')
             for ipredictor in predictors:
                 if ilabel.startswith(ipredictor) or " "+ipredictor+" " in ilabel:
+                    if ipredictor in self.predictor_dict:
+                        ipredictor = self.predictor_dict[ipredictor][0]
                     importance_sel.append( (ipredictor, i[1]) )
                     break
                     
