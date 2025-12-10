@@ -29,7 +29,6 @@ import numpy as np
 
 from permanens.utils import consult_repository_path, model_repository_path, id_generator, hashfile
 from permanens.logger import get_logger
-from permanens.mapping import condition_to_label, label_to_condition, atc_to_label, label_to_atc
 
 LOG = get_logger(__name__)
 
@@ -86,6 +85,8 @@ class Consult:
             self.model_labels.append((efile, hfile, dfile))
         
         self.modelID = 0
+        
+        self.load_predictors_mapping()
 
         # use first model as default
         # self.set_model(0)
@@ -139,6 +140,25 @@ class Consult:
 
         LOG.info ('INITIALIZATION COMPLETE')
         
+    def load_predictors_mapping (self, lang='en'):
+        model_repo = model_repository_path()
+        mpath = os.path.join(model_repo,f'predictors_mapping_{lang}.tsv')
+        
+        if not os.path.isfile (mpath):
+            LOG.error('predictors mapping not found')
+        
+        mapping_df = pd.read_csv(mpath, sep='\t')
+        self.predictor_dict = mapping_df.set_index('predictor').T.to_dict('list')
+        self.labels_dict = mapping_df.set_index('label').T.to_dict('list')
+
+        cats = ['MEN', 'SUB', 'SOM', 'ATC']
+        self.predictors_cat = {}
+        for icat in cats:
+            self.predictors_cat[icat] = [name for name, cat in zip(mapping_df['predictor'], mapping_df['cat']) if cat==icat]
+
+        # print (self.predictor_dict)
+        # print (self.labels_dict)
+
     def set_model (self, modelID, lang=None):
         ''' defines the model with the given modelID as the current model
             if the lang parameter is provided, the predictor variable names are
@@ -173,12 +193,31 @@ class Consult:
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
         result['model_hash'] = self.model_dict['model_hash']
 
-        result['conditions_labels'] = condition_to_label (self.predictors['conditions'])
-        result['drugs_labels'] = atc_to_label (self.predictors['drugs'])
-
-        # # for back-compatibility only
-        # result['conditions'] = self.predictors['conditions'] 
-        # result['drugs'] = self.predictors['drugs'] 
+        cats_label = {'MEN': 'Registered mental disorder diagnosis',
+                      'SUB': 'Registered substance use disorder diagnosis',
+                      'SOM': 'Other registered conditions'}
+        
+        # generate labels for the condition dropdown
+        result['conditions_labels'] = [] 
+        conditions = self.predictors['conditions']
+        for icat in cats_label.keys():
+            ilist = []
+            for ival in self.predictors_cat[icat]:
+                if ival in conditions:
+                    idict = self.predictor_dict[ival]
+                    if idict[1] == icat:
+                        ilist.append(idict[0])
+            if len(ilist) > 0:
+                result['conditions_labels'].append(cats_label[icat])
+                result['conditions_labels'].append(ilist)
+        
+        # generate labels for the drug dropdown
+        result['drugs_labels'] = []
+        drugs = self.predictors['drugs']
+        for ival in self.predictors_cat['ATC']:
+            if ival in drugs:
+                idict = self.predictor_dict[ival]
+                result['drugs_labels'].append(idict[0])
 
         return True, result
 
@@ -346,13 +385,11 @@ class Consult:
         explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
 
-        conditions = []
         if 'conditions_labels' in form:
-            conditions = label_to_condition (form['conditions_labels'])
+            conditions = [self.labels_dict[i][0] for i in form['conditions_labels']]
 
-        drugs = []
         if 'drugs_labels' in form:
-            drugs = label_to_atc (form['drugs_labels'])
+            drugs = [self.labels_dict[i][0] for i in form['drugs_labels']]
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)
