@@ -372,32 +372,32 @@ class Consult:
         importance_sel = [] 
         
         # only if the prediction is positive
-        if r==1:  
-            #TODO: results vary slighly in every run. Check this potential solution
-            # https://github.com/marcotcr/lime/issues/119
+        # if r==1:  
+        #TODO: results vary slighly in every run. Check this potential solution
+        # https://github.com/marcotcr/lime/issues/119
+        
+        # for j in range (10):
+        #     exp = explainer.explain_instance(xtest_np[0], model.predict_proba, num_features=30, num_samples= 5000, labels=(1), top_labels=1)
             
-            # for j in range (10):
-            #     exp = explainer.explain_instance(xtest_np[0], model.predict_proba, num_features=30, num_samples= 5000, labels=(1), top_labels=1)
-                
-            #     # exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=40, top_labels=1)
-            #     importance_all = exp.as_list(label=1)
-            #     print (importance_all)
+        #     # exp = explainer.explain_instance(xtest_np[0], model.predict_proba, labels=(1), num_features=40, top_labels=1)
+        #     importance_all = exp.as_list(label=1)
+        #     print (importance_all)
 
-            xint = xtest_np[0].astype(np.int32)
-            np.random.seed(1)
-            exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
-            # exp = explainer.explain_instance(xint, calib.predict_proba, num_features=len(names), num_samples=10000)
-            importance_all = exp.as_list(label=1)     
+        xint = xtest_np[0].astype(np.int32)
+        np.random.seed(1)
+        exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
+        # exp = explainer.explain_instance(xint, calib.predict_proba, num_features=len(names), num_samples=10000)
+        importance_all = exp.as_list(label=1)     
 
-            for i in importance_all:
-                ilabel = i[0]
+        for i in importance_all:
+            ilabel = i[0]
 
-                # LIME includes predictors in labels which either start with the predictor name (e.g.,'anxiolytic=0')
-                # or are inserted between unqualities (e.g., '4.00 < age <= 6.00')
-                for ipredictor in predictors:
-                    if ilabel.startswith(ipredictor) or " "+ipredictor+" " in ilabel:
-                        importance_sel.append( (ipredictor, i[1]) )
-                        break
+            # LIME includes predictors in labels which either start with the predictor name (e.g.,'anxiolytic=0')
+            # or are inserted between unqualities (e.g., '4.00 < age <= 6.00')
+            for ipredictor in predictors:
+                if ilabel.startswith(ipredictor) or " "+ipredictor+" " in ilabel:
+                    importance_sel.append( (ipredictor, i[1]) )
+                    break
                     
         result['outcome'] = r
         result['probability'] = irisk
