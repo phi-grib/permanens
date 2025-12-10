@@ -35,8 +35,9 @@ LOG = get_logger(__name__)
 age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
 sex_code = ['female','male']
 cats = ['MEN', 'SUB', 'SOM', 'ATC']
-VAR_MAX = 50
-
+cats_label = {'MEN': 'Registered mental disorder diagnosis',
+              'SUB': 'Registered substance use disorder diagnosis',
+              'SOM': 'Other registered conditions'}
 class Consult:
     ''' Class storing all the risk assessment information
     '''
@@ -194,10 +195,7 @@ class Consult:
         result['model_metrics_test'] = self.model_dict['metrics_prediction']
         result['model_hash'] = self.model_dict['model_hash']
 
-        cats_label = {'MEN': 'Registered mental disorder diagnosis',
-                      'SUB': 'Registered substance use disorder diagnosis',
-                      'SOM': 'Other registered conditions'}
-        
+        # define labels for the predictors in the current defined lenguaje
         self.load_predictors_mapping(lang)
 
         # generate labels for the condition dropdown
@@ -314,6 +312,8 @@ class Consult:
             if isinstance(form[ikey], list):
                 for item in ival:
 
+                    # since the form only contains the labels, the names should
+                    # be back-converted to predictors
                     if ikey == 'conditions_labels' or 'drugs_labels':
                         item = self.labels_dict[item][0]
                     
@@ -393,6 +393,7 @@ class Consult:
         explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
 
+        # obtain conditions and drugs back-converting the labels
         if 'conditions_labels' in form:
             conditions = [self.labels_dict[i][0] for i in form['conditions_labels']]
 
@@ -502,7 +503,6 @@ class Consult:
         result['probability_peers'] = iriskpeers
         result['histogram'] = graphic_histogram 
         result['histogram_bins'] = graphic_histogram_bins
-
         result['population_below'] = population_below
         result['risk_max'] = float(irisk_histogram_bins[-1])
 
