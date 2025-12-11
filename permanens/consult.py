@@ -257,6 +257,16 @@ class Consult:
     def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 
         '''
+
+        # in production servers, the object instance receiving a prediction could be
+        # different from the instance which received the set_model request and therefore
+        # the current model can be incorrect
+        if 'modelID' in form and form['modelID'] != self.modelID:           
+            self.set_model_engine(form['modelID'])
+
+        if lang != self.lang:
+            self.load_predictors_mapping(lang)
+
         if cname == None:
             # generate unique ID
             cname = id_generator()
@@ -389,15 +399,6 @@ class Consult:
         ''' uses the form to run the prediction pipeline
         '''
 
-        # in production servers, the object instance receiving a prediction could be
-        # different from the instance which received the set_model request and therefore
-        # the current model can be incorrect
-        if 'modelID' in form and form['modelID'] != self.modelID:           
-            self.set_model_engine(form['modelID'])
-
-        if lang != self.lang:
-            self.load_predictors_mapping(lang)
-
         LOG.info (f'predicting {cname} form, for model {self.modelID}')
 
         # results dictionary will contain a lot of information with the result of the analysis
@@ -410,11 +411,9 @@ class Consult:
 
         # obtain conditions and drugs back-converting the labels
         if 'conditions_labels' in form:
-            # conditions = [self.labels_dict[i][0] for i in form['conditions_labels']]
             conditions = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
-
+        
         if 'drugs_labels' in form:
-            # drugs = [self.labels_dict[i][0] for i in form['drugs_labels']]
             drugs = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
 
         # conditions form to adapt to the estimator requirements

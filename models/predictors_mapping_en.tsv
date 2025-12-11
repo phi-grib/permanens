@@ -29,3 +29,7 @@ anti-EPS	Anti-EPS agents	ATC
 analgesics (opioid or non-opioid)	Analgesics (opioid / non-opioid)	ATC
 anti-vertigo	Anti-vertigo agents	ATC
 addiction medicine	Addiction treatment	ATC
+sex	Sex	DEM
+age	Age	DEM
+events	Events	DEM
+last_event	Months since last event	DEM
