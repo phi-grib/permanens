@@ -29,3 +29,7 @@ anti-EPS	Agents antiextrepiramidals	ATC
 analgesics (opioid or non-opioid)	Analgèsics (opioides / no opioides)	ATC
 anti-vertigo	Medicació antivertiginosa	ATC
 addiction medicine	Tractament de les addiccions	ATC
+sex	Sexe	DEM
+age	Edat	DEM
+events	Nre. visites a urg per CA	DEM
+last_event	Mes. última visita per CA	DEM

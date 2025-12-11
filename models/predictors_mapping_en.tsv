@@ -31,5 +31,5 @@ anti-vertigo	Anti-vertigo agents	ATC
 addiction medicine	Addiction treatment	ATC
 sex	Sex	DEM
 age	Age	DEM
-events	Events	DEM
-last_event	Months since last event	DEM
+events	N of ED visits for SH	DEM
+last_event	Mo last ED visit for SH	DEM
