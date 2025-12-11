@@ -88,7 +88,11 @@ class Consult:
         
         self.modelID = 0
         self.lang = 'en'
-        
+
+        # initialice mapping dictionaries
+        self.predictor_dict = {}
+        self.labels_dict = {}
+        self.predictors_cat = {}
 
         # use first model as default
         # self.set_model(0)
@@ -147,7 +151,8 @@ class Consult:
         mpath = os.path.join(model_repo,f'predictors_mapping_{lang}.tsv')
         
         if not os.path.isfile (mpath):
-            LOG.error('predictors mapping not found')
+            LOG.error('predictors mapping not found!')
+            return
         
         mapping_df = pd.read_csv(mpath, sep='\t')
         self.predictor_dict = mapping_df.set_index('predictor').T.to_dict('list')
@@ -157,17 +162,21 @@ class Consult:
         for icat in cats:
             self.predictors_cat[icat] = [name for name, cat in zip(mapping_df['predictor'], mapping_df['cat']) if cat==icat]
 
-        # print (self.predictor_dict)
-        # print (self.labels_dict)
+    def label_from_pred (self, predictor_str):
+        if predictor_str in self.predictor_dict:
+            return self.predictor_dict[predictor_str][0], self.predictor_dict[predictor_str][1]
+        else:
+            return predictor_str, 'NONE'
+        
+    def pred_from_label (self, label_str):
+        if label_str in self.labels_dict:
+            return self.labels_dict[label_str][0]
+        else:
+            return label_str
 
-    def set_model (self, modelID, lang=None):
-        ''' defines the model with the given modelID as the current model
-            if the lang parameter is provided, the predictor variable names are
-            translated
-        '''
+    def set_model_engine (self, modelID):
 
         self.modelID = modelID
-        self.lang = lang
 
         LOG.info(f'setting model to {modelID}')
         if modelID >= len (self.model_dicts):
@@ -178,8 +187,6 @@ class Consult:
 
         # extract top-10 predictor for drugs and conditions
         var_importance = self.model_dict['var_importance']
-
-        # initialize predictors
         self.predictors={'drugs': [], 'conditions':[]}
 
         # assign predictors
@@ -188,7 +195,20 @@ class Consult:
             for ivar in var_importance:
                 if ivar in predictors_dict[item]:
                     self.predictors[item].append(ivar)
-        
+
+
+    def set_model (self, modelID, lang=None):
+        ''' defines the model with the given modelID as the current model
+            if the lang parameter is provided, the predictor variable names are
+            translated
+        '''
+
+        # set everything related with predictions
+        self.set_model_engine(modelID)
+
+        # set lenguaje
+        self.lang = lang
+
         result = {}
         result['model_description'] = self.model_dict['description']
         result['model_metrics_training'] = self.model_dict['metrics_fitting']
@@ -205,9 +225,14 @@ class Consult:
             ilist = []
             for ival in self.predictors_cat[icat]:
                 if ival in conditions:
-                    idict = self.predictor_dict[ival]
-                    if idict[1] == icat:
-                        ilist.append(idict[0])
+                    label, cat = self.label_from_pred(ival)
+                    if cat == icat:
+                        ilist.append(label)
+                    
+                    # idict = self.predictor_dict[ival]
+                    # if idict[1] == icat:
+                    #     ilist.append(idict[0])
+
             if len(ilist) > 0:
                 result['conditions_labels'].append(cats_label[icat])
                 result['conditions_labels'].append(ilist)
@@ -217,8 +242,11 @@ class Consult:
         drugs = self.predictors['drugs']
         for ival in self.predictors_cat['ATC']:
             if ival in drugs:
-                idict = self.predictor_dict[ival]
-                result['drugs_labels'].append(idict[0])
+                label, cat = self.label_from_pred(ival)
+                result['drugs_labels'].append(label)
+
+                # idict = self.predictor_dict[ival]
+                # result['drugs_labels'].append(idict[0])
 
         return True, result
 
@@ -314,11 +342,14 @@ class Consult:
 
                     # since the form only contains the labels, the names should
                     # be back-converted to predictors
-                    if ikey == 'conditions_labels' or 'drugs_labels':
-                        item = self.labels_dict[item][0]
+                    # if ikey == 'conditions_labels' or 'drugs_labels':
+                    #     # item = self.labels_dict[item][0]
                     
+                    item = self.pred_from_label(item)
                     if item in names:
                         xtest_np[0,names.index(item)] = 1
+                    else:
+                        LOG.error (f'predictor {item} not found!')
 
             # for sex and age
             if ikey in names:
@@ -358,27 +389,11 @@ class Consult:
         ''' uses the form to run the prediction pipeline
         '''
 
-        if 'modelID' in form and form['modelID'] != self.modelID:
-            
-            self.modelID = form['modelID']
-            
-            LOG.info (f'setting model {self.modelID} for local instance')
-
-            self.model_name = self.model_names[self.modelID]
-            self.model_dict = self.model_dicts[self.modelID]
-
-            # extract top-10 predictor for drugs and conditions
-            var_importance = self.model_dict['var_importance']
-
-            # initialize predictors
-            self.predictors={'drugs': [], 'conditions':[]}
-
-            # assign predictors
-            predictors_dict = self.model_dict['predictors_dict']
-            for item in ['drugs', 'conditions']:
-                for ivar in var_importance:
-                    if ivar in predictors_dict[item]:
-                        self.predictors[item].append(ivar)
+        # in production servers, the object instance receiving a prediction could be
+        # different from the instance which received the set_model request and therefore
+        # the current model can be incorrect
+        if 'modelID' in form and form['modelID'] != self.modelID:           
+            self.set_model_engine(form['modelID'])
 
         if lang != self.lang:
             self.load_predictors_mapping(lang)
@@ -395,10 +410,12 @@ class Consult:
 
         # obtain conditions and drugs back-converting the labels
         if 'conditions_labels' in form:
-            conditions = [self.labels_dict[i][0] for i in form['conditions_labels']]
+            # conditions = [self.labels_dict[i][0] for i in form['conditions_labels']]
+            conditions = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
 
         if 'drugs_labels' in form:
-            drugs = [self.labels_dict[i][0] for i in form['drugs_labels']]
+            # drugs = [self.labels_dict[i][0] for i in form['drugs_labels']]
+            drugs = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)

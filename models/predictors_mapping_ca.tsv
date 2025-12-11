@@ -1,31 +1,31 @@
-predictor	label	cat
-Schizophrenia and other non-organic psychosis	Psychotic D	MEN
-Mood [affective] disorders	Mood D	MEN
-Neurotic disorders	Anxiety D	MEN
-Borderline personality disorder	Borderline PD	MEN
-Other personality disorders	Non-Borderline PD	MEN
-Eating disorders	Eating D	MEN
-Habit and impulse disorders	Impulse D	MEN
-Behavioural and emotional disorders with onset usually occurring in childhood and adolescence	Childhood-onset D	MEN
-Mental retardation	Intellectual disability	MEN
-Mental disorder, not otherwise specified	Unspecified	MEN
-Substance use disorder - alcohol	Alcohol D	SUB
-Substance use disorder - sedatives or hypnotics	Sedative / Hypnotic D	SUB
-Substance use disorder - cannabinoids	Cannabis D	SUB
-Substance use disorder - cocaine	Cocaine D	SUB
-Substance use disorder - other, unspecified, or multiple drugs or psychoactive substances	Polysubstance / Unspecified	SUB
-Substance use disorder - tobacco	Tobacco D	SUB
-Hemiplegia	Hemiplegia / Paralysis	SOM
-Disorders of autonomic nervous system (inc autonomic dysreflexia)	Autonomic nervous system D	SOM
-Hereditary and idiopathic neuropathy	Hereditary and idiopathic neuropathy	SOM
-Asthma	Asthma	SOM
-Weight loss	Weight loss	SOM
-Homicide, assault	Assault (victim)	SOM
-antidepressants	Antidepressants	ATC
-anxiolytic	Anxiolytics / Sedatives	ATC
-medication for mood instability	Mood stabilizers & Antipsychotics (2nd gen)	ATC
-first generation antipsychotics	Antipsychotics (1st gen)	ATC
-anti-EPS	Anti-EPS agents	ATC
-analgesics (opioid or non-opioid)	Analgesics (opioid / non-opioid)	ATC
-anti-vertigo	Anti-vertigo agents	ATC
-addiction medicine	Addiction treatment	ATC
+﻿predictor	label	cat
+Schizophrenia and other non-organic psychosis	Tr. psicòtic	MEN
+Mood [affective] disorders	Tr. de l’estat d’ànim	MEN
+Neurotic disorders	Tr. d’ansietat	MEN
+Borderline personality disorder	Tr. límit de la personalitat	MEN
+Other personality disorders	Tr. de la personalitat, no límit	MEN
+Eating disorders	Tr. de la conducta alimentària	MEN
+Habit and impulse disorders	Tr. del control dels impulsos	MEN
+Behavioural and emotional disorders with onset usually occurring in childhood and adolescence	Tr. d’inici en la infantesa	MEN
+Mental retardation	Discapacitat intel·lectual	MEN
+Mental disorder, not otherwise specified	No especificat	MEN
+Substance use disorder - alcohol	Tr. per consum d’alcohol	SUB
+Substance use disorder - sedatives or hypnotics	Tr. per consum de sedants / hipnòtics	SUB
+Substance use disorder - cannabinoids	Tr. per consum de cànnabis	SUB
+Substance use disorder - cocaine	Tr. per consum de cocaïna	SUB
+Substance use disorder - other, unspecified, or multiple drugs or psychoactive substances	Policonsum / No especificat	SUB
+Substance use disorder - tobacco	Tr. per consum de tabac	SUB
+Hemiplegia	Hemiplegia / Paràlisi	SOM
+Disorders of autonomic nervous system (inc autonomic dysreflexia)	Tr. del sistema nerviós autònom	SOM
+Hereditary and idiopathic neuropathy	Neuropatia hereditària i idiopàtica	SOM
+Asthma	Asma	SOM
+Weight loss	Pèrdua de pes	SOM
+Homicide, assault	Agressió (víctima)	SOM
+antidepressants	Antidepressius	ATC
+anxiolytic	Anxiolítics / Sedants	ATC
+medication for mood instability	Estabilitzadors de l’estat d’ànim i antipsicòtics (2a generació)	ATC
+first generation antipsychotics	Antipsicòtics (1a generació)	ATC
+anti-EPS	Agents antiextrepiramidals	ATC
+analgesics (opioid or non-opioid)	Analgèsics (opioides / no opioides)	ATC
+anti-vertigo	Medicació antivertiginosa	ATC
+addiction medicine	Tractament de les addiccions	ATC
