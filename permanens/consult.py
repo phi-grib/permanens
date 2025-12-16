@@ -261,6 +261,15 @@ class Consult:
         # in production servers, the object instance receiving a prediction could be
         # different from the instance which received the set_model request and therefore
         # the current model can be incorrect
+
+        if not 'drugs' in form and 'drugs_labels' in form:
+            form['drugs'] = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
+            # form.pop('drugs_labels')
+
+        if not 'conditions' in form and 'conditions_labels' in form:
+            form['conditions'] = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
+            # form.pop('conditions_labels')
+
         if 'modelID' in form and form['modelID'] != self.modelID:           
             self.set_model_engine(form['modelID'])
 
@@ -296,6 +305,7 @@ class Consult:
         '''
         consultfile = os.path.join (self.cpath, cname)
 
+        form['lang'] = self.lang
         form['model_hash'] = self.model_dict['model_hash']
 
         with open(consultfile,'w') as f:
@@ -328,6 +338,15 @@ class Consult:
             if not found:
                 return False, 'No model matching'
         
+        if form['lang'] != self.lang:
+            if 'conditions_labels' in form:
+                form['conditions_labels'] = [self.label_from_pred(ipred) for ipred in form['conditions']]
+            
+            if 'drugs_labels' in form:
+                form['drugs_labels'] = [self.label_from_pred(ipred) for ipred in form['drugs']]
+
+            print(form)
+
         return True, form
 
     def condition_model (self, form, names):
@@ -355,7 +374,7 @@ class Consult:
                     # if ikey == 'conditions_labels' or 'drugs_labels':
                     #     # item = self.labels_dict[item][0]
                     
-                    item = self.pred_from_label(item)
+                    # item = self.pred_from_label(item)
                     if item in names:
                         xtest_np[0,names.index(item)] = 1
                     else:
@@ -409,12 +428,12 @@ class Consult:
         explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
 
-        # obtain conditions and drugs back-converting the labels
-        if 'conditions_labels' in form:
-            conditions = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
+        # # obtain conditions and drugs back-converting the labels
+        # if 'conditions_labels' in form:
+        #     conditions = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
         
-        if 'drugs_labels' in form:
-            drugs = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
+        # if 'drugs_labels' in form:
+        #     drugs = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)
@@ -427,8 +446,8 @@ class Consult:
 
         # list of predictors
         predictors = ['sex', 'age', 'events', 'last_event']
-        predictors += conditions
-        predictors += drugs
+        predictors += form['conditions']
+        predictors += form['drugs']
 
         # in case of negatives, pass an empty list
         importance_sel = [] 
@@ -447,8 +466,8 @@ class Consult:
 
         xint = xtest_np[0].astype(np.int32)
         np.random.seed(1)
-        exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
-        # exp = explainer.explain_instance(xint, calib.predict_proba, num_features=len(names), num_samples=10000)
+        # exp = explainer.explain_instance(xint, model.predict_proba, num_features=len(names), num_samples=10000)
+        exp = explainer.explain_instance(xint, calib.predict_proba, num_features=len(names), num_samples=10000)
         importance_all = exp.as_list(label=1)     
 
         for i in importance_all:
