@@ -6,4 +6,10 @@ en:
     individual is {element_risk:.2f}%.
   risk_peers: Among <s>{element_sex}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
     months is <s>{element_risk_peers:.2f}%.
-es: {}
+es: 
+  distribution: El riesgo de este paciente es <s>{element_risk_fold:.2f}<e> veces el riesgo de sus iguales <s>{element_sex}<e> 
+    y situa el riesgo sobre el <s>{element_distr:.1f}<e>% de sus iguales ajustados <s>{element_sex}<e> ajustado por edad.
+  risk_individual: Based on the information you entered, the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e>
+    individual is {element_risk:.2f}%.
+  risk_peers: Among <s>{element_sex}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
+    months is <s>{element_risk_peers:.2f}%.

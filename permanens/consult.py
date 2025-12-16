@@ -32,13 +32,13 @@ from permanens.logger import get_logger
 
 LOG = get_logger(__name__)
 
+lenguajes = ['en','es', 'ca']
 age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
 sex_code = ['female','male']
 cats = ['MEN', 'SUB', 'SOM', 'ATC']
 cats_label = {'MEN': 'Registered mental disorder diagnosis',
               'SUB': 'Registered substance use disorder diagnosis',
               'SOM': 'Other registered conditions'}
-lenguajes = ['en','es', 'ca']
 
 class Consult:
     ''' Class storing all the risk assessment information
