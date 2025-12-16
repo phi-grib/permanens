@@ -1,0 +1,9 @@
+ca: {}
+en:
+  distribution: The risk in this individual is <s>{element_risk_fold:.2f}<e> times the risk of age-matched <s>{element_sex}<e> 
+    peers and places its risk above <s>{element_distr:.1f}<e>% of age-matched <s>{element_sex}<e> peers.
+  risk_individual: Based on the information you entered, the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e>
+    individual is {element_risk:.2f}%.
+  risk_peers: Among <s>{element_sex}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
+    months is <s>{element_risk_peers:.2f}%.
+es: {}

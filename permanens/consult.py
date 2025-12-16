@@ -97,8 +97,9 @@ class Consult:
         self.predictors_cats = {}
 
 
+        model_repo = model_repository_path()
+        
         for ilang in lenguajes:
-            model_repo = model_repository_path()
             mpath = os.path.join(model_repo,f'predictors_mapping_{ilang}.tsv')
         
             if not os.path.isfile (mpath):
@@ -116,6 +117,16 @@ class Consult:
             self.predictors_cats[ilang] = {}
             for icat in cats:
                 self.predictors_cats[ilang][icat] = [name for name, cat in zip(mapping_df['predictor'], mapping_df['cat']) if cat==icat]
+
+        
+        self.babel = {}
+        bpath = os.path.join(model_repo, 'babel.yaml')
+        if not os.path.isfile (bpath):
+            LOG.error('multilenguaje text not found!')
+            return
+        
+        with open(bpath,'r') as f:
+            self.babel = yaml.safe_load(f)
 
         # use first model as default
         # self.set_model(0)
@@ -431,7 +442,7 @@ class Consult:
         
     #     return True, x_rules
 
-    def predict (self, form, cname, lang = None):
+    def predict (self, form, cname, lang = 'en'):
         ''' uses the form to run the prediction pipeline
         '''
 
@@ -565,28 +576,31 @@ class Consult:
         # }
 
         #TODO: load this from a file
-        narrative = {}
-        narrative['risk_individual'] = """ Based on the information you entered, 
-                                           the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e> 
-                                           individual is {element_risk:.2f}%. """
-        narrative['risk_peers']      = """ Among <s>{element_sex}<e> aged <s>{element_age_range}<e>
-                                           years presenting to the ED, the risk of 
-                                           <s>{element_endpoint}<e> months is <s>{element_risk_peers:.2f}%"""
+        # narrative = {'en':{}, 'es':{}, 'ca':{}}
+        # narrative['en']['risk_individual'] = """ Based on the information you entered, 
+        #                                    the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e> 
+        #                                    individual is {element_risk:.2f}%. """
+        # narrative['en']['risk_peers']      = """ Among <s>{element_sex}<e> aged <s>{element_age_range}<e>
+        #                                    years presenting to the ED, the risk of 
+        #                                    <s>{element_endpoint}<e> months is <s>{element_risk_peers:.2f}%"""
         
-        narrative['distribution']    = """ The risk in this individual is <s>{element_risk_fold:.2f}<e> 
-                                           times the risk of age-matched <s>{element_sex}<e> 
-                                           peers and places its risk above <s>{element_distr:.1f}<e>% 
-                                           of age-matched <s>{element_sex}<e> peers. """
+        # narrative['en']['distribution']    = """ The risk in this individual is <s>{element_risk_fold:.2f}<e> 
+        #                                    times the risk of age-matched <s>{element_sex}<e> 
+        #                                    peers and places its risk above <s>{element_distr:.1f}<e>% 
+        #                                    of age-matched <s>{element_sex}<e> peers. """
 
+
+        
+        inarrative = self.babel[lang]
         result['narrative'] = { 
-            'risk_individual' : narrative['risk_individual'].format(element_age = form['age'], 
+            'risk_individual' : inarrative['risk_individual'].format(element_age = form['age'], 
                                                                     element_sex = sex_code[histogram_sex_index],
                                                                     element_risk = irisk*100.0) ,
-            'risk_peers':narrative['risk_peers'].format (element_sex = sex_code[histogram_sex_index],
+            'risk_peers': inarrative['risk_peers'].format (element_sex = sex_code[histogram_sex_index],
                                                          element_age_range = age_ranges[histogram_age_index],
                                                          element_endpoint = iendpoint, 
                                                          element_risk_peers = iriskpeers*100),
-            'distribution': narrative['distribution'].format (element_risk_fold = irisk/iriskpeers,
+            'distribution': inarrative['distribution'].format (element_risk_fold = irisk/iriskpeers,
                                                               element_sex = sex_code[histogram_sex_index],
                                                               element_distr = population_below*100)
         }
