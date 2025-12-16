@@ -38,6 +38,8 @@ cats = ['MEN', 'SUB', 'SOM', 'ATC']
 cats_label = {'MEN': 'Registered mental disorder diagnosis',
               'SUB': 'Registered substance use disorder diagnosis',
               'SOM': 'Other registered conditions'}
+lenguajes = ['en','es', 'ca']
+
 class Consult:
     ''' Class storing all the risk assessment information
     '''
@@ -90,9 +92,30 @@ class Consult:
         self.lang = 'en'
 
         # initialice mapping dictionaries
-        self.predictor_dict = {}
-        self.labels_dict = {}
-        self.predictors_cat = {}
+        self.predictor_dicts = {}
+        self.labels_dicts = {}
+        self.predictors_cats = {}
+
+
+        for ilang in lenguajes:
+            model_repo = model_repository_path()
+            mpath = os.path.join(model_repo,f'predictors_mapping_{ilang}.tsv')
+        
+            if not os.path.isfile (mpath):
+                LOG.error('predictors mapping not found!')
+                return
+            
+            mapping_df = pd.read_csv(mpath, sep='\t')
+            
+            self.predictor_dicts[ilang] = {}
+            self.predictor_dicts[ilang] = mapping_df.set_index('predictor').T.to_dict('list')
+
+            self.labels_dicts[ilang] = {}
+            self.labels_dicts[ilang] = mapping_df.set_index('label').T.to_dict('list')
+
+            self.predictors_cats[ilang] = {}
+            for icat in cats:
+                self.predictors_cats[ilang][icat] = [name for name, cat in zip(mapping_df['predictor'], mapping_df['cat']) if cat==icat]
 
         # use first model as default
         # self.set_model(0)
@@ -147,20 +170,9 @@ class Consult:
         LOG.info ('INITIALIZATION COMPLETE')
         
     def load_predictors_mapping (self, lang='en'):
-        model_repo = model_repository_path()
-        mpath = os.path.join(model_repo,f'predictors_mapping_{lang}.tsv')
-        
-        if not os.path.isfile (mpath):
-            LOG.error('predictors mapping not found!')
-            return
-        
-        mapping_df = pd.read_csv(mpath, sep='\t')
-        self.predictor_dict = mapping_df.set_index('predictor').T.to_dict('list')
-        self.labels_dict = mapping_df.set_index('label').T.to_dict('list')
-
-        self.predictors_cat = {}
-        for icat in cats:
-            self.predictors_cat[icat] = [name for name, cat in zip(mapping_df['predictor'], mapping_df['cat']) if cat==icat]
+        self.predictor_dict = self.predictor_dicts[lang]
+        self.labels_dict = self.labels_dicts[lang]
+        self.predictors_cat = self.predictors_cats[lang]
 
     def label_from_pred (self, predictor_str):
         if predictor_str in self.predictor_dict:
@@ -546,10 +558,37 @@ class Consult:
         ####################################################
 
         # narrative
+        # result['narrative'] = { 
+        #     'risk_individual' : f"Based on the information you entered, the risk of this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> individual is {irisk*100.0:.2f}%." ,
+        #     'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED, the risk of <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.2f}<e>%",
+        #     'distribution': f"The risk in this individual is <s>{irisk/iriskpeers:.2f}<e> times the risk of age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places its risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
+        # }
+
+        #TODO: load this from a file
+        narrative = {}
+        narrative['risk_individual'] = """ Based on the information you entered, 
+                                           the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e> 
+                                           individual is {element_risk:.2f}%. """
+        narrative['risk_peers']      = """ Among <s>{element_sex}<e> aged <s>{element_age_range}<e>
+                                           years presenting to the ED, the risk of 
+                                           <s>{element_endpoint}<e> months is <s>{element_risk_peers:.2f}%"""
+        
+        narrative['distribution']    = """ The risk in this individual is <s>{element_risk_fold:.2f}<e> 
+                                           times the risk of age-matched <s>{element_sex}<e> 
+                                           peers and places its risk above <s>{element_distr:.1f}<e>% 
+                                           of age-matched <s>{element_sex}<e> peers. """
+
         result['narrative'] = { 
-            'risk_individual' : f"Based on the information you entered, the risk of this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> individual is {irisk*100.0:.2f}%." ,
-            'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED, the risk of <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.2f}<e>%",
-            'distribution': f"The risk in this individual is <s>{irisk/iriskpeers:.2f}<e> times the risk of age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places its risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
+            'risk_individual' : narrative['risk_individual'].format(element_age = form['age'], 
+                                                                    element_sex = sex_code[histogram_sex_index],
+                                                                    element_risk = irisk*100.0) ,
+            'risk_peers':narrative['risk_peers'].format (element_sex = sex_code[histogram_sex_index],
+                                                         element_age_range = age_ranges[histogram_age_index],
+                                                         element_endpoint = iendpoint, 
+                                                         element_risk_peers = iriskpeers*100),
+            'distribution': narrative['distribution'].format (element_risk_fold = irisk/iriskpeers,
+                                                              element_sex = sex_code[histogram_sex_index],
+                                                              element_distr = population_below*100)
         }
 
         ####################################################
