@@ -22,8 +22,8 @@
 
 import yaml
 import os
-# import pickle
 import dill
+import copy
 import pandas as pd
 import numpy as np
 
@@ -261,20 +261,18 @@ class Consult:
         # in production servers, the object instance receiving a prediction could be
         # different from the instance which received the set_model request and therefore
         # the current model can be incorrect
-
-        if not 'drugs' in form and 'drugs_labels' in form:
-            form['drugs'] = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
-            # form.pop('drugs_labels')
-
-        if not 'conditions' in form and 'conditions_labels' in form:
-            form['conditions'] = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
-            # form.pop('conditions_labels')
-
         if 'modelID' in form and form['modelID'] != self.modelID:           
             self.set_model_engine(form['modelID'])
 
         if lang != self.lang:
             self.load_predictors_mapping(lang)
+
+        # generate predictors from labels
+        if not 'drugs' in form and 'drugs_labels' in form:
+            form['drugs'] = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
+
+        if not 'conditions' in form and 'conditions_labels' in form:
+            form['conditions'] = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
 
         if cname == None:
             # generate unique ID
@@ -304,12 +302,23 @@ class Consult:
         ''' saves the Consult object to a YAML file
         '''
         consultfile = os.path.join (self.cpath, cname)
+       
+        # use a copy, because we don't want to save labels nor remove
+        # them from the copy of form
+        form_copy = copy.copy(form)
 
-        form['lang'] = self.lang
-        form['model_hash'] = self.model_dict['model_hash']
+        # add the languaje and model hash
+        form_copy['lang'] = self.lang
+        form_copy['model_hash'] = self.model_dict['model_hash']
+
+        # remove labels to make form languaje agnostic
+        if 'conditions_labels' in form_copy:
+            form_copy.pop('conditions_labels')
+        if 'drugs_labels' in form_copy:
+            form_copy.pop('drugs_labels')
 
         with open(consultfile,'w') as f:
-            f.write(yaml.dump(form))
+            f.write(yaml.dump(form_copy))
 
         return True
     
@@ -338,14 +347,12 @@ class Consult:
             if not found:
                 return False, 'No model matching'
         
-        if form['lang'] != self.lang:
-            if 'conditions_labels' in form:
-                form['conditions_labels'] = [self.label_from_pred(ipred) for ipred in form['conditions']]
-            
-            if 'drugs_labels' in form:
-                form['drugs_labels'] = [self.label_from_pred(ipred) for ipred in form['drugs']]
-
-            print(form)
+        # add labels in current languaje
+        if 'conditions' in form:
+            form['conditions_labels'] = [self.label_from_pred(ipred)[0] for ipred in form['conditions']]
+        
+        if 'drugs' in form:
+            form['drugs_labels'] = [self.label_from_pred(ipred)[0] for ipred in form['drugs']]
 
         return True, form
 
@@ -369,12 +376,10 @@ class Consult:
             if isinstance(form[ikey], list):
                 for item in ival:
 
-                    # since the form only contains the labels, the names should
-                    # be back-converted to predictors
-                    # if ikey == 'conditions_labels' or 'drugs_labels':
-                    #     # item = self.labels_dict[item][0]
-                    
-                    # item = self.pred_from_label(item)
+                    # don't use the labels
+                    if ikey == 'conditions_labels' or 'drugs_labels':
+                        continue
+
                     if item in names:
                         xtest_np[0,names.index(item)] = 1
                     else:
@@ -427,13 +432,6 @@ class Consult:
         calib = self.model_dict['calib']
         explainer = self.model_dict['explainer']
         names = model.feature_names_in_.tolist()
-
-        # # obtain conditions and drugs back-converting the labels
-        # if 'conditions_labels' in form:
-        #     conditions = [self.pred_from_label(ilabel) for ilabel in form['conditions_labels']]
-        
-        # if 'drugs_labels' in form:
-        #     drugs = [self.pred_from_label(ilabel) for ilabel in form['drugs_labels']]
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)
