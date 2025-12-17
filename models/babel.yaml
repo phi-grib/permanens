@@ -15,9 +15,9 @@ en:
     - males
     - females
   cats_label:
-    MEN: Registered mental disorder diagnosis
-    SUB: Registered substance use disorder diagnosis
-    SOM: Other registered conditions
+    MEN: Mental disorders
+    SUB: Substance use disorders
+    SOM: Other conditions
 ca: 
   distribution: 
     'El riesgo de este paciente es <s>{element_risk_fold:.2f}<e> veces el riesgo de sus iguales <s>{element_sex}<e> 
