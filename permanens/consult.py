@@ -34,11 +34,13 @@ LOG = get_logger(__name__)
 
 lenguajes = ['en','es', 'ca']
 age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
-sex_code = ['female','male']
 cats = ['MEN', 'SUB', 'SOM', 'ATC']
-cats_label = {'MEN': 'Registered mental disorder diagnosis',
-              'SUB': 'Registered substance use disorder diagnosis',
-              'SOM': 'Other registered conditions'}
+
+# sex_code = ['female','male']
+# sex_code_plural = ['females','males']
+# cats_label = {'MEN': 'Registered mental disorder diagnosis',
+            #   'SUB': 'Registered substance use disorder diagnosis',
+            #   'SOM': 'Other registered conditions'}
 
 class Consult:
     ''' Class storing all the risk assessment information
@@ -125,7 +127,7 @@ class Consult:
             LOG.error('multilenguaje text not found!')
             return
         
-        with open(bpath,'r') as f:
+        with open(bpath,'r',encoding='utf8') as f:
             self.babel = yaml.safe_load(f)
 
         # use first model as default
@@ -220,7 +222,7 @@ class Consult:
                     self.predictors[item].append(ivar)
 
 
-    def set_model (self, modelID, lang=None):
+    def set_model (self, modelID, lang='en'):
         ''' defines the model with the given modelID as the current model
             if the lang parameter is provided, the predictor variable names are
             translated
@@ -244,7 +246,7 @@ class Consult:
         # generate labels for the condition dropdown
         result['conditions_labels'] = [] 
         conditions = self.predictors['conditions']
-        for icat in cats_label.keys():
+        for icat in self.babel[lang]['cats_label'].keys():
             ilist = []
             for ival in self.predictors_cat[icat]:
                 if ival in conditions:
@@ -257,7 +259,7 @@ class Consult:
                     #     ilist.append(idict[0])
 
             if len(ilist) > 0:
-                result['conditions_labels'].append(cats_label[icat])
+                result['conditions_labels'].append(self.babel[lang]['cats_label'][icat])
                 result['conditions_labels'].append(ilist)
         
         # generate labels for the drug dropdown
@@ -568,41 +570,22 @@ class Consult:
         # result['histogram_bar'] = 0
         ####################################################
 
-        # narrative
-        # result['narrative'] = { 
-        #     'risk_individual' : f"Based on the information you entered, the risk of this <s>{form['age']}<e>-year-old <s>{sex_code[histogram_sex_index]}<e> individual is {irisk*100.0:.2f}%." ,
-        #     'risk_peers': f"Among <s>{sex_code[histogram_sex_index]}<e> aged <s>{age_ranges[histogram_age_index]}<e> years presenting to the ED, the risk of <s>{iendpoint}<e> months is <s>{iriskpeers*100.0:.2f}<e>%",
-        #     'distribution': f"The risk in this individual is <s>{irisk/iriskpeers:.2f}<e> times the risk of age-matched <s>{sex_code[histogram_sex_index]}<e> peers and places its risk above <s>{population_below*100:.1f}<e>% of age-matched <s>{sex_code[histogram_sex_index]}<e> peers."
-        # }
-
-        #TODO: load this from a file
-        # narrative = {'en':{}, 'es':{}, 'ca':{}}
-        # narrative['en']['risk_individual'] = """ Based on the information you entered, 
-        #                                    the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e> 
-        #                                    individual is {element_risk:.2f}%. """
-        # narrative['en']['risk_peers']      = """ Among <s>{element_sex}<e> aged <s>{element_age_range}<e>
-        #                                    years presenting to the ED, the risk of 
-        #                                    <s>{element_endpoint}<e> months is <s>{element_risk_peers:.2f}%"""
-        
-        # narrative['en']['distribution']    = """ The risk in this individual is <s>{element_risk_fold:.2f}<e> 
-        #                                    times the risk of age-matched <s>{element_sex}<e> 
-        #                                    peers and places its risk above <s>{element_distr:.1f}<e>% 
-        #                                    of age-matched <s>{element_sex}<e> peers. """
-
-
-        
         inarrative = self.babel[lang]
         result['narrative'] = { 
             'risk_individual' : inarrative['risk_individual'].format(element_age = form['age'], 
-                                                                    element_sex = sex_code[histogram_sex_index],
-                                                                    element_risk = irisk*100.0) ,
-            'risk_peers': inarrative['risk_peers'].format (element_sex = sex_code[histogram_sex_index],
+                                                                    element_sex = inarrative['sex_code'][histogram_sex_index],
+                                                                    element_risk = irisk*100.0,
+                                                                    element_endpoint = iendpoint, 
+                                                                    ) ,
+            'risk_peers': inarrative['risk_peers'].format (element_sex_plural = inarrative['sex_code_plural'][histogram_sex_index],
                                                          element_age_range = age_ranges[histogram_age_index],
                                                          element_endpoint = iendpoint, 
-                                                         element_risk_peers = iriskpeers*100),
+                                                         element_risk_peers = iriskpeers*100
+                                                         ),
             'distribution': inarrative['distribution'].format (element_risk_fold = irisk/iriskpeers,
-                                                              element_sex = sex_code[histogram_sex_index],
-                                                              element_distr = population_below*100)
+                                                              element_sex = inarrative['sex_code'][histogram_sex_index],
+                                                              element_distr = population_below*100
+                                                              )
         }
 
         ####################################################

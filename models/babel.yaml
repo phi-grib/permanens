@@ -1,15 +1,60 @@
-ca: {}
 en:
-  distribution: The risk in this individual is <s>{element_risk_fold:.2f}<e> times the risk of age-matched <s>{element_sex}<e> 
-    peers and places its risk above <s>{element_distr:.1f}<e>% of age-matched <s>{element_sex}<e> peers.
-  risk_individual: Based on the information you entered, the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e>
-    individual is {element_risk:.2f}%.
-  risk_peers: Among <s>{element_sex}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
-    months is <s>{element_risk_peers:.2f}%.
+  distribution: 
+    'The risk in this individual is <s>{element_risk_fold:.2f}<e> times the risk of age-matched <s>{element_sex}<e> 
+    peers presenting to the ED for self-harm, and places its risk above <s>{element_distr:.1f}<e>% of age-matched <s>{element_sex}<e> peers.'
+  risk_individual: 
+    'Based on the information you entered, the risk of <s>{element_endpoint}<e> for this <s>{element_age}<e>-year-old <s>{element_sex}<e>
+    individual is {element_risk:.2f}%.'
+  risk_peers:
+    'Among <s>{element_sex_plural}<e> aged <s>{element_age_range}<e> years presenting to the ED for self-harm, the average risk of <s>{element_endpoint}<e> 
+    is <s>{element_risk_peers:.2f}%.'
+  sex_code:
+    - male
+    - female
+  sex_code_plural:
+    - males
+    - females
+  cats_label:
+    MEN: Registered mental disorder diagnosis
+    SUB: Registered substance use disorder diagnosis
+    SOM: Other registered conditions
+ca: 
+  distribution: 
+    'El riesgo de este paciente es <s>{element_risk_fold:.2f}<e> veces el riesgo de sus iguales <s>{element_sex}<e> 
+    y situa el riesgo sobre el <s>{element_distr:.1f}<e>% de sus iguales ajustados <s>{element_sex}<e> ajustado por edad.'
+  risk_individual: 
+    'Based on the information you entered, the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e>
+    individual is {element_risk:.2f}%.'
+  risk_peers: 
+    'Among <s>{element_sex_plural}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
+    months is <s>{element_risk_peers:.2f}%.'
+  sex_code:
+    - hombre
+    - mujer
+  sex_code_plural:
+    - hombres
+    - mujeres
+  cats_label:
+    MEN: Diagnóstico de enfermedad mental
+    SUB: Uso de substancias
+    SOM: Otras condiciones
 es: 
-  distribution: El riesgo de este paciente es <s>{element_risk_fold:.2f}<e> veces el riesgo de sus iguales <s>{element_sex}<e> 
-    y situa el riesgo sobre el <s>{element_distr:.1f}<e>% de sus iguales ajustados <s>{element_sex}<e> ajustado por edad.
-  risk_individual: Based on the information you entered, the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e>
-    individual is {element_risk:.2f}%.
-  risk_peers: Among <s>{element_sex}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
-    months is <s>{element_risk_peers:.2f}%.
+  distribution: 
+    'El riesgo de este paciente es <s>{element_risk_fold:.2f}<e> veces el riesgo de sus iguales <s>{element_sex}<e> 
+    y situa el riesgo sobre el <s>{element_distr:.1f}<e>% de sus iguales ajustados <s>{element_sex}<e> ajustado por edad.'
+  risk_individual: 
+    'Based on the information you entered, the risk of this <s>{element_age}<e>-year-old <s>{element_sex}<e>
+    individual is {element_risk:.2f}%.'
+  risk_peers: 
+    'Among <s>{element_sex_plural}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
+    months is <s>{element_risk_peers:.2f}%.'
+  sex_code:
+    - hombre
+    - mujer
+  sex_code_plural:
+    - hombres
+    - mujeres
+  cats_label:
+    MEN: Diagnóstico de enfermedad mental
+    SUB: Uso de substancias
+    SOM: Otras condiciones
