@@ -156,16 +156,16 @@ def action_list(out='text'):
 
     return True, consult_list
 
-def action_models(out='text'):
+def action_models(out, lang):
     '''
     list all models in the model repository
     '''
-    model_labels = c.get_model_labels()
+    model_labels = c.get_model_labels(lang)
     if out == 'text':
         print (model_labels)
         return True, 'OK'
     
-    return True, c.get_model_labels()
+    return True, model_labels
 
 def action_setmodel(model_id, lang=None):
     '''

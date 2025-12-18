@@ -265,9 +265,19 @@ class Consult:
 
         return True, result
 
-    def get_model_labels (self):
+    def get_model_labels (self, lang):
         ''' returns model labels'''
-        return self.model_labels
+
+        if lang == None:
+            return self.model_labels
+
+        if lang not in lenguajes:
+            return self.model_labels
+
+        labels = []
+        for imodel_label in self.model_labels:
+            labels.append( (self.babel[lang]['endpoint_label'][imodel_label[0]], imodel_label[1], imodel_label[2] ))
+        return labels
        
     def run (self, form, cname=None, lang='en'):
         ''' function called when receiving an input form 
