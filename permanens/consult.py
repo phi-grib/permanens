@@ -388,6 +388,8 @@ class Consult:
         nvarx = len(names)
         xtest_np = np.zeros((1,nvarx))
 
+        print (form)
+
         if 'events' not in form:
             form['events'] == 0
             
@@ -398,13 +400,8 @@ class Consult:
             ival = form[ikey]
 
             # for lists
-            if isinstance(form[ikey], list):
+            if ikey == 'conditions' or ikey == 'drugs':
                 for item in ival:
-
-                    # don't use the labels
-                    if ikey == 'conditions_labels' or 'drugs_labels':
-                        continue
-
                     if item in names:
                         xtest_np[0,names.index(item)] = 1
                     else:

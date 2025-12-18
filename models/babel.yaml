@@ -9,11 +9,11 @@ en:
     'Among <s>{element_sex_plural}<e> aged <s>{element_age_range}<e> years presenting to the ED for self-harm, the average risk of <s>{element_endpoint}<e> 
     is <s>{element_risk_peers:.2f}%.'
   sex_code:
-    - male
     - female
+    - male
   sex_code_plural:
-    - males
     - females
+    - males
   cats_label:
     MEN: Mental disorders
     SUB: Substance use disorders
@@ -29,11 +29,11 @@ ca:
     'Among <s>{element_sex_plural}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
     months is <s>{element_risk_peers:.2f}%.'
   sex_code:
-    - hombre
     - mujer
+    - hombre
   sex_code_plural:
-    - hombres
     - mujeres
+    - hombres
   cats_label:
     MEN: Diagnóstico de enfermedad mental
     SUB: Uso de substancias
@@ -49,11 +49,11 @@ es:
     'Among <s>{element_sex_plural}<e> aged <s>{element_age_range}<e> years presenting to the ED, the risk of <s>{element_endpoint}<e> 
     months is <s>{element_risk_peers:.2f}%.'
   sex_code:
-    - hombre
     - mujer
+    - hombre
   sex_code_plural:
-    - hombres
     - mujeres
+    - hombres
   cats_label:
     MEN: Diagnóstico de enfermedad mental
     SUB: Uso de substancias
