@@ -36,12 +36,6 @@ lenguajes = ['en','es', 'ca']
 age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
 cats = ['MEN', 'SUB', 'SOM', 'ATC']
 
-# sex_code = ['female','male']
-# sex_code_plural = ['females','males']
-# cats_label = {'MEN': 'Registered mental disorder diagnosis',
-            #   'SUB': 'Registered substance use disorder diagnosis',
-            #   'SOM': 'Other registered conditions'}
-
 class Consult:
     ''' Class storing all the risk assessment information
     '''
@@ -98,9 +92,9 @@ class Consult:
         self.labels_dicts = {}
         self.predictors_cats = {}
 
-
         model_repo = model_repository_path()
         
+        # open predictor mapping in the supported lenguajes
         for ilang in lenguajes:
             mpath = os.path.join(model_repo,f'predictors_mapping_{ilang}.tsv')
         
@@ -120,7 +114,7 @@ class Consult:
             for icat in cats:
                 self.predictors_cats[ilang][icat] = [name for name, cat in zip(mapping_df['predictor'], mapping_df['cat']) if cat==icat]
 
-        
+        # open multi-lenguaje support definitions
         self.babel = {}
         bpath = os.path.join(model_repo, 'babel.yaml')
         if not os.path.isfile (bpath):
@@ -200,6 +194,9 @@ class Consult:
             return label_str
 
     def set_model_engine (self, modelID):
+        ''' sets in the object all the changes required to make use of 
+            the model indicated by modelID 
+        '''
 
         self.modelID = modelID
 
@@ -254,10 +251,6 @@ class Consult:
                     if cat == icat:
                         ilist.append(label)
                     
-                    # idict = self.predictor_dict[ival]
-                    # if idict[1] == icat:
-                    #     ilist.append(idict[0])
-
             if len(ilist) > 0:
                 result['conditions_labels'].append(self.babel[lang]['cats_label'][icat])
                 result['conditions_labels'].append(ilist)
@@ -269,9 +262,6 @@ class Consult:
             if ival in drugs:
                 label, cat = self.label_from_pred(ival)
                 result['drugs_labels'].append(label)
-
-                # idict = self.predictor_dict[ival]
-                # result['drugs_labels'].append(idict[0])
 
         return True, result
 
@@ -388,8 +378,6 @@ class Consult:
         nvarx = len(names)
         xtest_np = np.zeros((1,nvarx))
 
-        print (form)
-
         if 'events' not in form:
             form['events'] == 0
             
@@ -401,7 +389,7 @@ class Consult:
 
             # for lists
             if ikey == 'conditions' or ikey == 'drugs':
-                for item in ival:
+                for item in ival: # conditions and drugs are list, we iterate for each element
                     if item in names:
                         xtest_np[0,names.index(item)] = 1
                     else:
