@@ -520,7 +520,7 @@ class Consult:
         risk_segment = self.model_dict['risk_segment'][histogram_sex_index]
 
         # endpoint name
-        iendpoint = self.model_dict['endpoint']
+        iendpoint = self.babel[lang]['endpoint_label'][self.model_dict['endpoint']]
         
         # risk of peers
         iriskpeers = risk_segment[histogram_age_index]

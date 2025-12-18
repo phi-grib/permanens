@@ -19,6 +19,10 @@ en:
     MEN: Mental disorders
     SUB: Substance use disorders
     SOM: Other conditions
+  endpoint_label:
+    self-harm repetition within the next 3 months : self-harm repetition within the next 3 months
+    self-harm repetition within the next 12 months : self-harm repetition within the next 12 months
+    suicide within the next 12 months : suicide within the next 12 months
 ca: 
   distribution: 
     'El risc d’aquesta persona és <s>{element_risk_fold:.2f}<e> vegades el risc dels seus iguals de sexe <s>{element_sex}<e> 
@@ -40,6 +44,10 @@ ca:
     MEN: Trastorns mentals
     SUB: Trastorns per ús de substàncies
     SOM: Altres afeccions
+  endpoint_label:
+    self-harm repetition within the next 3 months : repetició d’autolesió en els propers 3 mesos
+    self-harm repetition within the next 12 months : repetició d’autolesió en els propers 12 mesos
+    suicide within the next 12 months : suïcidi en els propers 12 mesos
 es: 
   distribution: 
     'El riesgo de esta persona es <s>{element_risk_fold:.2f}<e> veces el riesgo de sus pares de sexo <s>{element_sex}<e> 
@@ -61,3 +69,8 @@ es:
     MEN: Trastornos mentales
     SUB: Trastornos de uso de substancias
     SOM: Otras afecciones
+  endpoint_label:
+    self-harm repetition within the next 3 months : repetición de autolesión en los próximos 3 meses
+    self-harm repetition within the next 12 months : repetición de autolesión en los próximos 12 meses
+    suicide within the next 12 months : suicidio en los próximos 12 meses
+
