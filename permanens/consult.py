@@ -35,6 +35,7 @@ LOG = get_logger(__name__)
 lenguajes = ['en','es', 'ca']
 age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
 cats = ['MEN', 'SUB', 'SOM', 'ATC']
+demographics = ['sex', 'age', 'events', 'last_event']
 
 class Consult:
     ''' Class storing all the risk assessment information
@@ -263,6 +264,8 @@ class Consult:
                 label, cat = self.label_from_pred(ival)
                 result['drugs_labels'].append(label)
 
+        result['demographics_labels'] = [self.label_from_pred(ipred)[0] for ipred in demographics]
+
         return True, result
 
     def get_model_labels (self, lang):
@@ -378,6 +381,8 @@ class Consult:
         
         if 'drugs' in form:
             form['drugs_labels'] = [self.label_from_pred(ipred)[0] for ipred in form['drugs']]
+
+        form['demographics_labels'] = [self.label_from_pred(ipred)[0] for ipred in demographics]
 
         return True, form
 
