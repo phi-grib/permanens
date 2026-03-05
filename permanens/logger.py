@@ -24,8 +24,10 @@
 import functools
 import logging
 import sys
+import os
 from logging.handlers import RotatingFileHandler
 from pathlib import Path
+from permanens.utils import model_repository_path
 
 def supress_log(logger: logging.Logger):
     """Decorator for suprerss logs during objects workflow
@@ -54,20 +56,22 @@ def get_log_file() -> Path:
     The path of the log file is given by
     appdirs.user_log_dir
     """
-    log_filename_path = './'
-    log_filename_path = Path(log_filename_path)
+    # log_filename_path = './'
+    # log_filename_path = Path(log_filename_path)
     
-    # creeate dir if it does not exist
-    if not log_filename_path.exists():
-        log_filename_path.mkdir(parents=True)
+    # # creeate dir if it does not exist
+    # if not log_filename_path.exists():
+    #     log_filename_path.mkdir(parents=True)
 
-    log_filename = log_filename_path / 'permanens.log'  # append file name
+    log_filename_path = model_repository_path() 
+    log_filename = os.path.join (log_filename_path,'permanens.log')  # append file name
+    log_object = Path(log_filename)
 
     # check if exists to not erase current file
-    if not log_filename.exists():
-        log_filename.touch()
+    if not os.path.isfile(log_filename):
+        log_object.touch()
 
-    return log_filename
+    return log_object
 
 
 def get_logger(name) -> logging.Logger:
