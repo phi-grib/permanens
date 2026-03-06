@@ -63,12 +63,11 @@ def get_log_file() -> Path:
     # if not log_filename_path.exists():
     #     log_filename_path.mkdir(parents=True)
 
-    log_filename_path = model_repository_path() 
-    log_filename = os.path.join (log_filename_path,'permanens.log')  # append file name
+    log_filename = os.path.join (model_repository_path() ,'permanens.log')  # append file name
     log_object = Path(log_filename)
 
     # check if exists to not erase current file
-    if not os.path.isfile(log_filename):
+    if not log_object.exists():
         log_object.touch()
 
     return log_object

@@ -40,7 +40,12 @@ def valid_token (token):
     '''
     if token == '67257293892':
         return True
+    
     return False
+
+def action_login ():
+    LOG.info ('New login')
+    return
 
 def action_consult (form=None, formfile=None, id=None, lang='en'):
     ''' uses the input data provided in the arguments to run the consult  
@@ -91,7 +96,7 @@ def action_advice(token, lang='en'):
 
     if not lang in c.advice:
         lang = 'en'
-        
+    
     if valid_token (token):
        return True, c.advice[lang]['doctor']
 
@@ -115,15 +120,19 @@ def action_rerun (id, token, lang='en'):
 def action_retrieve (id):
     ''' tries to load a form with the ID given as argument, saved in the repository 
     '''
+
+    LOG.info (f'Retrieving input for ID: {id}')
     # c = Consult()
     success, form = c.load_form(id)
     return success, form
 
 def action_save_care (care, lang='en'):
+    LOG.info ('Saving care interaction')
     success, result = c.save_care(care)
     return success, result
 
 def action_load_care (id):
+    LOG.info (f'Loading care information for ID: {id}')
     success, care = c.load_care(id)
     return success, care
 

@@ -66,7 +66,7 @@ class Consult:
                 with open(ipath, 'rb') as handle:
                     idict = dill.load(handle)
             except:
-                LOG.error ('unable to load model info')
+                LOG.error ('Unable to load model info')
                 continue
             
             idict['model_hash'] = hfile
@@ -100,7 +100,7 @@ class Consult:
             mpath = os.path.join(model_repo,f'predictors_mapping_{ilang}.tsv')
         
             if not os.path.isfile (mpath):
-                LOG.error('predictors mapping not found!')
+                LOG.error('Predictors mapping not found!')
                 return
             
             mapping_df = pd.read_csv(mpath, sep='\t')
@@ -119,7 +119,7 @@ class Consult:
         self.babel = {}
         bpath = os.path.join(model_repo, 'babel.yaml')
         if not os.path.isfile (bpath):
-            LOG.error('multilenguaje text not found!')
+            LOG.error('Multilenguaje text not found!')
             return
         
         with open(bpath,'r',encoding='utf8') as f:
@@ -201,7 +201,7 @@ class Consult:
 
         self.modelID = modelID
 
-        LOG.info(f'setting model to {modelID}')
+        LOG.info(f'Setting model to {modelID}')
         if modelID >= len (self.model_dicts):
             return False, 'modeID out of range'
         
@@ -408,7 +408,7 @@ class Consult:
                     if item in names:
                         xtest_np[0,names.index(item)] = 1
                     else:
-                        LOG.error (f'predictor {item} not found!')
+                        LOG.error (f'Predictor {item} not found!')
 
             # for sex and age
             if ikey in names:
@@ -448,7 +448,7 @@ class Consult:
         ''' uses the form to run the prediction pipeline
         '''
 
-        LOG.info (f'predicting {cname} form, for model {self.modelID}')
+        LOG.info (f'Predicting ID: {cname}, in model {self.modelID}')
 
         # results dictionary will contain a lot of information with the result of the analysis
         result = {'cname' : cname} 
