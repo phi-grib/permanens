@@ -7,14 +7,10 @@ Clinical Decisions Support System (CDSS) of PERMANENS project
 
 A docker container (https://www.docker.com/), fully configured can be downloaded from DockerHub and installed using:
 
-```bash
-docker run -d -p 5000:80 acabrera809/permanens:local
-```
-Then, the Permanens GUI will be accesible from a web browser at address http://localhost:5000
 
-Please note that the port of this address is defined in the command line above and can be easily customized.
+It is also possible to use an existing local folder for storing the RAs. Let's assume you wish to use 'c:\data' as the local PERMANENS repository. Start by creating a folder inside named 'permanens'.
 
-It is also possible to use an existing local folder for storing the RAs. Let's assume you wish to use 'c:\data' as the local PERMANENS repository. Start by creating a folder inside named 'permanens'. Then, run the following command: 
+Ensure that the mapped local directory contains the necessary models. Then, run the following command:
 
 ```bash
 docker run -d -p 5000:80 -v c:\permanens:/data acabrera809/permanens:local
