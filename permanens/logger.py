@@ -64,13 +64,17 @@ def get_log_file() -> Path:
     #     log_filename_path.mkdir(parents=True)
 
     log_filename = os.path.join (model_repository_path() ,'permanens.log')  # append file name
-    log_object = Path(log_filename)
+    if not os.path.isfile(log_filename):
+        with open(log_filename,'w') as f:
+            f.write('')
 
-    # check if exists to not erase current file
-    if not log_object.exists():
-        log_object.touch()
+    # log_object = Path(log_filename)
 
-    return log_object
+    # # check if exists to not erase current file
+    # if not log_object.exists():
+    #     log_object.touch()
+
+    return Path(log_filename)
 
 
 def get_logger(name) -> logging.Logger:
