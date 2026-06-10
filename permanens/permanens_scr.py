@@ -23,14 +23,8 @@
 import os
 import argparse
 from permanens.logger import get_logger
-# from permanens import __version__
-
-LOG = get_logger(__name__)
 
 def main():
-
-    LOG.debug('-------------NEW RUN-------------\n')
-
     results = None
     parser = argparse.ArgumentParser(description='permanens')
 
@@ -58,20 +52,23 @@ def main():
 
     args = parser.parse_args()
 
+    # when we configure the app the location of the LOG is still not defined
+    if args.command == 'config':
+        from permanens.config import configure
+        success, results = configure(args.directory, (args.action == 'silent'))
+        if not success:
+            print (f'{results}, configuration unchanged')
+        return
+    
+    LOG = get_logger(__name__)
+    
+    LOG.debug('-------------NEW RUN-------------\n')
+
     if args.formfile is not None:
         if not os.path.isfile(args.formfile):
             LOG.error(f'Input file {args.formfile} not found')
             return 
-
-    if args.command == 'config':
         
-        from permanens.config import configure
-        
-        success, results = configure(args.directory, (args.action == 'silent'))
-        if not success:
-            LOG.error(f'{results}, configuration unchanged')
-        return
-
     from permanens.manage import action_consult, action_kill, action_list, action_rerun
     
     if args.command == 'consult':

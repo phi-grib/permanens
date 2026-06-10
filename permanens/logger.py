@@ -56,23 +56,14 @@ def get_log_file() -> Path:
     The path of the log file is given by
     appdirs.user_log_dir
     """
-    # log_filename_path = './'
-    # log_filename_path = Path(log_filename_path)
-    
-    # # creeate dir if it does not exist
-    # if not log_filename_path.exists():
-    #     log_filename_path.mkdir(parents=True)
+    model_path = model_repository_path()
+    if not os.path.isdir(model_path):
+        model_path = './'
 
-    log_filename = os.path.join (model_repository_path() ,'permanens.log')  # append file name
+    log_filename = os.path.join (model_path,'permanens.log')  # append file name
     if not os.path.isfile(log_filename):
         with open(log_filename,'w') as f:
             f.write('')
-
-    # log_object = Path(log_filename)
-
-    # # check if exists to not erase current file
-    # if not log_object.exists():
-    #     log_object.touch()
 
     return Path(log_filename)
 
@@ -101,6 +92,7 @@ def get_logger(name) -> logging.Logger:
     )
 
     log_file = get_log_file()  # Create the log file
+       
     # create console and file handler
     # if not already created
     if not logger.handlers:
