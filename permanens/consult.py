@@ -36,6 +36,7 @@ lenguajes = ['en','es', 'ca']
 age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94'] 
 cats = ['MEN', 'SUB', 'SOM', 'ATC']
 demographics = ['sex', 'age', 'events', 'last_event']
+alt_demographics = ['nationality', 'geographicZone', 'income']  # used only by CARES
 
 class Consult:
     ''' Class storing all the risk assessment information
@@ -85,8 +86,12 @@ class Consult:
             
             self.model_labels.append((efile, hfile, dfile))
         
-        self.modelID = 0
         self.lang = 'en'
+
+        # set model info to defaults
+        self.modelID = 0
+        self.model_name = ''
+        self.model_dict = None
 
         # initialice mapping dictionaries
         self.predictor_dicts = {}
@@ -289,7 +294,17 @@ class Consult:
         # in production servers, the object instance receiving a prediction could be
         # different from the instance which received the set_model request and therefore
         # the current model can be incorrect
-        if 'modelID' in form and form['modelID'] != self.modelID:           
+
+        # make sure that the active model is aligned with the incoming form
+        if self.model_dict is None:
+            if 'modelID' in form:          
+                self.set_model_engine(form['modelID'])
+            else:
+                # fallback, in no case self.model_dict can be left undefined
+                self.modelID = 0
+                self.set_model_engine(0)
+        
+        if 'modelID' in form and form['modelID']!= self.modelID:
             self.set_model_engine(form['modelID'])
 
         if lang != self.lang:
@@ -329,11 +344,13 @@ class Consult:
     def save_form (self, form, cname):
         ''' saves the Consult object to a YAML file
         '''
-        consultfile = os.path.join (self.cpath, cname)
        
         # use a copy, because we don't want to save labels nor remove
         # them from the copy of form
         form_copy = copy.copy(form)
+
+        # define the output file for saving the form
+        consultfile = os.path.join (self.cpath, cname)
 
         # add the languaje and model hash
         form_copy['lang'] = self.lang
@@ -410,11 +427,16 @@ class Consult:
                     else:
                         LOG.error (f'Predictor {item} not found!')
 
-            # for sex and age
+            # for form keys corresponding to predictor names (e.g., age, sex)
             if ikey in names:
                 if ikey == 'age':
                     ival = int (np.round(ival/10.0))
                 xtest_np[0,names.index(ikey)] = ival
+
+            # for form keys with values corresponding to predictor names (e.g., nationality) 
+            if ikey in alt_demographics:
+                if ival in names:
+                    xtest_np[0,names.index(ival)] = 1
 
         # convert to pandas dataframe 
         xtest_pd = pd.DataFrame(xtest_np)
@@ -460,6 +482,7 @@ class Consult:
 
         # conditions form to adapt to the estimator requirements
         success, xtest_pd, xtest_np = self.condition_model (form, names)
+
         if not success:
             return False, 'unable to condition input form'
 
