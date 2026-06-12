@@ -6,6 +6,7 @@ ras/
 *.tgz
 dist/*
 consults/*
+cares_test/*
 *.dill
 permanens.egg-info/*
 static/*
