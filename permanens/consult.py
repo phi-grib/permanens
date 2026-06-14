@@ -71,6 +71,19 @@ class Consult:
                 continue
             
             idict['model_hash'] = hfile
+
+            try:
+                ifname_list = idict['description'].split('-')
+                curated_endpoint = f'{ifname_list[1]}-{(ifname_list[2][:-11])}'
+
+                if curated_endpoint.startswith('o1-'):
+                    curated_endpoint = f'suicide-{curated_endpoint[4:]}m'
+                elif curated_endpoint.startswith('o2-'):
+                    curated_endpoint = f'selfharm-{curated_endpoint[4:]}m'
+            except:
+                curated_endpoint = 'unknown'
+            idict ['endpoint'] = curated_endpoint
+
             self.model_dicts.append(idict)
         
             # models are identified by the descrition and a hashed unique ID
@@ -78,13 +91,9 @@ class Consult:
                 dfile = idict['description']
             else:
                 dfile = 'unknown'
-            # models are identified by the descrition and a hashed unique ID
-            if 'endpoint' in idict:
-                efile = idict['endpoint']
-            else:
-                efile = 'unknown'
-            
-            self.model_labels.append((efile, hfile, dfile))
+
+            self.model_labels.append((curated_endpoint, hfile, dfile))
+            # print ((curated_endpoint, hfile, dfile))
         
         self.lang = 'en'
 
@@ -284,7 +293,10 @@ class Consult:
 
         labels = []
         for imodel_label in self.model_labels:
-            labels.append( (self.babel[lang]['endpoint_label'][imodel_label[0]], imodel_label[1], imodel_label[2] ))
+            if imodel_label[0] in self.babel[lang]['endpoint_label']:
+                labels.append( (self.babel[lang]['endpoint_label'][imodel_label[0]], imodel_label[1], imodel_label[2] ))
+            else:
+                labels.append( ([imodel_label[0]], [imodel_label[1]], [imodel_label[2]]))
         return labels
        
     def run (self, form, cname=None, lang='en'):
@@ -558,7 +570,10 @@ class Consult:
         risk_segment = self.model_dict['risk_segment'][histogram_sex_index]
 
         # endpoint name
-        iendpoint = self.babel[lang]['endpoint_label'][self.model_dict['endpoint']]
+        if self.model_dict['endpoint'] in self.babel[lang]['endpoint_label']:
+            iendpoint = self.babel[lang]['endpoint_label'][self.model_dict['endpoint']]
+        else:
+            iendpoint = 'unknown'
         
         # risk of peers
         iriskpeers = risk_segment[histogram_age_index]
