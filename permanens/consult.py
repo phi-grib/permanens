@@ -232,7 +232,8 @@ class Consult:
             for ivar in var_importance:
                 if ivar in predictors_dict[item]:
                     self.predictors[item].append(ivar)
-
+        
+        # print ( len(var_importance), len(self.predictors['drugs']), len (self.predictors['conditions']))
 
     def set_model (self, modelID, lang='en'):
         ''' defines the model with the given modelID as the current model
@@ -269,6 +270,8 @@ class Consult:
             if len(ilist) > 0:
                 result['conditions_labels'].append(self.babel[lang]['cats_label'][icat])
                 result['conditions_labels'].append(ilist)
+        
+        # print ('a total of :', len(conditions), 'condition were maped to:', result['conditions_labels'])
         
         # generate labels for the drug dropdown
         result['drugs_labels'] = []
@@ -451,8 +454,7 @@ class Consult:
                     xtest_np[0,names.index(ival)] = 1
 
         # convert to pandas dataframe 
-        xtest_pd = pd.DataFrame(xtest_np)
-        xtest_pd.columns = names
+        xtest_pd = pd.DataFrame(xtest_np, columns= names)
 
         return True, xtest_pd, xtest_np
     
@@ -502,10 +504,18 @@ class Consult:
         r = model.predict(xtest_pd).tolist()[0]
         irisk = calib.predict_proba(xtest_pd).tolist()[0][1]
 
-        # list of predictors
+        # print (form)
+
+        # list of predictors which will be used to filter the
+        # variable importances
         predictors = ['sex', 'age', 'events', 'last_event']
         predictors += form['conditions']
         predictors += form['drugs']
+        for ikey in alt_demographics:
+            if ikey in form:
+                predictors.append(form[ikey])
+
+        print (predictors)
 
         # in case of negatives, pass an empty list
         importance_sel = [] 
