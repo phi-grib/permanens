@@ -20,9 +20,14 @@ en:
     SUB: Substance use disorders
     SOM: Other conditions
   endpoint_label:
-    self-harm repetition within the next 3 months : self-harm repetition within the next 3 months
-    self-harm repetition within the next 12 months : self-harm repetition within the next 12 months
-    suicide within the next 12 months : suicide within the next 12 months
+    selfharm-1m : self-harm repetition within the next month
+    selfharm-3m : self-harm repetition within the next 3 months
+    selfharm-6m : self-harm repetition within the next 6 months
+    selfharm-12m : self-harm repetition within the next 12 months
+    suicide-1m :  suicide within the next month
+    suicide-3m :  suicide within the next 3 months
+    suicide-6m :  suicide within the next 6 months
+    suicide-12m :  suicide within the next 12 months
 ca: 
   distribution: 
     'El risc d’aquesta persona és <s>{element_risk_fold:.2f}<e> vegades el risc dels seus iguals de sexe <s>{element_sex}<e> 
@@ -45,9 +50,14 @@ ca:
     SUB: Trastorns per ús de substàncies
     SOM: Altres afeccions
   endpoint_label:
-    self-harm repetition within the next 3 months : repetició d’autolesió en els propers 3 mesos
-    self-harm repetition within the next 12 months : repetició d’autolesió en els propers 12 mesos
-    suicide within the next 12 months : suïcidi en els propers 12 mesos
+    selfharm-1m : repetició d’autolesió en el proper mes
+    selfharm-3m : repetició d’autolesió en els propers 3 mesos
+    selfharm-6m : repetició d’autolesió en els propers 6 mesos
+    selfharm-12m : repetició d’autolesió en els propers 12 mesos
+    suicide-1m : suïcidi en el proper mes
+    suicide-3m : suïcidi en els propers 3 mesos
+    suicide-6m : suïcidi en els propers 6 mesos
+    suicide-12m : suïcidi en els propers 12 mesos
 es: 
   distribution: 
     'El riesgo de esta persona es <s>{element_risk_fold:.2f}<e> veces el riesgo de sus pares de sexo <s>{element_sex}<e> 
@@ -70,7 +80,12 @@ es:
     SUB: Trastornos de uso de substancias
     SOM: Otras afecciones
   endpoint_label:
-    self-harm repetition within the next 3 months : repetición de autolesión en los próximos 3 meses
-    self-harm repetition within the next 12 months : repetición de autolesión en los próximos 12 meses
-    suicide within the next 12 months : suicidio en los próximos 12 meses
+    selfharm-1m : repetición de autolesión en el próximo mes
+    selfharm-3m : repetición de autolesión en los próximos 3 meses
+    selfharm-6m : repetición de autolesión en los próximos 6 meses
+    selfharm-12m : repetición de autolesión en los próximos 12 meses
+    suicide-1m : suicidio en el próximo mes
+    suicide-3m : suicidio en los próximos 3 meses
+    suicide-6m : suicidio en los próximos 6 meses
+    suicide-12m : suicidio en los próximos 12 meses
 

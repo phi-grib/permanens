@@ -515,7 +515,7 @@ class Consult:
             if ikey in form:
                 predictors.append(form[ikey])
 
-        print (predictors)
+        # print (predictors)
 
         # in case of negatives, pass an empty list
         importance_sel = [] 
