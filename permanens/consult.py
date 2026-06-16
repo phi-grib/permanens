@@ -37,6 +37,7 @@ age_ranges = ['18-24','25-34','35-44','45-54','55-64','65-74','75-84','85-94']
 cats = ['MEN', 'SUB', 'SOM', 'ATC']
 demographics = ['sex', 'age', 'events', 'last_event']
 alt_demographics = ['nationality', 'geographicZone', 'income']  # used only by CARES
+MAX_PREDICTORS = 40
 
 class Consult:
     ''' Class storing all the risk assessment information
@@ -222,8 +223,9 @@ class Consult:
         self.model_name = self.model_names[modelID]
         self.model_dict = self.model_dicts[modelID]
 
-        # extract top-10 predictor for drugs and conditions
-        var_importance = self.model_dict['var_importance']
+        # extract MAX_PREDICTORS predictor for drugs and conditions
+        var_importance = self.model_dict['var_importance'][:MAX_PREDICTORS]
+        # print (len(var_importance), var_importance)
         self.predictors={'drugs': [], 'conditions':[]}
 
         # assign predictors
@@ -233,7 +235,7 @@ class Consult:
                 if ivar in predictors_dict[item]:
                     self.predictors[item].append(ivar)
         
-        # print ( len(var_importance), len(self.predictors['drugs']), len (self.predictors['conditions']))
+        # print ( len(var_importance), self.predictors['drugs'], self.predictors['conditions'])
 
     def set_model (self, modelID, lang='en'):
         ''' defines the model with the given modelID as the current model
