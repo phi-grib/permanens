@@ -12,9 +12,9 @@ docker run -d -p 5000:80 -v c:\permanens:/data mpastorphi/permanens_local:latest
 ````
 
 In this example the local 'c:\permanens' folder is defined as your PERMANENS repository (you can use any suitable path). Inside you must have a 'models' and 'consults' folder:
-    c:\permanens
-    c:\permanens\models
-    c:\permanens\consults
+- c:\permanens
+- c:\permanens\models
+- c:\permanens\consults
     
 Before running, copy inside the local models folder the models (*.dill files, not distributed here) and other files found within the permanenes/model of this repository
 
