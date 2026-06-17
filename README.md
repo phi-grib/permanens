@@ -3,20 +3,24 @@
 Clinical Decisions Support System (CDSS) of PERMANENS project
 
 
-## Install
+## Use pre-configured container
 
 A docker container (https://www.docker.com/), fully configured can be downloaded from DockerHub and installed using:
 
+````
+docker run -d -p 5000:80 -v c:\permanens:/data mpastorphi/permanens_local:latest
+````
 
-It is also possible to use an existing local folder for storing the RAs. Let's assume you wish to use 'c:\data' as the local PERMANENS repository. Start by creating a folder inside named 'permanens'.
+Mase sure that the local 'c:\permanens' file is your local PERMANENS repository. Inside you must have a 'models' and 'consults' folder. 
+    c:\permanens
+    c:\permanens\models
+    c:\permanens\consults
+    
+Inside the models folder copy the models (*.dill files, not distributed here) and other files commonly found within the permanenes/model 
 
-Ensure that the mapped local directory contains the necessary models. Then, run the following command:
+You can acces the permanens GUI from any web broser pointing at address http://localhost:5000
 
-```bash
-docker run -d -p 5000:80 -v c:\permanens:/data acabrera809/permanens:local
-```
-Then, as in the previous example, you can acces the permanens GUI from a web broser at http://localhost:5000
-
+## Local install
 
 Permanens can be used in most Windows, Linux or macOS configurations, provided that a suitable execution environment is set up. We recommend, as a fist step, installing the Conda package and environment manager. Download a suitable Conda or Anaconda distribution for your operative system from [here](https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html#)
 
