@@ -81,7 +81,7 @@ python setup.py develop
 After installation is completed, you must run the configuration command to configure the directory where permanens will place the consults. If permanens has not been configured previously the following command
 
 ```bash
-permanenns -c config
+permanens -c config
 ```
 
 will suggest a default directory structure following the XDG specification in GNU/Linux, %APPDATA% in windows.
