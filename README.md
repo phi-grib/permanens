@@ -5,18 +5,18 @@ Clinical Decisions Support System (CDSS) of PERMANENS project
 
 ## Use pre-configured container
 
-A docker container (https://www.docker.com/), fully configured can be downloaded from DockerHub and installed using:
+A docker container (https://www.docker.com/), fully configured can be downloaded from DockerHub and run using:
 
 ````
 docker run -d -p 5000:80 -v c:\permanens:/data mpastorphi/permanens_local:latest
 ````
 
-Mase sure that the local 'c:\permanens' file is your local PERMANENS repository. Inside you must have a 'models' and 'consults' folder. 
+In this example the local 'c:\permanens' folder is defined as your PERMANENS repository (you can use any suitable path). Inside you must have a 'models' and 'consults' folder:
     c:\permanens
     c:\permanens\models
     c:\permanens\consults
     
-Inside the models folder copy the models (*.dill files, not distributed here) and other files commonly found within the permanenes/model 
+Before running, copy inside the local models folder the models (*.dill files, not distributed here) and other files found within the permanenes/model of this repository
 
 You can acces the permanens GUI from any web broser pointing at address http://localhost:5000
 
